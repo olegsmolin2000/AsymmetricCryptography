@@ -1,0 +1,13 @@
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.exe
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.deps.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.runtimeconfig.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.runtimeconfig.dev.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptography.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.csprojAssemblyReference.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.csproj.CoreCompileInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.AssemblyInfoInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.AssemblyInfo.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.genruntimeconfig.cache
