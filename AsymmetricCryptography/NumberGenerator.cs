@@ -9,6 +9,7 @@ namespace AsymmetricCryptography
     {
         private static Random Rand;
 
+        //список запаздываний для метода Фибоначчи с запазываниями
         private static readonly List<(int, int)> Laggs = new List<(int, int)>()
         {
             (24, 55), (38, 89), (37, 100), (30, 127),
@@ -106,7 +107,26 @@ namespace AsymmetricCryptography
             return number;
         }
 
+        //генерация простых чисел
+        //генерируются случайные числа до тех пор, пока не выпадет число, прошедшее проверку на простоту
+        public static BigInteger GeneratePrimeNumber(int binarylength)
+        {
+            BigInteger number = 0;
 
+            while (!PrimalityVerifications.IsPrimal(number,100))
+                number = GenerateNumber(binarylength);
 
+            return number;
+        }
+
+        public static BigInteger GeneratePrimeNumber(BigInteger min,BigInteger max)
+        {
+            BigInteger number = 0;
+
+            while (!PrimalityVerifications.IsPrimal(number, 100))
+                number = GenerateNumber(min, max);
+
+            return number;
+        }
     }
 }
