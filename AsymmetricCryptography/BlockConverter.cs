@@ -53,5 +53,31 @@ namespace AsymmetricCryptography
 
             return blocks;
         }
+
+        //получение массива байтов из блока
+        public static byte[] BlockToBytes(BigInteger block,int blockSize)
+        {
+            //перевод блока в двоичный вид
+            string binaryBlock = BinaryConvertings.BigIntToBinary(block);
+
+            //дописывание нулей в начало, чтобы получить точные байты из блока
+            if (binaryBlock.Length % 8 != 0)
+            {
+                int offsetCount = 8 - binaryBlock.Length % 8;
+
+                binaryBlock = binaryBlock.PadLeft(binaryBlock.Length + offsetCount, '0');
+            }
+
+            byte[] blockBytes = new byte[binaryBlock.Length / 8];
+
+            for (int i = 0; i < binaryBlock.Length; i+=8)
+            {
+                string binaryByte = binaryBlock.Substring(i, 8);
+
+                blockBytes[i/8]= Convert.ToByte(binaryByte, 2);
+            }
+
+            return blockBytes;
+        }
     }
 }

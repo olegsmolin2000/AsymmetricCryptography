@@ -14,8 +14,8 @@ namespace AsymmetricCryptography
             int size = rand.Next(50);
             int blockSize = rand.Next(1,10);
 
-            size = 9;
-            blockSize = 8;
+            //size = 9;
+            //blockSize = 8;
 
             Console.WriteLine("size:" + size);
             Console.WriteLine("blockSize:" + blockSize);
@@ -36,7 +36,13 @@ namespace AsymmetricCryptography
             Console.WriteLine("----------------------------");
             for (int i = 0; i < blocks.Length; i++)
             {
-                Console.WriteLine(BinaryConvertings.BigIntToBinary(blocks[i]).PadRight(BinaryConvertings.GetBinaryLength(blocks[i]),'0'));
+                Console.WriteLine(BinaryConvertings.BigIntToBinary(blocks[i]).PadLeft(blockSize * 8, '0'));
+                byte[] bytesblocks = BlockConverter.BlockToBytes(blocks[i], blockSize);
+
+                for (int j = 0; j < bytesblocks.Length; j++)
+                {
+                    Console.WriteLine("\t" + Convert.ToString(bytesblocks[j], 2).PadLeft(8, '0'));
+                }
             }
 
         }
