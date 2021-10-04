@@ -48,27 +48,38 @@ namespace AsymmetricCryptography
                 }
 
                 //перевод блока из двоичного вида в десятичный
-                blocks[i / blockSize] = BinaryConvertings.BinaryToBigInt(binaryBlock.ToString());
+                blocks[i / blockSize] = BinaryConverter.BinaryToBigInt(binaryBlock.ToString());
             }
 
             return blocks;
         }
 
         //получение массива байтов из блока
-        public static byte[] BlockToBytes(BigInteger block,int blockSize)
+        public static byte[] BlockToBytes(BigInteger block, int bytesCount = 0)
         {
             //перевод блока в двоичный вид
-            string binaryBlock = BinaryConvertings.BigIntToBinary(block);
+            string binaryBlock = BinaryConverter.BigIntToBinary(block);
 
-            //дописывание нулей в начало, чтобы получить точные байты из блока
-            if (binaryBlock.Length % 8 != 0)
+            byte[] blockBytes;
+
+            if (bytesCount == 0)
             {
-                int offsetCount = 8 - binaryBlock.Length % 8;
+                //дописывание нулей в начало, чтобы получить точные байты из блока
+                if (binaryBlock.Length % 8 != 0)
+                {
+                    int offsetCount = 8 - binaryBlock.Length % 8;
 
-                binaryBlock = binaryBlock.PadLeft(binaryBlock.Length + offsetCount, '0');
+                    binaryBlock = binaryBlock.PadLeft(binaryBlock.Length + offsetCount, '0');
+                }
+
+                blockBytes = new byte[binaryBlock.Length / 8];
             }
+            else
+            {
+                blockBytes = new byte[bytesCount];
 
-            byte[] blockBytes = new byte[binaryBlock.Length / 8];
+                binaryBlock = binaryBlock.PadLeft(bytesCount * 8, '0');
+            }
 
             for (int i = 0; i < binaryBlock.Length; i+=8)
             {

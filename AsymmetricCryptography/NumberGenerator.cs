@@ -80,7 +80,7 @@ namespace AsymmetricCryptography
             if (number[0] == '0')
                 number[0] = '1';
 
-            return BinaryConvertings.BinaryToBigInt(number.ToString());
+            return BinaryConverter.BinaryToBigInt(number.ToString());
         }
 
         //генерация числа по диапазону
@@ -89,8 +89,8 @@ namespace AsymmetricCryptography
             if (min > max)
                 throw new ArgumentException("Min > max");
 
-            int minBitLength = BinaryConvertings.GetBinaryLength(min);
-            int maxBitLength = BinaryConvertings.GetBinaryLength(max);
+            int minBitLength = BinaryConverter.GetBinaryLength(min);
+            int maxBitLength = BinaryConverter.GetBinaryLength(max);
 
             BigInteger number;
 

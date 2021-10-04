@@ -2,6 +2,7 @@
 using System.Numerics;
 using System.Text;
 using System.Threading;
+using AsymmetricCryptography.RSA;
 
 namespace AsymmetricCryptography
 {
@@ -9,42 +10,48 @@ namespace AsymmetricCryptography
     {
         static void Main(string[] args)
         {
-            Random rand = new Random();
+            //Random rand = new Random();
 
-            int size = rand.Next(50);
-            int blockSize = rand.Next(1,10);
+            //int size = rand.Next(50);
+            //int blockSize = rand.Next(1,10);
 
-            //size = 9;
-            //blockSize = 8;
+            //size = 15;
+            //blockSize = 4;
 
-            Console.WriteLine("size:" + size);
-            Console.WriteLine("blockSize:" + blockSize);
+            //Console.WriteLine("size:" + size);
+            //Console.WriteLine("blockSize:" + blockSize);
 
-            Console.WriteLine("----------------------------");
+            //Console.WriteLine("----------------------------");
 
-            byte[] bytes = new byte[size];
+            //byte[] bytes = new byte[size];
 
-            for (int i = 0; i < size; i++)
-            {
-                bytes[i] = Convert.ToByte(rand.Next() % 256);
+            //for (int i = 0; i < size; i++)
+            //{
+            //    bytes[i] = Convert.ToByte(rand.Next() % 256);
 
-                Console.WriteLine(Convert.ToString(bytes[i], 2).PadLeft(8, '0'));
-            }
 
-            BigInteger[] blocks = BlockConverter.BytesToBlocks(bytes, blockSize);
+            //}
+            //bytes[12] = 0;
 
-            Console.WriteLine("----------------------------");
-            for (int i = 0; i < blocks.Length; i++)
-            {
-                Console.WriteLine(BinaryConvertings.BigIntToBinary(blocks[i]).PadLeft(blockSize * 8, '0'));
-                byte[] bytesblocks = BlockConverter.BlockToBytes(blocks[i], blockSize);
+            //for (int i = 0; i < size; i++)
+            //{
+            //    Console.WriteLine(Convert.ToString(bytes[i], 2).PadLeft(8, '0'));
+            //}
+            //BigInteger[] blocks = BlockConverter.BytesToBlocks(bytes, blockSize);
 
-                for (int j = 0; j < bytesblocks.Length; j++)
-                {
-                    Console.WriteLine("\t" + Convert.ToString(bytesblocks[j], 2).PadLeft(8, '0'));
-                }
-            }
+            //Console.WriteLine("----------------------------");
+            //for (int i = 0; i < blocks.Length; i++)
+            //{
+            //    Console.WriteLine(BinaryConverter.BigIntToBinary(blocks[i]).PadLeft(blockSize * 8, '0'));
+            //    byte[] bytesblocks = BlockConverter.BlockToBytes(blocks[i],blockSize);
 
+            //    for (int j = 0; j < bytesblocks.Length; j++)
+            //    {
+            //        Console.WriteLine("\t" + Convert.ToString(bytesblocks[j], 2).PadLeft(8, '0'));
+            //    }
+            //}
+            RsaKey q = new RsaKey(123124, 1241251251);
+            q.PrintConsole();
         }
     }
 }

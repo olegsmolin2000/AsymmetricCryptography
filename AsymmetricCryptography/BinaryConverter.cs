@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AsymmetricCryptography
 {
-    static class BinaryConvertings
+    static class BinaryConverter
     {
         public static BigInteger BinaryToBigInt(string binaryString)
         {
