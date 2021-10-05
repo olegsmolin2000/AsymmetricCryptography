@@ -28,14 +28,14 @@ namespace AsymmetricCryptography.RSA
             {
                 blocks[i] = BigInteger.ModPow(blocks[i], exponent, modulus);
 
-                encryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i],blockSize+1));
+                encryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i], blockSize + 1));
             }
 
             //в результате получается массив байтов зашифрованных данных
             return encryptedBytes.ToArray();
         }
 
-        //расшифровка RSA
+        //расшифровка RSA с помощью закрытого ключа
         public static byte[] Decryption(byte[] encryptedData,RsaPrivateKey privateKey)
         {
             //получение закрытой экспоненты и модуля
@@ -46,7 +46,7 @@ namespace AsymmetricCryptography.RSA
             int blockSize = BlockConverter.GetBlockSize(modulus);
 
             //перевод зашифрованных данных в блоки BigInt
-            BigInteger[] blocks = BlockConverter.BytesToBlocks(encryptedData, blockSize+1);
+            BigInteger[] blocks = BlockConverter.BytesToBlocks(encryptedData, blockSize + 1);
 
             //в список будет заноситься результат дешифровки
             List<byte> decryptedBytes = new List<byte>();
