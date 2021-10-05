@@ -50,8 +50,11 @@ namespace AsymmetricCryptography
             //        Console.WriteLine("\t" + Convert.ToString(bytesblocks[j], 2).PadLeft(8, '0'));
             //    }
             //}
-            RsaKey q = new RsaKey(123124, 1241251251);
+            RsaPublicKey q = new RsaPublicKey(1241241225, 124127775222);
             q.PrintConsole();
+
+            RsaPrivateKey w = new RsaPrivateKey(2135235, 1212, 112124, 214214, 235235);
+            w.PrintConsole();
         }
     }
 }
