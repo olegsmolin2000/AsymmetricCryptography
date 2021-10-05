@@ -34,15 +34,15 @@ namespace AsymmetricCryptography.RSA
         {
             Console.WriteLine(new string('-', 50));
 
-            Console.WriteLine("Type: RSA private key");
+            Console.WriteLine("Type: RSA private key\n");
 
-            Console.WriteLine("Modulus(n):{0}({1} bits)", Modulus, BinaryConverter.GetBinaryLength(Modulus));
-            Console.WriteLine("PublicExponent(e):{0}({1} bits)", PublicExponent, BinaryConverter.GetBinaryLength(PublicExponent));
-            Console.WriteLine("PrivateExponent(d):{0}({1} bits)", PrivateExponent, BinaryConverter.GetBinaryLength(PrivateExponent));
-            Console.WriteLine("Prime1(p):{0}({1} bits)", Prime1, BinaryConverter.GetBinaryLength(Prime1));
-            Console.WriteLine("Prime2(q):{0}({1} bits)", Prime2, BinaryConverter.GetBinaryLength(Prime2));
-            Console.WriteLine("Exponent1(d mod(p-1)):{0}({1} bits)", Exponent1, BinaryConverter.GetBinaryLength(Exponent1));
-            Console.WriteLine("Exponent2(d mod(q-1)):{0}({1} bits)", Exponent2, BinaryConverter.GetBinaryLength(Exponent2));
+            Console.WriteLine("Modulus(n):{0}({1} bits)\n", Modulus, BinaryConverter.GetBinaryLength(Modulus));
+            Console.WriteLine("PublicExponent(e):{0}({1} bits)\n", PublicExponent, BinaryConverter.GetBinaryLength(PublicExponent));
+            Console.WriteLine("PrivateExponent(d):{0}({1} bits)\n", PrivateExponent, BinaryConverter.GetBinaryLength(PrivateExponent));
+            Console.WriteLine("Prime1(p):{0}({1} bits)\n", Prime1, BinaryConverter.GetBinaryLength(Prime1));
+            Console.WriteLine("Prime2(q):{0}({1} bits)\n", Prime2, BinaryConverter.GetBinaryLength(Prime2));
+            Console.WriteLine("Exponent1(d mod(p-1)):{0}({1} bits)\n", Exponent1, BinaryConverter.GetBinaryLength(Exponent1));
+            Console.WriteLine("Exponent2(d mod(q-1)):{0}({1} bits)\n", Exponent2, BinaryConverter.GetBinaryLength(Exponent2));
             Console.WriteLine("Coefficient((1/q) mod p):{0}({1} bits)", Coefficient, BinaryConverter.GetBinaryLength(Coefficient));
 
             Console.WriteLine(new string('-', 50));

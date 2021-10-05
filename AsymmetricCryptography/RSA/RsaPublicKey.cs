@@ -20,9 +20,9 @@ namespace AsymmetricCryptography.RSA
         {
             Console.WriteLine(new string('-',50));
 
-            Console.WriteLine("Type: RSA public key");
+            Console.WriteLine("Type: RSA public key\n");
 
-            Console.WriteLine("Modulus(n):{0}({1} bits)", Modulus, BinaryConverter.GetBinaryLength(Modulus));
+            Console.WriteLine("Modulus(n):{0}({1} bits)\n", Modulus, BinaryConverter.GetBinaryLength(Modulus));
             Console.WriteLine("Exponent(e):{0}({1} bits)", Exponent, BinaryConverter.GetBinaryLength(Exponent));
 
             Console.WriteLine(new string('-', 50));
