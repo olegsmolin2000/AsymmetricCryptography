@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
+using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography.RSA
 {
@@ -63,6 +64,33 @@ namespace AsymmetricCryptography.RSA
             decryptedBytes.RemoveAll(x => x == 0);
 
             return decryptedBytes.ToArray();
+        }
+
+        //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
+        public static BigInteger SignatureCreating(byte[] message,RsaPrivateKey privateKey,CryptographicHashAlgorithm hashAlgorithm)
+        {
+            BigInteger digest = new BigInteger(hashAlgorithm.GetHash(message));
+
+            //если модуль ключа не может вместить хеш или хеш будет меньше нуля, то будут проблемы
+            //поэтому хеш берётся по модулю
+            digest = ModularArithmetic.Modulus(digest, privateKey.Modulus);
+
+            BigInteger signature = BigInteger.ModPow(digest, privateKey.PrivateExponent, privateKey.Modulus);
+
+            return signature;
+        }
+
+        //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
+        public static bool SignatureVerification(BigInteger signature,byte[] message,RsaPublicKey publicKey,CryptographicHashAlgorithm hashAlgorithm)
+        {
+            BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(message));
+
+            //взятие хеша по модулю, аналогично того же, что и в создании подписи
+            realHash = ModularArithmetic.Modulus(realHash, publicKey.Modulus);
+
+            BigInteger signatureHash = BigInteger.ModPow(signature, publicKey.Exponent, publicKey.Modulus);
+
+            return realHash == signatureHash;
         }
     }
 }

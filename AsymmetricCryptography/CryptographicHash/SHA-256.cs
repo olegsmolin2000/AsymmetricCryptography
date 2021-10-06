@@ -38,10 +38,7 @@ namespace AsymmetricCryptography.CryptographicHash
             };
 
             Preprocessing(message);
-            for (int i = 0; i < preprocessedMessage.Length; i++)
-            {
-                Console.WriteLine(Convert.ToString(preprocessedMessage[i], 2));
-            }
+
             //разделение на блоки и работа с каждым
             for (int index = 0; index < preprocessedMessage.Length; index += 64)
             {
@@ -50,7 +47,7 @@ namespace AsymmetricCryptography.CryptographicHash
 
                 for (int j = 0; j < 64; j++)
                 {
-                    block[index] = preprocessedMessage[index + j];
+                    block[j] = preprocessedMessage[index + j];
                 }
 
                 //создаётся 64 слова длиной 32 бит.
