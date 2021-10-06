@@ -12,16 +12,40 @@ namespace AsymmetricCryptography
     {
         static void Main(string[] args)
         {
-            DsaDomainParameters para;
+            Random rand = new Random();
 
-            para = KeysGenerator.DsaDomainParametersGeneration(256, 64);
+            int s = 0;
+            int count = 1000;
 
-            //para.PrintConsole();
+            for (int i = 0; i < count; i++)
+            {
+                if (i % 50 == 0)
+                    Console.WriteLine(i);
+                DsaPrivateKey q1;
+                DsaPublicKey q2;
 
-            DsaPublicKey q = new DsaPublicKey(para, 2512512);
-            //q.PrintConsole();
-            DsaPrivateKey w = new DsaPrivateKey(para, 125125, 1251215);
-            w.PrintConsole();
+                KeysGenerator.DsaKeysGeneration(128, 64, out q1, out q2);
+
+                StringBuilder message = new StringBuilder();
+
+                int mesLength = rand.Next() % 500;
+
+                for (int j = 0; j < mesLength; j++)
+                {
+                    message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 256)));
+                }
+
+                ElGamalDigitalSignature sign = DSA.CreateSignature(Encoding.UTF8.GetBytes(message.ToString()), q1, new SHA_256());
+
+                Console.WriteLine(DSA.VerifySignature(Encoding.UTF8.GetBytes(message.ToString()), sign, q2, new SHA_256()));
+                    s++;
+
+
+            }
+
+
+            Console.WriteLine("s:" + s);
+            Console.WriteLine("count:" + count);
         }
     }
 }

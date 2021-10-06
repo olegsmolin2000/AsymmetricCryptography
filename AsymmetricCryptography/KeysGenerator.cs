@@ -33,7 +33,7 @@ namespace AsymmetricCryptography
             } while (!PrimalityVerifications.IsCoprime(e,euler));
 
             //вычисление закрытой экспоненты, d*e (mod euler) =1 ( мультипликативно обратное к числу e по модулю euler)
-            d = e.GetMultiplicativeModuloReverse(euler);
+            d = ModularArithmetic.GetMultiplicativeModuloReverse(e, euler);
 
             privateKey = new RsaPrivateKey(n, e, d, p, q);
             publicKey = new RsaPublicKey(e, n);

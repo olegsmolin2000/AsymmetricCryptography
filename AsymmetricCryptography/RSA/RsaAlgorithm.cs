@@ -37,7 +37,7 @@ namespace AsymmetricCryptography.RSA
         }
 
         //расшифровка RSA с помощью закрытого ключа
-        public static byte[] Decryption(byte[] encryptedData,RsaPrivateKey privateKey)
+        public static byte[] Decrypt(byte[] encryptedData,RsaPrivateKey privateKey)
         {
             //получение закрытой экспоненты и модуля
             BigInteger exponent = privateKey.PrivateExponent;
@@ -67,7 +67,7 @@ namespace AsymmetricCryptography.RSA
         }
 
         //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
-        public static BigInteger SignatureCreating(byte[] message,RsaPrivateKey privateKey,CryptographicHashAlgorithm hashAlgorithm)
+        public static BigInteger CreateSignature(byte[] message,RsaPrivateKey privateKey,CryptographicHashAlgorithm hashAlgorithm)
         {
             BigInteger digest = new BigInteger(hashAlgorithm.GetHash(message));
 
@@ -81,7 +81,7 @@ namespace AsymmetricCryptography.RSA
         }
 
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
-        public static bool SignatureVerification(BigInteger signature,byte[] message,RsaPublicKey publicKey,CryptographicHashAlgorithm hashAlgorithm)
+        public static bool VerifySignature(BigInteger signature,byte[] message,RsaPublicKey publicKey,CryptographicHashAlgorithm hashAlgorithm)
         {
             BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(message));
 

@@ -51,7 +51,7 @@ namespace AsymmetricCryptography
 
         //функция получения обратного числа по модулю
         //реализована с помощью расширенного алгоритма Евклида
-        public static BigInteger GetMultiplicativeModuloReverse(this BigInteger number, BigInteger mod)
+        public static BigInteger GetMultiplicativeModuloReverse(BigInteger number, BigInteger mod)
         {
             BigInteger x, y;
 
