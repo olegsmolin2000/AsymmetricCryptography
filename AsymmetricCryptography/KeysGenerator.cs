@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 using AsymmetricCryptography.RSA;
+using AsymmetricCryptography.DigitalSignatureAlgorithm;
 
 namespace AsymmetricCryptography
 {
@@ -36,6 +37,41 @@ namespace AsymmetricCryptography
 
             privateKey = new RsaPrivateKey(n, e, d, p, q);
             publicKey = new RsaPublicKey(e, n);
+        }
+
+        //генерация доменных параметров DSA, которые можно использовать для нескольких пользователей
+        //L - битовый размер параметра p
+        //N - число бит размером, совпадающим с числом бит в значении криптографической хеш функции
+        public static DsaDomainParameters DsaDomainParametersGeneration(int L,int N)
+        {
+            //q - простое число, размер которого в битах совпадает с размерностью в битах значения хеш-функции
+            BigInteger q = NumberGenerator.GeneratePrimeNumber(N);
+
+            //поиск простого числа p такого, что (p-1) % q == 0
+            BigInteger p;
+
+            //генерируется случайное НЕПРОСТОЕ число длины L-N,
+            //умножается на q, прибавляется 1 и результат проверяется на простоту
+            do
+            {
+                p = NumberGenerator.GenerateNumber(L- N);
+                p *= q;
+                p++;
+            } while (!PrimalityVerifications.IsPrimal(p, 1000));
+
+            //вычисляется g по формуле g = h^((p - 1) / q) mod p, такое что g != 1
+            //обычно h = 2 подходит
+            BigInteger g = BigInteger.ModPow(2, (p - 1) / q, p);
+
+            //если h = 2 не подошло, то оно выбирается из промежутка (1, p - 1)
+            while (g <= 1)
+            {
+                BigInteger h = NumberGenerator.GenerateNumber(1, p - 1);
+
+                g = BigInteger.ModPow(h, (p - 1) / q, p);
+            }
+
+            return new DsaDomainParameters(q, p, g);
         }
     }
 }

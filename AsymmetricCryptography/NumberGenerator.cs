@@ -66,7 +66,7 @@ namespace AsymmetricCryptography
             }
             else
             {
-                //если битовый размер числа меньше запаздываний, то разряды заполняются случайными битами
+                //если битовый размер числа меньше запаздываний, то все разряды заполняются случайными битами
                 while (number.Length < binaryLength)
                 {
                     int randBit = Rand.Next(2);
