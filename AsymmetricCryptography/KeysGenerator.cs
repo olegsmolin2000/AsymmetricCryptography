@@ -73,5 +73,31 @@ namespace AsymmetricCryptography
 
             return new DsaDomainParameters(q, p, g);
         }
+
+        public static void DsaKeysGeneration(int L, int N, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        {
+            DsaDomainParameters parameters = DsaDomainParametersGeneration(L, N);
+
+            DsaKeysGeneration(parameters, out privateKey, out publicKey);
+        }
+
+        public static void DsaKeysGeneration(int L, int N, out DsaDomainParameters parameters, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        {
+            parameters = DsaDomainParametersGeneration(L, N);
+
+            DsaKeysGeneration(parameters, out privateKey, out publicKey);
+        }
+
+        public static void DsaKeysGeneration(DsaDomainParameters parameters,out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        {
+            //x - закрытый ключ. случайное число в промежутке (2, q)
+            BigInteger x = NumberGenerator.GenerateNumber(2, parameters.Q - 1);
+
+            //y - открытый ключ. y=g^x mod p
+            BigInteger y = BigInteger.ModPow(parameters.G, x, parameters.P);
+
+            privateKey = new DsaPrivateKey(parameters, x, y);
+            publicKey = new DsaPublicKey(parameters, y);
+        }
     }
 }
