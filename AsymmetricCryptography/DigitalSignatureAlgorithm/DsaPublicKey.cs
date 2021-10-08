@@ -5,11 +5,13 @@ using System.Numerics;
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
-    class DsaPublicKey
+    class DsaPublicKey : AsymmetricKey
     {
         public DsaDomainParameters Parameters { get; }
 
         public BigInteger Y { get; }
+
+        public override string KeyType => "DSA public key";
 
         public DsaPublicKey(DsaDomainParameters parameters,BigInteger y)
         {
@@ -17,7 +19,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             this.Y = y;
         }
 
-        public void PrintConsole()
+        public override void PrintConsole()
         {
             Console.WriteLine(new string('-', 75));
 

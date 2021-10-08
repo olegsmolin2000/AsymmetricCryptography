@@ -38,6 +38,17 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
+        public RsaAlgorithm(int keyBinarySize)
+        {
+            RsaPrivateKey rsaPrivateKey;
+            RsaPublicKey rsaPublicKey;
+
+            KeysGenerator.RsaKeysGeneration(keyBinarySize, out rsaPrivateKey, out rsaPublicKey);
+
+            PublicKey = rsaPublicKey;
+            PrivateKey = rsaPrivateKey;
+        }
+
         public RsaAlgorithm(RsaPrivateKey privateKey,RsaPublicKey publicKey)
         {
             PublicKey = publicKey;

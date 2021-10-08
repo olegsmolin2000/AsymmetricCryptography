@@ -23,10 +23,8 @@ namespace AsymmetricCryptography
                     Console.WriteLine(i);
                 DsaPrivateKey q1;
                 DsaPublicKey q2;
-
                 RsaPrivateKey q11;
                 RsaPublicKey q22;
-
                 KeysGenerator.RsaKeysGeneration(32, out q11, out q22);
                 KeysGenerator.DsaKeysGeneration(128, 64, out q1, out q2);
 
@@ -38,19 +36,23 @@ namespace AsymmetricCryptography
                 {
                     message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 255+1)));
                 }
+                
+                RsaAlgorithm rsa1 = new RsaAlgorithm(q11,q22);
+
+                DSA dsa1 = new DSA(q1, q2);
 
                 byte[] data = Encoding.UTF8.GetBytes(message.ToString());
 
-                ElGamalDigitalSignature sign = DSA.CreateSignature(data, q1, new SHA_256());
-                BigInteger rsaSign = RSA.RsaAlgorithm.CreateSignature(data, q11, new SHA_256());
+                ElGamalDigitalSignature sign = dsa1.CreateSignature(data, new SHA_256());
+                BigInteger rsaSign = rsa1.CreateSignature(data, new SHA_256());
 
-                bool dsa = DSA.VerifySignature(data, sign, q2, new SHA_256());
-                bool rsa = RsaAlgorithm.VerifySignature(rsaSign, data, q22, new SHA_256());
+                bool dsa = dsa1.VerifySignature(data, sign, new SHA_256());
+                bool rsa = rsa1.VerifySignature(rsaSign, data, new SHA_256());
 
-                RsaAlgorithm rsa1 = new RsaAlgorithm(q11, q22);
+                
 
                 var crypt = rsa1.Encrypt(data);
-                var decryp = RsaAlgorithm.Decrypt(crypt, q11);
+                var decryp = rsa1.Decrypt(crypt);
 
                 
 

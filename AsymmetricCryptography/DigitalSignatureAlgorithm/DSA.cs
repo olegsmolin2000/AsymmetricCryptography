@@ -6,13 +6,47 @@ using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
-    static class DSA
+    sealed class DSA:AsymmetricAlgorithm
     {
-        public static ElGamalDigitalSignature CreateSignature(byte[] message,DsaPrivateKey privateKey,CryptographicHashAlgorithm hashAlgorithm)
+        public override string AlgorithmName => "DSA";
+
+        private new DsaPrivateKey PrivateKey
         {
-            BigInteger q = privateKey.Parameters.Q;
-            BigInteger p = privateKey.Parameters.P;
-            BigInteger g = privateKey.Parameters.G;
+            get
+            {
+                return base.PrivateKey as DsaPrivateKey;
+            }
+            set
+            {
+                if (value is DsaPrivateKey)
+                    base.PrivateKey = value;
+            }
+        }
+
+        private new DsaPublicKey PublicKey
+        {
+            get
+            {
+                return base.PublicKey as DsaPublicKey;
+            }
+            set
+            {
+                if (value is DsaPublicKey)
+                    base.PublicKey = value;
+            }
+        }
+
+        public DSA(DsaPrivateKey privateKey,DsaPublicKey publicKey)
+        {
+            PrivateKey = privateKey;
+            PublicKey = publicKey;
+        }
+
+        public ElGamalDigitalSignature CreateSignature(byte[] message,CryptographicHashAlgorithm hashAlgorithm)
+        {
+            BigInteger q = PrivateKey.Parameters.Q;
+            BigInteger p = PrivateKey.Parameters.P;
+            BigInteger g = PrivateKey.Parameters.G;
 
             BigInteger r = 0, s = 0;
 
@@ -32,7 +66,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                 BigInteger reverseK = ModularArithmetic.GetMultiplicativeModuloReverse(k, q);
 
                 //вычисление (H(m) + x * r) mod q
-                hash += privateKey.X * r;
+                hash += PrivateKey.X * r;
 
                 //s= (k^-1)*(H(m) + x * r) mod q
                 s = ModularArithmetic.Modulus(reverseK * hash, q);
@@ -42,11 +76,11 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             return new ElGamalDigitalSignature(r, s);
         }
 
-        public static bool VerifySignature(byte[] message,ElGamalDigitalSignature signature,DsaPublicKey publicKey,CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifySignature(byte[] message,ElGamalDigitalSignature signature,CryptographicHashAlgorithm hashAlgorithm)
         {
-            BigInteger q = publicKey.Parameters.Q;
-            BigInteger p = publicKey.Parameters.P;
-            BigInteger g = publicKey.Parameters.G;
+            BigInteger q = PublicKey.Parameters.Q;
+            BigInteger p = PublicKey.Parameters.P;
+            BigInteger g = PublicKey.Parameters.G;
 
             //вычисление w = s^-1 mod q
             BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(signature.S, q);
@@ -60,7 +94,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
             //v = (g^u1 * y^u2 mod p) mod q
             g = BigInteger.ModPow(g, u1, p);
-            BigInteger y = BigInteger.ModPow(publicKey.Y, u2, p);
+            BigInteger y = BigInteger.ModPow(PublicKey.Y, u2, p);
 
             BigInteger v = ModularArithmetic.Modulus(ModularArithmetic.Modulus(g * y, p), q);
 
@@ -68,7 +102,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             return v == signature.R;
         }
 
-        private static BigInteger GenerateSessionKey(BigInteger q)
+        private BigInteger GenerateSessionKey(BigInteger q)
         {
             return NumberGenerator.GenerateNumber(2, q - 1);
         }
