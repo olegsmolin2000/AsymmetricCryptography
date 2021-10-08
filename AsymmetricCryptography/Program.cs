@@ -19,7 +19,7 @@ namespace AsymmetricCryptography
 
             for (int i = 0; i < count; i++)
             {
-                if (i % 50 == 0)
+                if (i % 10 == 0)
                     Console.WriteLine(i);
                 DsaPrivateKey q1;
                 DsaPublicKey q2;
@@ -27,7 +27,7 @@ namespace AsymmetricCryptography
                 RsaPublicKey q22;
                 KeysGenerator.RsaKeysGeneration(32, out q11, out q22);
                 KeysGenerator.DsaKeysGeneration(128, 64, out q1, out q2);
-
+                //System.Security.Cryptography.RSACryptoServiceProvider
                 StringBuilder message = new StringBuilder();
                 
                 int mesLength = rand.Next() % 50;
@@ -43,11 +43,11 @@ namespace AsymmetricCryptography
 
                 byte[] data = Encoding.UTF8.GetBytes(message.ToString());
 
-                ElGamalDigitalSignature sign = dsa1.CreateSignature(data, new SHA_256());
-                BigInteger rsaSign = rsa1.CreateSignature(data, new SHA_256());
+                DigitalSignature sign = dsa1.CreateSignature(data, new SHA_256());
+                DigitalSignature rsaSign = rsa1.CreateSignature(data, new SHA_256());
 
-                bool dsa = dsa1.VerifySignature(data, sign, new SHA_256());
-                bool rsa = rsa1.VerifySignature(rsaSign, data, new SHA_256());
+                bool dsa = dsa1.VerifyDigitalSignature(sign, data, new SHA_256());
+                bool rsa = rsa1.VerifyDigitalSignature(rsaSign, data, new SHA_256());
 
                 
 

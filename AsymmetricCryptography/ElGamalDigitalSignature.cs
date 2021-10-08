@@ -6,8 +6,10 @@ using System.Numerics;
 namespace AsymmetricCryptography
 {
     //цифровая подпись по схеме Эль Гамаля
-    class ElGamalDigitalSignature
+    class ElGamalDigitalSignature:DigitalSignature
     {
+        public override string Type => "El Gamal scheme digital signature";
+
         public BigInteger R { get; }
         public BigInteger S { get; }
 
@@ -17,7 +19,7 @@ namespace AsymmetricCryptography
             this.S = s;
         }
 
-        public void PrintConsole()
+        public override void PrintConsole()
         {
             Console.WriteLine(new string('-', 50));
 

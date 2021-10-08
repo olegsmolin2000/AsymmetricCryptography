@@ -8,7 +8,7 @@ namespace AsymmetricCryptography.RSA
 {
     //todo:
     // zero bytes incorrect encryption
-    sealed class RsaAlgorithm: AsymmetricAlgorithm
+    sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor,IDigitalSignature
     {
         public override string AlgorithmName => "RSA";
 
@@ -114,9 +114,9 @@ namespace AsymmetricCryptography.RSA
         }
 
         //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
-        public BigInteger CreateSignature(byte[] message,CryptographicHashAlgorithm hashAlgorithm)
+        public DigitalSignature CreateSignature(byte[] data,CryptographicHashAlgorithm hashAlgorithm)
         {
-            BigInteger digest = new BigInteger(hashAlgorithm.GetHash(message));
+            BigInteger digest = new BigInteger(hashAlgorithm.GetHash(data));
 
             //если модуль ключа не может вместить хеш или хеш будет меньше нуля, то будут проблемы
             //поэтому хеш берётся по модулю
@@ -124,18 +124,20 @@ namespace AsymmetricCryptography.RSA
 
             BigInteger signature = BigInteger.ModPow(digest, PrivateKey.PrivateExponent, PrivateKey.Modulus);
 
-            return signature;
+            return new RsaDigitalSignature(signature);
         }
 
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
-        public bool VerifySignature(BigInteger signature,byte[] message,CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data,CryptographicHashAlgorithm hashAlgorithm)
         {
-            BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(message));
+            BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(data));
 
             //взятие хеша по модулю, аналогично того же, что и в создании подписи
             realHash = ModularArithmetic.Modulus(realHash, PublicKey.Modulus);
 
-            BigInteger signatureHash = BigInteger.ModPow(signature, PublicKey.Exponent, PublicKey.Modulus);
+            BigInteger sign = (signature as RsaDigitalSignature).signValue;
+
+            BigInteger signatureHash = BigInteger.ModPow(sign, PublicKey.Exponent, PublicKey.Modulus);
 
             return realHash == signatureHash;
         }
