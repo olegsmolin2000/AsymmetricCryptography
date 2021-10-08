@@ -78,19 +78,21 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
         public bool VerifyDigitalSignature(DigitalSignature signature ,byte[] data,CryptographicHashAlgorithm hashAlgorithm)
         {
+            ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
+
             BigInteger q = PublicKey.Parameters.Q;
             BigInteger p = PublicKey.Parameters.P;
             BigInteger g = PublicKey.Parameters.G;
 
             //вычисление w = s^-1 mod q
-            BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse((signature as ElGamalDigitalSignature).S, q);
+            BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(digitalSignature.S, q);
 
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
 
             //u1 = H(m) * w mod q
             BigInteger u1 = ModularArithmetic.Modulus(hash * w, q);
             //u2 = r * w mod q
-            BigInteger u2 = ModularArithmetic.Modulus((signature as ElGamalDigitalSignature).R * w, q);
+            BigInteger u2 = ModularArithmetic.Modulus(digitalSignature.R * w, q);
 
             //v = (g^u1 * y^u2 mod p) mod q
             g = BigInteger.ModPow(g, u1, p);
@@ -99,7 +101,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             BigInteger v = ModularArithmetic.Modulus(ModularArithmetic.Modulus(g * y, p), q);
 
             //если v == r то подпись верна
-            return v == (signature as ElGamalDigitalSignature).R;
+            return v == digitalSignature.R;
         }
 
         private BigInteger GenerateSessionKey(BigInteger q)

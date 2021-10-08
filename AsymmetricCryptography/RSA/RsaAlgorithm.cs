@@ -130,14 +130,14 @@ namespace AsymmetricCryptography.RSA
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
         public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data,CryptographicHashAlgorithm hashAlgorithm)
         {
+            RsaDigitalSignature digitalSignature = (RsaDigitalSignature)signature;
+
             BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(data));
 
             //взятие хеша по модулю, аналогично того же, что и в создании подписи
             realHash = ModularArithmetic.Modulus(realHash, PublicKey.Modulus);
 
-            BigInteger sign = (signature as RsaDigitalSignature).signValue;
-
-            BigInteger signatureHash = BigInteger.ModPow(sign, PublicKey.Exponent, PublicKey.Modulus);
+            BigInteger signatureHash = BigInteger.ModPow(digitalSignature.signValue, PublicKey.Exponent, PublicKey.Modulus);
 
             return realHash == signatureHash;
         }
