@@ -5,10 +5,13 @@ using System.Numerics;
 
 namespace AsymmetricCryptography.RSA
 {
-    class RsaPublicKey
+    class RsaPublicKey: AsymmetricKey
     {
         public BigInteger Exponent { get; }//e
         public BigInteger Modulus { get; }//n
+
+        public override string KeyType => "RSA public key";
+
 
         public RsaPublicKey(BigInteger publicExponent,BigInteger modulus)
         {
@@ -16,7 +19,7 @@ namespace AsymmetricCryptography.RSA
             this.Modulus = modulus;
         }
 
-        public void PrintConsole()
+        public override void PrintConsole()
         {
             Console.WriteLine(new string('-',50));
 

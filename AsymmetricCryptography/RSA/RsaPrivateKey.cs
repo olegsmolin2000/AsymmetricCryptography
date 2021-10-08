@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace AsymmetricCryptography.RSA
 {
-    class RsaPrivateKey
+    class RsaPrivateKey:AsymmetricKey
     {
         public BigInteger Modulus { get; }//n
         public BigInteger PublicExponent { get; }//e
@@ -15,6 +15,8 @@ namespace AsymmetricCryptography.RSA
         public BigInteger Exponent1 { get; }//d mod(p-1)
         public BigInteger Exponent2 { get; }//d mod(q-1)
         public BigInteger Coefficient { get; }//(1/q) mod p
+
+        public override string KeyType => "RSA private key";
 
         public RsaPrivateKey(BigInteger n, BigInteger e, BigInteger d, BigInteger p, BigInteger q)
         {
@@ -30,7 +32,7 @@ namespace AsymmetricCryptography.RSA
             Coefficient = ModularArithmetic.GetMultiplicativeModuloReverse(q, p);
         }
 
-        public void PrintConsole()
+        public override void PrintConsole()
         {
             Console.WriteLine(new string('-', 50));
 

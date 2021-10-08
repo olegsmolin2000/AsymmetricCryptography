@@ -6,14 +6,50 @@ using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography.RSA
 {
-    static class RsaAlgorithm
+    //todo:
+    // zero bytes incorrect encryption
+    sealed class RsaAlgorithm: AsymmetricAlgorithm
     {
+        public override string AlgorithmName => "RSA";
+
+        private new RsaPublicKey PublicKey
+        {
+            get
+            {
+                return base.PublicKey as RsaPublicKey;
+            }
+            set
+            {
+                if (value is RsaPublicKey)
+                    base.PublicKey = value;
+            }
+        }
+
+        private new RsaPrivateKey PrivateKey
+        {
+            get
+            {
+                return base.PrivateKey as RsaPrivateKey;
+            }
+            set
+            {
+                if (value is RsaPrivateKey)
+                    base.PrivateKey = value;
+            }
+        }
+
+        public RsaAlgorithm(RsaPrivateKey privateKey,RsaPublicKey publicKey)
+        {
+            PublicKey = publicKey;
+            PrivateKey = privateKey;
+        }
+
         //шифрование RSA с помощью открытого ключа
-        public static byte[] Encrypt(byte[] data,RsaPublicKey publicKey)
+        public byte[] Encrypt(byte[] data)
         {
             //получение отклытой экпоненты и модуля
-            BigInteger exponent = publicKey.Exponent;
-            BigInteger modulus = publicKey.Modulus;
+            BigInteger exponent = PublicKey.Exponent;
+            BigInteger modulus = PublicKey.Modulus;
 
             //вычисление размера блока
             int blockSize = BlockConverter.GetBlockSize(modulus);
@@ -37,11 +73,11 @@ namespace AsymmetricCryptography.RSA
         }
 
         //расшифровка RSA с помощью закрытого ключа
-        public static byte[] Decrypt(byte[] encryptedData,RsaPrivateKey privateKey)
+        public byte[] Decrypt(byte[] encryptedData)
         {
             //получение закрытой экспоненты и модуля
-            BigInteger exponent = privateKey.PrivateExponent;
-            BigInteger modulus = privateKey.Modulus;
+            BigInteger exponent = PrivateKey.PrivateExponent;
+            BigInteger modulus = PrivateKey.Modulus;
 
             //вычисление размера блоков
             int blockSize = BlockConverter.GetBlockSize(modulus);
@@ -67,28 +103,28 @@ namespace AsymmetricCryptography.RSA
         }
 
         //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
-        public static BigInteger CreateSignature(byte[] message,RsaPrivateKey privateKey,CryptographicHashAlgorithm hashAlgorithm)
+        public BigInteger CreateSignature(byte[] message,CryptographicHashAlgorithm hashAlgorithm)
         {
             BigInteger digest = new BigInteger(hashAlgorithm.GetHash(message));
 
             //если модуль ключа не может вместить хеш или хеш будет меньше нуля, то будут проблемы
             //поэтому хеш берётся по модулю
-            digest = ModularArithmetic.Modulus(digest, privateKey.Modulus);
+            digest = ModularArithmetic.Modulus(digest, PrivateKey.Modulus);
 
-            BigInteger signature = BigInteger.ModPow(digest, privateKey.PrivateExponent, privateKey.Modulus);
+            BigInteger signature = BigInteger.ModPow(digest, PrivateKey.PrivateExponent, PrivateKey.Modulus);
 
             return signature;
         }
 
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
-        public static bool VerifySignature(BigInteger signature,byte[] message,RsaPublicKey publicKey,CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifySignature(BigInteger signature,byte[] message,CryptographicHashAlgorithm hashAlgorithm)
         {
             BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(message));
 
             //взятие хеша по модулю, аналогично того же, что и в создании подписи
-            realHash = ModularArithmetic.Modulus(realHash, publicKey.Modulus);
+            realHash = ModularArithmetic.Modulus(realHash, PublicKey.Modulus);
 
-            BigInteger signatureHash = BigInteger.ModPow(signature, publicKey.Exponent, publicKey.Modulus);
+            BigInteger signatureHash = BigInteger.ModPow(signature, PublicKey.Exponent, PublicKey.Modulus);
 
             return realHash == signatureHash;
         }

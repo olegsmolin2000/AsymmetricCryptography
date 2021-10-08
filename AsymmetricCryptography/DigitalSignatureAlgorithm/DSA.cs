@@ -28,8 +28,6 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                
                 BigInteger hash = new BigInteger(hashAlgorithm.GetHash(message));
 
-                hash = ModularArithmetic.Modulus(hash, p);
-
                 //вычисление k^-1 mod q
                 BigInteger reverseK = ModularArithmetic.GetMultiplicativeModuloReverse(k, q);
 
@@ -54,8 +52,6 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(signature.S, q);
 
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(message));
-
-            hash = ModularArithmetic.Modulus(hash, p);
 
             //u1 = H(m) * w mod q
             BigInteger u1 = ModularArithmetic.Modulus(hash * w, q);
