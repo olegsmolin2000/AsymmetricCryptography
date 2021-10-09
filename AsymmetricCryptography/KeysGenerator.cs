@@ -4,6 +4,7 @@ using System.Text;
 using System.Numerics;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
+using AsymmetricCryptography.ElGamal;
 
 namespace AsymmetricCryptography
 {
@@ -100,6 +101,44 @@ namespace AsymmetricCryptography
             publicKey = new DsaPublicKey(parameters, y);
         }
 
+        public static ElGamalKeyParameters ElGamalParametersGeneration(int keyBinaryLength)
+        {
+            //генерация случайного простого числа p
+            BigInteger p = NumberGenerator.GeneratePrimeNumber(keyBinaryLength);
 
+            //вычисление g - первообразного корня p
+            BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
+
+            return new ElGamalKeyParameters(p, g);
+        }
+
+        public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        {
+            ElGamalKeyParameters parameters = ElGamalParametersGeneration(keyBinaryLength);
+
+            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+        }
+
+        public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        {
+            parameters = ElGamalParametersGeneration(keyBinaryLength);
+
+            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+        }
+
+        public static void ElGamalKeysGeneration(ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        {
+            BigInteger p = parameters.P;
+            BigInteger g = parameters.G;
+
+            //выбирается простое число x, 1 < x < p - 1
+            BigInteger x = NumberGenerator.GenerateNumber(2, p - 2);
+
+            //вычисляется y=g^x mod p
+            BigInteger y = BigInteger.ModPow(g, x, p);
+
+            privateKey = new ElGamalPrivateKey(parameters, x);
+            publicKey = new ElGamalPublicKey(parameters, y);
+        }
     }
 }

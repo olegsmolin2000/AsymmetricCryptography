@@ -13,6 +13,12 @@ namespace AsymmetricCryptography.ElGamal
 
         public BigInteger Y { get; }
 
+        public ElGamalPublicKey(ElGamalKeyParameters parameters, BigInteger y)
+        {
+            this.Parameters = parameters;
+            this.Y = y;
+        }
+
         public override void PrintConsole()
         {
             Console.WriteLine(new string('-', 75));

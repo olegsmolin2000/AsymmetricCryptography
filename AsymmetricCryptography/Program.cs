@@ -5,6 +5,7 @@ using System.Threading;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.CryptographicHash;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
+using AsymmetricCryptography.ElGamal;
 
 namespace AsymmetricCryptography
 {
@@ -19,7 +20,7 @@ namespace AsymmetricCryptography
 
             for (int i = 0; i < count; i++)
             {
-                if (i % 10 == 0)
+                //if (i % 10 == 0)
                     Console.WriteLine(i);
                 DsaPrivateKey q1;
                 DsaPublicKey q2;
@@ -32,6 +33,11 @@ namespace AsymmetricCryptography
                 AsymmetricKey qq = q11;
                 int mesLength = rand.Next() % 50;
 
+                ElGamalPrivateKey qq1;
+                ElGamalPublicKey qq2;
+
+                KeysGenerator.ElGamalKeysGeneration(40, out qq1, out qq2);
+
                 for (int j = 0; j < mesLength; j++)
                 {
                     message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 255+1)));
@@ -40,6 +46,8 @@ namespace AsymmetricCryptography
                 RsaAlgorithm rsa1 = new RsaAlgorithm(q11,q22);
                 
                 DSA dsa1 = new DSA(q1, q2);
+
+                ElGamalAlgorithm elg = new ElGamalAlgorithm(qq1,qq2);
 
                 byte[] data = Encoding.UTF8.GetBytes(message.ToString());
 
@@ -54,7 +62,9 @@ namespace AsymmetricCryptography
                 var crypt = rsa1.Encrypt(data);
                 var decryp = rsa1.Decrypt(crypt);
 
-                
+                var egcrypt = elg.Encrypt(data);
+                var egdecrypt = elg.Decrypt(egcrypt);
+
 
                 if (!dsa)
                     Console.WriteLine("dsa error");
@@ -62,7 +72,8 @@ namespace AsymmetricCryptography
                     Console.WriteLine("rsa sign error");
                 if (Encoding.UTF8.GetString(decryp) != message.ToString())
                     Console.WriteLine("rsa crypt error");
-
+                if (Encoding.UTF8.GetString(egdecrypt) != message.ToString())
+                    Console.WriteLine("el gamal crypt error");
 
 
             }
