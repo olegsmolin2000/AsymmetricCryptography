@@ -36,7 +36,7 @@ namespace AsymmetricCryptography
                 ElGamalPrivateKey qq1;
                 ElGamalPublicKey qq2;
 
-                KeysGenerator.ElGamalKeysGeneration(40, out qq1, out qq2);
+                KeysGenerator.ElGamalKeysGeneration(32, out qq1, out qq2);
 
                 for (int j = 0; j < mesLength; j++)
                 {
@@ -53,10 +53,11 @@ namespace AsymmetricCryptography
 
                 DigitalSignature sign = dsa1.CreateSignature(data, new SHA_256());
                 DigitalSignature rsaSign = rsa1.CreateSignature(data, new SHA_256());
+                DigitalSignature elgamalds = elg.CreateSignature(data, new SHA_256());
 
                 bool dsa = dsa1.VerifyDigitalSignature(sign, data, new SHA_256());
                 bool rsa = rsa1.VerifyDigitalSignature(rsaSign, data, new SHA_256());
-
+                bool elgamal = elg.VerifyDigitalSignature(elgamalds, data, new SHA_256());
                 
 
                 var crypt = rsa1.Encrypt(data);
@@ -74,7 +75,8 @@ namespace AsymmetricCryptography
                     Console.WriteLine("rsa crypt error");
                 if (Encoding.UTF8.GetString(egdecrypt) != message.ToString())
                     Console.WriteLine("el gamal crypt error");
-
+                if (!elgamal)
+                    Console.WriteLine("el gamal sign error");
 
             }
 
