@@ -6,7 +6,7 @@ using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
-    sealed class DSA:AsymmetricAlgorithm,IDigitalSignature
+    sealed class DSA:AsymmetricAlgorithm, IDigitalSignature
     {
         public override string AlgorithmName => "DSA";
 

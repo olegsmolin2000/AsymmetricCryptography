@@ -25,11 +25,11 @@ namespace AsymmetricCryptography
                 DsaPublicKey q2;
                 RsaPrivateKey q11;
                 RsaPublicKey q22;
-                KeysGenerator.RsaKeysGeneration(32, out q11, out q22);
-                KeysGenerator.DsaKeysGeneration(128, 64, out q1, out q2);
+                KeysGenerator.RsaKeysGeneration(24, out q11, out q22);
+                KeysGenerator.DsaKeysGeneration(48, 32, out q1, out q2);
                 //System.Security.Cryptography.RSACryptoServiceProvider
                 StringBuilder message = new StringBuilder();
-                
+                AsymmetricKey qq = q11;
                 int mesLength = rand.Next() % 50;
 
                 for (int j = 0; j < mesLength; j++)
@@ -38,7 +38,7 @@ namespace AsymmetricCryptography
                 }
                 
                 RsaAlgorithm rsa1 = new RsaAlgorithm(q11,q22);
-
+                
                 DSA dsa1 = new DSA(q1, q2);
 
                 byte[] data = Encoding.UTF8.GetBytes(message.ToString());
@@ -62,8 +62,9 @@ namespace AsymmetricCryptography
                     Console.WriteLine("rsa sign error");
                 if (Encoding.UTF8.GetString(decryp) != message.ToString())
                     Console.WriteLine("rsa crypt error");
-                //else
-                    //Console.WriteLine("rsa crypt success");
+
+
+
             }
 
 

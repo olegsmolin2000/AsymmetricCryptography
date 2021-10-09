@@ -8,7 +8,7 @@ namespace AsymmetricCryptography.RSA
 {
     //todo:
     // zero bytes incorrect encryption
-    sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor,IDigitalSignature
+    sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignature
     {
         public override string AlgorithmName => "RSA";
 
