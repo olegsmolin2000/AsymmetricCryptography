@@ -5,7 +5,7 @@ using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography
 {
-    interface IDigitalSignature
+    interface IDigitalSignatutator
     {
         public DigitalSignature CreateSignature(byte[] data, CryptographicHashAlgorithm hashAlgorithm);
         public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data, CryptographicHashAlgorithm hashAlgorithm);

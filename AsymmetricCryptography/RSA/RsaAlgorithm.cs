@@ -8,7 +8,7 @@ namespace AsymmetricCryptography.RSA
 {
     //todo:
     // zero bytes incorrect encryption
-    sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignature
+    sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
         public override string AlgorithmName => "RSA";
 
@@ -43,7 +43,7 @@ namespace AsymmetricCryptography.RSA
             RsaPrivateKey rsaPrivateKey;
             RsaPublicKey rsaPublicKey;
 
-            KeysGenerator.RsaKeysGeneration(keyBinarySize, out rsaPrivateKey, out rsaPublicKey);
+            oldKeysGenerator.RsaKeysGeneration(keyBinarySize, out rsaPrivateKey, out rsaPublicKey);
 
             PublicKey = rsaPublicKey;
             PrivateKey = rsaPrivateKey;

@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace AsymmetricCryptography.ElGamal
 {
-    class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignature
+    class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
         public override string AlgorithmName => "El Gamal";
 

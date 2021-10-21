@@ -85,8 +85,38 @@ namespace AsymmetricCryptography
             //    Console.WriteLine("count:" + count);
 
 
+            int keySize = 0;
 
+            Console.Write("input key binary size:");
+            keySize = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+            RsaAlgorithm rsa = new RsaAlgorithm(keySize);
+            rsa.PrintKeys();
+            string message = "";
+            Console.WriteLine();
+            Console.Write("input messsage:");
+            message = Console.ReadLine();
 
+            byte[] mesBytes = Encoding.UTF8.GetBytes(message);
+
+            byte[] encrypt = rsa.Encrypt(mesBytes);
+
+            Console.WriteLine();
+
+            Console.WriteLine("encryption:"+Encoding.UTF8.GetString(encrypt));
+            Console.WriteLine();
+            byte[] decrypt = rsa.Decrypt(encrypt);
+
+            Console.WriteLine("decryption:" + Encoding.UTF8.GetString(decrypt));
+            Console.WriteLine();
+            CryptographicHashAlgorithm hashAlgorithm = new SHA_256();
+
+            DigitalSignature sign = rsa.CreateSignature(mesBytes, hashAlgorithm);
+
+            sign.PrintConsole();
+            Console.WriteLine();
+
+            Console.WriteLine("signature verification:" + rsa.VerifyDigitalSignature(sign, mesBytes, hashAlgorithm));
 
 
 
