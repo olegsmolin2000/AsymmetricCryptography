@@ -36,10 +36,11 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             }
         }
 
-        public DSA(DsaPrivateKey privateKey,DsaPublicKey publicKey)
+        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey,NumberGenerator numberGenerator,PrimalityVerificator primalityVerificator)
+            :base(numberGenerator,primalityVerificator)
         {
-            PrivateKey = privateKey;
-            PublicKey = publicKey;
+            PrivateKey = privateKey as DsaPrivateKey;
+            PublicKey = publicKey as DsaPublicKey;
         }
 
         public DigitalSignature CreateSignature(byte[] data,CryptographicHashAlgorithm hashAlgorithm)
@@ -106,7 +107,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
         private BigInteger GenerateSessionKey(BigInteger q)
         {
-            return FibonacciNumberGenerator.GenerateNumber(2, q - 1);
+            return numberGenerator.GenerateNumber(2, q - 1);
         }
     }
 }

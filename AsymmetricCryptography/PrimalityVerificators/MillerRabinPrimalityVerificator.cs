@@ -7,8 +7,9 @@ namespace AsymmetricCryptography
 {
     class MillerRabinPrimalityVerificator: PrimalityVerificator
     {
-        public MillerRabinPrimalityVerificator(NumberGenerator numberGenerator) : base(numberGenerator)
+        public override void SetNumberGenerator(NumberGenerator numberGenerator)
         {
+            base.numberGenerator = numberGenerator;
         }
 
         //вероятностный тест на простоту Миллера-Рабина

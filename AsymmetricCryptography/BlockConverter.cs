@@ -5,6 +5,8 @@ using System.Text;
 
 namespace AsymmetricCryptography
 {
+    //todo:
+    // zero bytes incorrect encryption
     static class BlockConverter
     {
         //функция нахождени количества байтов, которые можно обрабатывать по заданному модулю

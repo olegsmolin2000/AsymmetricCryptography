@@ -6,8 +6,8 @@ using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography.RSA
 {
-    //todo:
-    // zero bytes incorrect encryption
+    // TODO:
+    // new keys generation method by factory
     sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
         public override string AlgorithmName => "RSA";
@@ -38,21 +38,11 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
-        public RsaAlgorithm(int keyBinarySize)
+        public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator)
+             : base(numberGenerator, primalityVerificator)
         {
-            RsaPrivateKey rsaPrivateKey;
-            RsaPublicKey rsaPublicKey;
-
-            oldKeysGenerator.RsaKeysGeneration(keyBinarySize, out rsaPrivateKey, out rsaPublicKey);
-
-            PublicKey = rsaPublicKey;
-            PrivateKey = rsaPrivateKey;
-        }
-
-        public RsaAlgorithm(RsaPrivateKey privateKey,RsaPublicKey publicKey)
-        {
-            PublicKey = publicKey;
-            PrivateKey = privateKey;
+            PublicKey = publicKey as RsaPublicKey;
+            PrivateKey = privateKey as RsaPrivateKey;
         }
 
         //шифрование RSA с помощью открытого ключа

@@ -40,105 +40,105 @@ namespace AsymmetricCryptography
         //    publicKey = new RsaPublicKey(e, n);
         //}
 
-        //генерация доменных параметров DSA, которые можно использовать для нескольких пользователей
-        //L - битовый размер параметра p
-        //N - число бит размером, совпадающим с числом бит в значении криптографической хеш функции
-        public static DsaDomainParameters DsaDomainParametersGeneration(int L,int N)
-        {
-            //q - простое число, размер которого в битах совпадает с размерностью в битах значения хеш-функции
-            BigInteger q = FibonacciNumberGenerator.GeneratePrimeNumber(N);
+        ////генерация доменных параметров DSA, которые можно использовать для нескольких пользователей
+        ////L - битовый размер параметра p
+        ////N - число бит размером, совпадающим с числом бит в значении криптографической хеш функции
+        //public static DsaDomainParameters DsaDomainParametersGeneration(int L,int N)
+        //{
+        //    //q - простое число, размер которого в битах совпадает с размерностью в битах значения хеш-функции
+        //    BigInteger q = FibonacciNumberGenerator.GeneratePrimeNumber(N);
 
-            //поиск простого числа p такого, что (p-1) % q == 0
-            BigInteger p;
+        //    //поиск простого числа p такого, что (p-1) % q == 0
+        //    BigInteger p;
 
-            //генерируется случайное НЕПРОСТОЕ число длины L-N,
-            //умножается на q, прибавляется 1 и результат проверяется на простоту
-            do
-            {
-                p = FibonacciNumberGenerator.GenerateNumber(L- N);
-                p *= q;
-                p++;
-            } while (!MillerRabinPrimalityVerificator.IsPrimal(p, 1000));
+        //    //генерируется случайное НЕПРОСТОЕ число длины L-N,
+        //    //умножается на q, прибавляется 1 и результат проверяется на простоту
+        //    do
+        //    {
+        //        p = FibonacciNumberGenerator.GenerateNumber(L- N);
+        //        p *= q;
+        //        p++;
+        //    } while (!MillerRabinPrimalityVerificator.IsPrimal(p, 1000));
 
-            //вычисляется g по формуле g = h^((p - 1) / q) mod p, такое что g != 1
-            //обычно h = 2 подходит
-            BigInteger g = BigInteger.ModPow(2, (p - 1) / q, p);
+        //    //вычисляется g по формуле g = h^((p - 1) / q) mod p, такое что g != 1
+        //    //обычно h = 2 подходит
+        //    BigInteger g = BigInteger.ModPow(2, (p - 1) / q, p);
 
-            //если h = 2 не подошло, то оно выбирается из промежутка (1, p - 1)
-            while (g <= 1)
-            {
-                BigInteger h = FibonacciNumberGenerator.GenerateNumber(1, p - 1);
+        //    //если h = 2 не подошло, то оно выбирается из промежутка (1, p - 1)
+        //    while (g <= 1)
+        //    {
+        //        BigInteger h = FibonacciNumberGenerator.GenerateNumber(1, p - 1);
 
-                g = BigInteger.ModPow(h, (p - 1) / q, p);
-            }
+        //        g = BigInteger.ModPow(h, (p - 1) / q, p);
+        //    }
 
-            return new DsaDomainParameters(q, p, g);
-        }
+        //    return new DsaDomainParameters(q, p, g);
+        //}
 
-        public static void DsaKeysGeneration(int L, int N, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
-        {
-            DsaDomainParameters parameters = DsaDomainParametersGeneration(L, N);
+        //public static void DsaKeysGeneration(int L, int N, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        //{
+        //    DsaDomainParameters parameters = DsaDomainParametersGeneration(L, N);
 
-            DsaKeysGeneration(parameters, out privateKey, out publicKey);
-        }
+        //    DsaKeysGeneration(parameters, out privateKey, out publicKey);
+        //}
 
-        public static void DsaKeysGeneration(int L, int N, out DsaDomainParameters parameters, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
-        {
-            parameters = DsaDomainParametersGeneration(L, N);
+        //public static void DsaKeysGeneration(int L, int N, out DsaDomainParameters parameters, out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        //{
+        //    parameters = DsaDomainParametersGeneration(L, N);
 
-            DsaKeysGeneration(parameters, out privateKey, out publicKey);
-        }
+        //    DsaKeysGeneration(parameters, out privateKey, out publicKey);
+        //}
 
-        public static void DsaKeysGeneration(DsaDomainParameters parameters,out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
-        {
-            //x - закрытый ключ. случайное число в промежутке (2, q)
-            BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, parameters.Q - 1);
+        //public static void DsaKeysGeneration(DsaDomainParameters parameters,out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
+        //{
+        //    //x - закрытый ключ. случайное число в промежутке (2, q)
+        //    BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, parameters.Q - 1);
 
-            //y - открытый ключ. y=g^x mod p
-            BigInteger y = BigInteger.ModPow(parameters.G, x, parameters.P);
+        //    //y - открытый ключ. y=g^x mod p
+        //    BigInteger y = BigInteger.ModPow(parameters.G, x, parameters.P);
 
-            privateKey = new DsaPrivateKey(parameters, x, y);
-            publicKey = new DsaPublicKey(parameters, y);
-        }
+        //    privateKey = new DsaPrivateKey(parameters, x, y);
+        //    publicKey = new DsaPublicKey(parameters, y);
+        //}
 
-        public static ElGamalKeyParameters ElGamalParametersGeneration(int keyBinaryLength)
-        {
-            //генерация случайного простого числа p
-            BigInteger p = FibonacciNumberGenerator.GeneratePrimeNumber(keyBinaryLength);
+        //public static ElGamalKeyParameters ElGamalParametersGeneration(int keyBinaryLength)
+        //{
+        //    //генерация случайного простого числа p
+        //    BigInteger p = FibonacciNumberGenerator.GeneratePrimeNumber(keyBinaryLength);
 
-            //вычисление g - первообразного корня p
-            BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
+        //    //вычисление g - первообразного корня p
+        //    BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
 
-            return new ElGamalKeyParameters(p, g);
-        }
+        //    return new ElGamalKeyParameters(p, g);
+        //}
 
-        public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
-        {
-            ElGamalKeyParameters parameters = ElGamalParametersGeneration(keyBinaryLength);
+        //public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        //{
+        //    ElGamalKeyParameters parameters = ElGamalParametersGeneration(keyBinaryLength);
 
-            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
-        }
+        //    ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+        //}
 
-        public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
-        {
-            parameters = ElGamalParametersGeneration(keyBinaryLength);
+        //public static void ElGamalKeysGeneration(int keyBinaryLength, out ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        //{
+        //    parameters = ElGamalParametersGeneration(keyBinaryLength);
 
-            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
-        }
+        //    ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+        //}
 
-        public static void ElGamalKeysGeneration(ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
-        {
-            BigInteger p = parameters.P;
-            BigInteger g = parameters.G;
+        //public static void ElGamalKeysGeneration(ElGamalKeyParameters parameters, out ElGamalPrivateKey privateKey, out ElGamalPublicKey publicKey)
+        //{
+        //    BigInteger p = parameters.P;
+        //    BigInteger g = parameters.G;
 
-            //выбирается простое число x, 1 < x < p - 1
-            BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, p - 2);
+        //    //выбирается простое число x, 1 < x < p - 1
+        //    BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, p - 2);
 
-            //вычисляется y=g^x mod p
-            BigInteger y = BigInteger.ModPow(g, x, p);
+        //    //вычисляется y=g^x mod p
+        //    BigInteger y = BigInteger.ModPow(g, x, p);
 
-            privateKey = new ElGamalPrivateKey(parameters, x);
-            publicKey = new ElGamalPublicKey(parameters, y);
-        }
+        //    privateKey = new ElGamalPrivateKey(parameters, x);
+        //    publicKey = new ElGamalPublicKey(parameters, y);
+        //}
     }
 }

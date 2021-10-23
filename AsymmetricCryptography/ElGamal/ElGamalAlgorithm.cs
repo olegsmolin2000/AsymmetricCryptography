@@ -36,10 +36,11 @@ namespace AsymmetricCryptography.ElGamal
             }
         }
 
-        public ElGamalAlgorithm(ElGamalPrivateKey privateKey,ElGamalPublicKey publicKey)
+        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey,NumberGenerator numberGenerator,PrimalityVerificator primalityVerificator)
+            :base(numberGenerator,primalityVerificator)
         {
-            PrivateKey = privateKey;
-            PublicKey = publicKey;
+            PrivateKey = privateKey as ElGamalPrivateKey;
+            PublicKey = publicKey as ElGamalPublicKey;
         }
 
         public byte[] Encrypt(byte[] data)
@@ -190,8 +191,8 @@ namespace AsymmetricCryptography.ElGamal
 
             do
             {
-                sessionKey = FibonacciNumberGenerator.GenerateNumber(2, p - 2);
-            } while (!MillerRabinPrimalityVerificator.IsCoprime(sessionKey, p - 1));
+                sessionKey = numberGenerator.GenerateNumber(2, p - 2);
+            } while (!primalityVerificator.IsCoprime(sessionKey, p - 1));
 
             return sessionKey;
         }
