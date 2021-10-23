@@ -9,6 +9,13 @@ namespace AsymmetricCryptography
     {
         protected static Random rand = new Random();
 
+        protected PrimalityVerificator primalityVerificator;
+
+        protected NumberGenerator(PrimalityVerificator primalityVerificator)
+        {
+            this.primalityVerificator = primalityVerificator;
+        }
+
         public abstract BigInteger GenerateNumber(int binarySize);
         public abstract BigInteger GenerateNumber(BigInteger min,BigInteger max);
 

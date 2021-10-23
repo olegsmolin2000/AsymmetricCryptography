@@ -58,7 +58,7 @@ namespace AsymmetricCryptography
                 p = FibonacciNumberGenerator.GenerateNumber(L- N);
                 p *= q;
                 p++;
-            } while (!PrimalityVerifications.IsPrimal(p, 1000));
+            } while (!MillerRabinPrimalityVerificator.IsPrimal(p, 1000));
 
             //вычисляется g по формуле g = h^((p - 1) / q) mod p, такое что g != 1
             //обычно h = 2 подходит

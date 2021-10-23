@@ -7,6 +7,10 @@ namespace AsymmetricCryptography.RSA
 {
     class RsaKeysGenerator : KeysGenerator
     {
+        public RsaKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator) : base(numberGenerator, primalityVerificator)
+        {
+        }
+
         public override void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             BigInteger p, q;
@@ -14,9 +18,9 @@ namespace AsymmetricCryptography.RSA
             BigInteger e, d;
 
             //генерация простых чисел p и q по заданному количеству бит
-            q = p = FibonacciNumberGenerator.GeneratePrimeNumber(binarySize);
+            q = p = numberGenerator.GeneratePrimeNumber(binarySize);
             while (q == p)
-                q = FibonacciNumberGenerator.GeneratePrimeNumber(binarySize);
+                q = numberGenerator.GeneratePrimeNumber(binarySize);
 
             //вычисление модуля
             n = p * q;
@@ -27,8 +31,8 @@ namespace AsymmetricCryptography.RSA
             //генерация открытой экспоненты e (1 < e < euler), взаимно простой с euler
             do
             {
-                e = FibonacciNumberGenerator.GeneratePrimeNumber(1, fi);
-            } while (!PrimalityVerifications.IsCoprime(e, fi));
+                e = numberGenerator.GeneratePrimeNumber(1, fi);
+            } while (!primalityVerificator.IsCoprime(e, fi));
 
             //вычисление закрытой экспоненты, d*e (mod euler) =1 ( мультипликативно обратное к числу e по модулю euler)
             d = ModularArithmetic.GetMultiplicativeModuloReverse(e, fi);

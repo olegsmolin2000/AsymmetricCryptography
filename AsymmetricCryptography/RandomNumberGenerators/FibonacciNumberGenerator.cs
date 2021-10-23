@@ -15,6 +15,10 @@ namespace AsymmetricCryptography
             (576, 3217), (4187, 9689), (7083, 19937), (9739, 23209)
         };
 
+        public FibonacciNumberGenerator(PrimalityVerificator primalityVerificator) : base(primalityVerificator)
+        {
+        }
+
         //генерация случайного числа по количеству бит методом Фибоначчи с запаздываниями
         //в полученом случайном числе ровно столько бит, сколько задано параметром
         public override BigInteger GenerateNumber(int binarySize)
@@ -106,7 +110,7 @@ namespace AsymmetricCryptography
         {
             BigInteger number = 0;
 
-            while (!PrimalityVerifications.IsPrimal(number,100))
+            while (!primalityVerificator.IsPrimal(number,100))
                 number = GenerateNumber(binarySize);
 
             return number;
@@ -116,7 +120,7 @@ namespace AsymmetricCryptography
         {
             BigInteger number = 0;
 
-            while (!PrimalityVerifications.IsPrimal(number, 100))
+            while (!primalityVerificator.IsPrimal(number, 100))
                 number = GenerateNumber(min, max);
 
             return number;

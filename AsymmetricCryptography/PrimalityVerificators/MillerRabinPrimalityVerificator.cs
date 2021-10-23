@@ -5,10 +5,14 @@ using System.Text;
 
 namespace AsymmetricCryptography
 {
-    static class PrimalityVerifications
+    class MillerRabinPrimalityVerificator: PrimalityVerificator
     {
+        public MillerRabinPrimalityVerificator(NumberGenerator numberGenerator) : base(numberGenerator)
+        {
+        }
+
         //вероятностный тест на простоту Миллера-Рабина
-        public static bool IsPrimal(BigInteger number, int k)
+        public override bool IsPrimal(BigInteger number, int k)
         {
             if (number == 2 || number == 3)
                 return true;
@@ -28,7 +32,7 @@ namespace AsymmetricCryptography
 
             for (int i = 0; i < k; i++)
             {
-                BigInteger a = FibonacciNumberGenerator.GenerateNumber(2, number - 2);
+                BigInteger a = numberGenerator.GenerateNumber(2, number - 2);
 
                 BigInteger x = BigInteger.ModPow(a, t, number);
 
@@ -51,20 +55,6 @@ namespace AsymmetricCryptography
             }
 
             return true;
-        }
-
-        //проверка чисел на взаимную простоту
-        public static bool IsCoprime(BigInteger num1, BigInteger num2)
-        {
-            while (num1 != 0 && num2 != 0)
-            {
-                if (num1 > num2)
-                    num1 %= num2;
-                else
-                    num2 %= num1;
-            }
-
-            return BigInteger.Max(num1, num2) == 1;
         }
     }
 }
