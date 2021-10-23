@@ -190,7 +190,7 @@ namespace AsymmetricCryptography.ElGamal
 
             do
             {
-                sessionKey = NumberGenerator.GenerateNumber(2, p - 2);
+                sessionKey = FibonacciNumberGenerator.GenerateNumber(2, p - 2);
             } while (!PrimalityVerifications.IsCoprime(sessionKey, p - 1));
 
             return sessionKey;

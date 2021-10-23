@@ -106,7 +106,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
         private BigInteger GenerateSessionKey(BigInteger q)
         {
-            return NumberGenerator.GenerateNumber(2, q - 1);
+            return FibonacciNumberGenerator.GenerateNumber(2, q - 1);
         }
     }
 }

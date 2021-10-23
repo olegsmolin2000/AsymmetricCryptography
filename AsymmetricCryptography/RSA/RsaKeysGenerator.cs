@@ -14,9 +14,9 @@ namespace AsymmetricCryptography.RSA
             BigInteger e, d;
 
             //генерация простых чисел p и q по заданному количеству бит
-            q = p = NumberGenerator.GeneratePrimeNumber(binarySize);
+            q = p = FibonacciNumberGenerator.GeneratePrimeNumber(binarySize);
             while (q == p)
-                q = NumberGenerator.GeneratePrimeNumber(binarySize);
+                q = FibonacciNumberGenerator.GeneratePrimeNumber(binarySize);
 
             //вычисление модуля
             n = p * q;
@@ -27,7 +27,7 @@ namespace AsymmetricCryptography.RSA
             //генерация открытой экспоненты e (1 < e < euler), взаимно простой с euler
             do
             {
-                e = NumberGenerator.GeneratePrimeNumber(1, fi);
+                e = FibonacciNumberGenerator.GeneratePrimeNumber(1, fi);
             } while (!PrimalityVerifications.IsCoprime(e, fi));
 
             //вычисление закрытой экспоненты, d*e (mod euler) =1 ( мультипликативно обратное к числу e по модулю euler)

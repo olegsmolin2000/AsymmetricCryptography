@@ -28,7 +28,7 @@ namespace AsymmetricCryptography
 
             for (int i = 0; i < k; i++)
             {
-                BigInteger a = NumberGenerator.GenerateNumber(2, number - 2);
+                BigInteger a = FibonacciNumberGenerator.GenerateNumber(2, number - 2);
 
                 BigInteger x = BigInteger.ModPow(a, t, number);
 

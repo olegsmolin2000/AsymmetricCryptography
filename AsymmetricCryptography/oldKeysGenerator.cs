@@ -46,7 +46,7 @@ namespace AsymmetricCryptography
         public static DsaDomainParameters DsaDomainParametersGeneration(int L,int N)
         {
             //q - простое число, размер которого в битах совпадает с размерностью в битах значения хеш-функции
-            BigInteger q = NumberGenerator.GeneratePrimeNumber(N);
+            BigInteger q = FibonacciNumberGenerator.GeneratePrimeNumber(N);
 
             //поиск простого числа p такого, что (p-1) % q == 0
             BigInteger p;
@@ -55,7 +55,7 @@ namespace AsymmetricCryptography
             //умножается на q, прибавляется 1 и результат проверяется на простоту
             do
             {
-                p = NumberGenerator.GenerateNumber(L- N);
+                p = FibonacciNumberGenerator.GenerateNumber(L- N);
                 p *= q;
                 p++;
             } while (!PrimalityVerifications.IsPrimal(p, 1000));
@@ -67,7 +67,7 @@ namespace AsymmetricCryptography
             //если h = 2 не подошло, то оно выбирается из промежутка (1, p - 1)
             while (g <= 1)
             {
-                BigInteger h = NumberGenerator.GenerateNumber(1, p - 1);
+                BigInteger h = FibonacciNumberGenerator.GenerateNumber(1, p - 1);
 
                 g = BigInteger.ModPow(h, (p - 1) / q, p);
             }
@@ -92,7 +92,7 @@ namespace AsymmetricCryptography
         public static void DsaKeysGeneration(DsaDomainParameters parameters,out DsaPrivateKey privateKey, out DsaPublicKey publicKey)
         {
             //x - закрытый ключ. случайное число в промежутке (2, q)
-            BigInteger x = NumberGenerator.GenerateNumber(2, parameters.Q - 1);
+            BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, parameters.Q - 1);
 
             //y - открытый ключ. y=g^x mod p
             BigInteger y = BigInteger.ModPow(parameters.G, x, parameters.P);
@@ -104,7 +104,7 @@ namespace AsymmetricCryptography
         public static ElGamalKeyParameters ElGamalParametersGeneration(int keyBinaryLength)
         {
             //генерация случайного простого числа p
-            BigInteger p = NumberGenerator.GeneratePrimeNumber(keyBinaryLength);
+            BigInteger p = FibonacciNumberGenerator.GeneratePrimeNumber(keyBinaryLength);
 
             //вычисление g - первообразного корня p
             BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
@@ -132,7 +132,7 @@ namespace AsymmetricCryptography
             BigInteger g = parameters.G;
 
             //выбирается простое число x, 1 < x < p - 1
-            BigInteger x = NumberGenerator.GenerateNumber(2, p - 2);
+            BigInteger x = FibonacciNumberGenerator.GenerateNumber(2, p - 2);
 
             //вычисляется y=g^x mod p
             BigInteger y = BigInteger.ModPow(g, x, p);
