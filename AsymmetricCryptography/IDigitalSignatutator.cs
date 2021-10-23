@@ -7,7 +7,7 @@ namespace AsymmetricCryptography
 {
     interface IDigitalSignatutator
     {
-        public DigitalSignature CreateSignature(byte[] data, CryptographicHashAlgorithm hashAlgorithm);
-        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data, CryptographicHashAlgorithm hashAlgorithm);
+        public DigitalSignature CreateSignature(byte[] data);
+        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data);
     }
 }

@@ -24,6 +24,7 @@ namespace AsymmetricCryptography
                 NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
                 primalityVerificator.SetNumberGenerator(numberGenerator);
 
+                Parameters parameters = new Parameters(numberGenerator, primalityVerificator, new SHA_256());
 
                 if (i % 10 == 0)
                 Console.WriteLine(i);
@@ -58,17 +59,17 @@ namespace AsymmetricCryptography
 
 
 
-                RsaAlgorithm rsaAlg = new RsaAlgorithm(rsaPrivateKey, rsaPublicKey, numberGenerator, primalityVerificator);
-                DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, numberGenerator, primalityVerificator);
-                ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, numberGenerator, primalityVerificator);
+                RsaAlgorithm rsaAlg = new RsaAlgorithm(rsaPrivateKey, rsaPublicKey, parameters);
+                DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, parameters);
+                ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, parameters);
 
-                DigitalSignature rsaSign = rsaAlg.CreateSignature(data, new SHA_256());
-                DigitalSignature dsaSign = dsaAlg.CreateSignature(data, new SHA_256());
-                DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data, new SHA_256());
+                DigitalSignature rsaSign = rsaAlg.CreateSignature(data);
+                DigitalSignature dsaSign = dsaAlg.CreateSignature(data);
+                DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data);
 
-                bool rsaVer = rsaAlg.VerifyDigitalSignature(rsaSign, data, new SHA_256());
-                bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data, new SHA_256());
-                bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data, new SHA_256());
+                bool rsaVer = rsaAlg.VerifyDigitalSignature(rsaSign, data);
+                bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data);
+                bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data);
 
 
                 var rsaEncryption = rsaAlg.Encrypt(data);

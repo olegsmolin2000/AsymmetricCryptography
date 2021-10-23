@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace AsymmetricCryptography.ElGamal
 {
-    class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
+    sealed class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
         public override string AlgorithmName => "El Gamal";
 
@@ -36,11 +36,11 @@ namespace AsymmetricCryptography.ElGamal
             }
         }
 
-        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey,NumberGenerator numberGenerator,PrimalityVerificator primalityVerificator)
-            :base(numberGenerator,primalityVerificator)
+        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
+             : base(parameters)
         {
-            PrivateKey = privateKey as ElGamalPrivateKey;
-            PublicKey = publicKey as ElGamalPublicKey;
+            base.PrivateKey = privateKey;
+            base.PublicKey = publicKey;
         }
 
         public byte[] Encrypt(byte[] data)
@@ -118,7 +118,7 @@ namespace AsymmetricCryptography.ElGamal
             return decryptedBytes.ToArray();
         }
 
-        public DigitalSignature CreateSignature(byte[] data, CryptographicHashAlgorithm hashAlgorithm)
+        public DigitalSignature CreateSignature(byte[] data)
         {
             //вычисление хеша по криптографической хеш функции
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
@@ -146,7 +146,7 @@ namespace AsymmetricCryptography.ElGamal
             return new ElGamalDigitalSignature(r, s);
         }
 
-        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data, CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data)
         {
             ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
 

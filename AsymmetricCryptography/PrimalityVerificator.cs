@@ -9,7 +9,10 @@ namespace AsymmetricCryptography
     {
         protected NumberGenerator numberGenerator;
 
-        public abstract void SetNumberGenerator(NumberGenerator numberGenerator);
+        public void SetNumberGenerator(NumberGenerator numberGenerator)
+        {
+            this.numberGenerator = numberGenerator;
+        }
 
         public abstract bool IsPrimal(BigInteger number, int k = 0);
 

@@ -38,11 +38,11 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
-        public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator)
-             : base(numberGenerator, primalityVerificator)
+        public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
+             : base(parameters)
         {
-            PublicKey = publicKey as RsaPublicKey;
-            PrivateKey = privateKey as RsaPrivateKey;
+            base.PrivateKey = privateKey;
+            base.PublicKey = publicKey;
         }
 
         //шифрование RSA с помощью открытого ключа
@@ -104,7 +104,7 @@ namespace AsymmetricCryptography.RSA
         }
 
         //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
-        public DigitalSignature CreateSignature(byte[] data,CryptographicHashAlgorithm hashAlgorithm)
+        public DigitalSignature CreateSignature(byte[] data)
         {
             BigInteger digest = new BigInteger(hashAlgorithm.GetHash(data));
 
@@ -118,7 +118,7 @@ namespace AsymmetricCryptography.RSA
         }
 
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
-        public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data,CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data)
         {
             RsaDigitalSignature digitalSignature = (RsaDigitalSignature)signature;
 

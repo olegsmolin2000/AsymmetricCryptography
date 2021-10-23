@@ -36,14 +36,14 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             }
         }
 
-        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey,NumberGenerator numberGenerator,PrimalityVerificator primalityVerificator)
-            :base(numberGenerator,primalityVerificator)
+        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
+             : base(parameters)
         {
-            PrivateKey = privateKey as DsaPrivateKey;
-            PublicKey = publicKey as DsaPublicKey;
+            base.PrivateKey = privateKey;
+            base.PublicKey = publicKey;
         }
 
-        public DigitalSignature CreateSignature(byte[] data,CryptographicHashAlgorithm hashAlgorithm)
+        public DigitalSignature CreateSignature(byte[] data)
         {
             BigInteger q = PrivateKey.Parameters.Q;
             BigInteger p = PrivateKey.Parameters.P;
@@ -77,7 +77,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             return new ElGamalDigitalSignature(r, s);
         }
 
-        public bool VerifyDigitalSignature(DigitalSignature signature ,byte[] data,CryptographicHashAlgorithm hashAlgorithm)
+        public bool VerifyDigitalSignature(DigitalSignature signature ,byte[] data)
         {
             ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
 

@@ -5,13 +5,8 @@ using System.Text;
 
 namespace AsymmetricCryptography
 {
-    class MillerRabinPrimalityVerificator: PrimalityVerificator
+    sealed class MillerRabinPrimalityVerificator: PrimalityVerificator
     {
-        public override void SetNumberGenerator(NumberGenerator numberGenerator)
-        {
-            base.numberGenerator = numberGenerator;
-        }
-
         //вероятностный тест на простоту Миллера-Рабина
         public override bool IsPrimal(BigInteger number, int k)
         {

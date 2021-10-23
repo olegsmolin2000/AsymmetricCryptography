@@ -1,7 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AsymmetricCryptography.CryptographicHash.CryptographicHashAlgorithm" Collapsed="true">
+    <Position X="12.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAEAAAgAAAAAAAAAAACCAAQAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>CryptographicHash\CryptographicHashAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.CryptographicHash.MD_5" Collapsed="true">
+    <Position X="11.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAIAAAAAAAAAgAAAAAAAAAACgIAIGGAAAAA=</HashCode>
+      <FileName>CryptographicHash\MD-5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.CryptographicHash.SHA_256" Collapsed="true">
+    <Position X="13.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAgABIAkAAAAAAAgAAAAAAAAAACgAAIAAAAAAA=</HashCode>
+      <FileName>CryptographicHash\SHA-256.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DSA" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQBAQBAAABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DigitalSignatureAlgorithm\DSA.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaDomainParameters" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACABgAAA=</HashCode>
+      <FileName>DigitalSignatureAlgorithm\DsaDomainParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaKeysGenerator" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>DigitalSignatureAlgorithm\DsaKeysGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaPrivateKey" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAYAA=</HashCode>
+      <FileName>DigitalSignatureAlgorithm\DsaPrivateKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaPublicKey" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAIAA=</HashCode>
+      <FileName>DigitalSignatureAlgorithm\DsaPublicKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.ElGamal.ElGamalAlgorithm" Collapsed="true">
+    <Position X="3.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAQBAQBAQABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ElGamal\ElGamalAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AsymmetricCryptography.ElGamal.ElGamalKeyParameters" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACABAAAA=</HashCode>
+      <FileName>ElGamal\ElGamalKeyParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.ElGamal.ElGamalKeysGenerator" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAAAQA=</HashCode>
+      <FileName>ElGamal\ElGamalKeysGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.ElGamal.ElGamalPrivateKey" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAQAA=</HashCode>
+      <FileName>ElGamal\ElGamalPrivateKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AsymmetricCryptography.ElGamal.ElGamalPublicKey" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAIAA=</HashCode>
+      <FileName>ElGamal\ElGamalPublicKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="AsymmetricCryptography.MillerRabinPrimalityVerificator" Collapsed="true">
-    <Position X="12.25" Y="4.75" Width="1.5" />
+    <Position X="3.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PrimalityVerificators\MillerRabinPrimalityVerificator.cs</FileName>
@@ -15,9 +108,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.AsymmetricAlgorithm" Collapsed="true">
-    <Position X="5.75" Y="3.5" Width="1.5" />
+    <Position X="5.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAQAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAQAAQAAQAAAAAAQAAAAAAAAAAQAAEAAAAAA=</HashCode>
       <FileName>AsymmetricAlgorithm.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,21 +136,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.DigitalSignature" Collapsed="true">
-    <Position X="9.5" Y="6.5" Width="1.5" />
+    <Position X="12.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DigitalSignature.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.ElGamalDigitalSignature" Collapsed="true">
-    <Position X="8.25" Y="7.75" Width="1.5" />
+    <Position X="13.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAQA=</HashCode>
       <FileName>ElGamalDigitalSignature.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.KeysGenerator" Collapsed="true">
-    <Position X="3.25" Y="9.5" Width="1.5" />
+    <Position X="5.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAA=</HashCode>
       <FileName>KeysGenerator.cs</FileName>
@@ -77,17 +170,17 @@
       <FileName>NumberGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AsymmetricCryptography.oldKeysGenerator" Collapsed="true">
+  <Class Name="AsymmetricCryptography.Parameters" Collapsed="true">
     <Position X="21" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAQAAAAAAQA=</HashCode>
-      <FileName>oldKeysGenerator.cs</FileName>
+      <HashCode>AAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Parameters.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.PrimalityVerificator" Collapsed="true">
-    <Position X="12.25" Y="3.5" Width="1.5" />
+    <Position X="3.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAEEAAAAAAAgAAAAAA=</HashCode>
       <FileName>PrimalityVerificator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -98,87 +191,8 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AsymmetricCryptography.CryptographicHash.CryptographicHashAlgorithm" Collapsed="true">
-    <Position X="4.5" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAEAAAgAAAAAAAAAAACCAAQAAAACAAAAAAAAIAA=</HashCode>
-      <FileName>CryptographicHash\CryptographicHashAlgorithm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.CryptographicHash.MD_5" Collapsed="true">
-    <Position X="5.5" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAAAIAAAAAAAAAgAAAAAAAAAACgIAIGGAAAAA=</HashCode>
-      <FileName>CryptographicHash\MD-5.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.CryptographicHash.SHA_256" Collapsed="true">
-    <Position X="3.25" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAgABIAkAAAAAAAgAAAAAAAAAACgAAIAAAAAAA=</HashCode>
-      <FileName>CryptographicHash\SHA-256.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DSA" Collapsed="true">
-    <Position X="3.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAQBAQBAAABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DigitalSignatureAlgorithm\DSA.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaDomainParameters" Collapsed="true">
-    <Position X="21" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACABgAAA=</HashCode>
-      <FileName>DigitalSignatureAlgorithm\DsaDomainParameters.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaPrivateKey" Collapsed="true">
-    <Position X="12.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAYAA=</HashCode>
-      <FileName>DigitalSignatureAlgorithm\DsaPrivateKey.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.DigitalSignatureAlgorithm.DsaPublicKey" Collapsed="true">
-    <Position X="15" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAIAA=</HashCode>
-      <FileName>DigitalSignatureAlgorithm\DsaPublicKey.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.ElGamal.ElGamalAlgorithm" Collapsed="true">
-    <Position X="8" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AQAAAAAAAQBAQBAQABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ElGamal\ElGamalAlgorithm.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="AsymmetricCryptography.ElGamal.ElGamalKeyParameters" Collapsed="true">
-    <Position X="17.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACABAAAA=</HashCode>
-      <FileName>ElGamal\ElGamalKeyParameters.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.ElGamal.ElGamalPrivateKey" Collapsed="true">
-    <Position X="6" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAQAA=</HashCode>
-      <FileName>ElGamal\ElGamalPrivateKey.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AsymmetricCryptography.ElGamal.ElGamalPublicKey" Collapsed="true">
-    <Position X="10.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAYAAAAAAIAA=</HashCode>
-      <FileName>ElGamal\ElGamalPublicKey.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="AsymmetricCryptography.RSA.RsaAlgorithm" Collapsed="true">
-    <Position X="5.75" Y="4.75" Width="1.5" />
+    <Position X="8" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAQAAQBAQABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RSA\RsaAlgorithm.cs</FileName>
@@ -186,28 +200,28 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AsymmetricCryptography.RSA.RsaDigitalSignature" Collapsed="true">
-    <Position X="10.5" Y="7.75" Width="1.5" />
+    <Position X="11.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>RSA\RsaDigitalSignature.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.RSA.RsaKeysGenerator" Collapsed="true">
-    <Position X="3.25" Y="10.75" Width="1.5" />
+    <Position X="3.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>RSA\RsaKeysGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.RSA.RsaPrivateKey" Collapsed="true">
-    <Position X="3.75" Y="1.75" Width="1.5" />
+    <Position X="10.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAAAAAAAAAAABAQCEAQAAAAEQAAAAAAAAA=</HashCode>
       <FileName>RSA\RsaPrivateKey.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AsymmetricCryptography.RSA.RsaPublicKey" Collapsed="true">
-    <Position X="8.25" Y="1.75" Width="1.5" />
+    <Position X="12.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAQAAAAEQAAAAAAAAA=</HashCode>
       <FileName>RSA\RsaPublicKey.cs</FileName>
