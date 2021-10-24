@@ -2,129 +2,132 @@
 using System.Numerics;
 using System.Text;
 using System.Threading;
-using AsymmetricCryptography.RSA;
+using AsymmetricCryptography;
 using AsymmetricCryptography.CryptographicHash;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
 using AsymmetricCryptography.ElGamal;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
+using AsymmetricCryptography.RSA;
 
-namespace AsymmetricCryptography
+namespace AsymmetricCryptographyConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
-            NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
-            primalityVerificator.SetNumberGenerator(numberGenerator);
-
-            Parameters parameters = new Parameters(numberGenerator, primalityVerificator, new SHA_256());
-
-            AsymmetricAlgorithm rsa = new RsaAlgorithm(parameters);
-
-            KeysGenerator generator = new RsaKeysGenerator(parameters);
-
-            AsymmetricKey pub, priv;
-
-            generator.GenerateKeyPair(64, out priv, out pub);
-
-            rsa.SetKeys(null, pub);
-
-            var text = Encoding.UTF8.GetBytes("zhopa asfrest 123");
-
-            var encryption = (rsa as RsaAlgorithm).Encrypt(text);
-
-
-
-
-
-
-
-
-            //Random rand = new Random();
-
-            //int s = 0;
-            //int count = 1000;
-
-            //for (int i = 0; i < count; i++)
-            //{
             //    PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
             //    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
             //    primalityVerificator.SetNumberGenerator(numberGenerator);
 
             //    Parameters parameters = new Parameters(numberGenerator, primalityVerificator, new SHA_256());
 
-            //    //if (i % 10 == 0)
-            //    Console.WriteLine(i);
+            //    AsymmetricAlgorithm rsa = new RsaAlgorithm(parameters);
 
-            //    AsymmetricKey rsaPrivateKey;
-            //    AsymmetricKey rsaPublicKey;
-            //    AsymmetricKey dsaPrivateKey;
-            //    AsymmetricKey dsaPublicKey;
-            //    AsymmetricKey elGamalPrivateKey;
-            //    AsymmetricKey elGamalPublicKey;
+            //    KeysGenerator generator = new RsaKeysGenerator(parameters);
 
-            //    KeysGenerator rsaGenerator = new RsaKeysGenerator(parameters);
-            //    KeysGenerator dsaGenerator = new DsaKeysGenerator(parameters);
-            //    KeysGenerator elGamalGenerator = new ElGamalKeysGenerator(parameters);
+            //    AsymmetricKey pub, priv;
 
-            //    rsaGenerator.GenerateKeyPair(64, out rsaPrivateKey, out rsaPublicKey);
-            //    dsaGenerator.GenerateKeyPair(384, out dsaPrivateKey, out dsaPublicKey);
-            //    elGamalGenerator.GenerateKeyPair(24, out elGamalPrivateKey, out elGamalPublicKey);
+            //    generator.GenerateKeyPair(64, out priv, out pub);
+
+            //    rsa.SetKeys(null, pub);
+
+            //    var text = Encoding.UTF8.GetBytes("zhopa asfrest 123");
+
+            //    var encryption = (rsa as RsaAlgorithm).Encrypt(text);
 
 
 
-            //    StringBuilder message = new StringBuilder();
-
-            //    int mesLength = rand.Next() % 5000;
-
-            //    for (int j = 0; j < mesLength; j++)
-            //    {
-            //        message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 254 + 1)));
-            //    }
-
-            //    byte[] data = Encoding.UTF8.GetBytes(message.ToString());
 
 
 
-            //    RsaAlgorithm rsaAlg = new RsaAlgorithm(rsaPrivateKey, rsaPublicKey, parameters);
-            //    DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, parameters);
-            //    ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, parameters);
-
-            //    DigitalSignature rsaSign = rsaAlg.CreateSignature(data);
-            //    DigitalSignature dsaSign = dsaAlg.CreateSignature(data);
-            //    DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data);
-
-            //    bool rsaVer = rsaAlg.VerifyDigitalSignature(rsaSign, data);
-            //    bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data);
-            //    bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data);
 
 
-            //    var rsaEncryption = rsaAlg.Encrypt(data);
-            //    var elGamalEncryption = elGamalAlg.Encrypt(data);
+            Random rand = new Random();
 
-            //    var rsaDecryption = rsaAlg.Decrypt(rsaEncryption);
-            //    var elGamalDecryption = elGamalAlg.Decrypt(elGamalEncryption);
+            int s = 0;
+            int count = 1000;
 
-            //    if (!rsaVer)
-            //        Console.WriteLine("rsa sign error");
-            //    if (!dsaVer)
-            //        Console.WriteLine("dsa sign error");
-            //    if (!elgamalVer)
-            //        Console.WriteLine("el gamal sign error");
+            for (int i = 0; i < count; i++)
+            {
+                PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
+                NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
+                primalityVerificator.SetNumberGenerator(numberGenerator);
 
-            //    if (Encoding.UTF8.GetString(rsaDecryption) != message.ToString())
-            //        Console.WriteLine("rsa crypt error");
-            //    if (Encoding.UTF8.GetString(elGamalDecryption) != message.ToString())
-            //        Console.WriteLine("el gamal crypt error");
+                Parameters parameters = new Parameters(numberGenerator, primalityVerificator, new SHA_256());
+
+                //if (i % 10 == 0)
+                Console.WriteLine(i);
+
+                AsymmetricKey rsaPrivateKey;
+                AsymmetricKey rsaPublicKey;
+                AsymmetricKey dsaPrivateKey;
+                AsymmetricKey dsaPublicKey;
+                AsymmetricKey elGamalPrivateKey;
+                AsymmetricKey elGamalPublicKey;
+
+                KeysGenerator rsaGenerator = new RsaKeysGenerator(parameters);
+                KeysGenerator dsaGenerator = new DsaKeysGenerator(parameters);
+                KeysGenerator elGamalGenerator = new ElGamalKeysGenerator(parameters);
+
+                rsaGenerator.GenerateKeyPair(64, out rsaPrivateKey, out rsaPublicKey);
+                dsaGenerator.GenerateKeyPair(384, out dsaPrivateKey, out dsaPublicKey);
+                elGamalGenerator.GenerateKeyPair(24, out elGamalPrivateKey, out elGamalPublicKey);
 
 
-            //}
+
+                StringBuilder message = new StringBuilder();
+
+                int mesLength = rand.Next() % 5000;
+
+                for (int j = 0; j < mesLength; j++)
+                {
+                    message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 255 + 1)));
+                }
+
+                byte[] data = Encoding.UTF8.GetBytes((message).ToString());
 
 
-            //Console.WriteLine("s:" + s);
-            //Console.WriteLine("count:" + count);
+
+                RsaAlgorithm rsaAlg = new RsaAlgorithm(rsaPrivateKey, rsaPublicKey, parameters);
+                DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, parameters);
+                ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, parameters);
+
+                DigitalSignature rsaSign = rsaAlg.CreateSignature(data);
+                DigitalSignature dsaSign = dsaAlg.CreateSignature(data);
+                DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data);
+
+                bool rsaVer = rsaAlg.VerifyDigitalSignature(rsaSign, data);
+                bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data);
+                bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data);
+
+
+                var rsaEncryption = rsaAlg.Encrypt(data);
+                var elGamalEncryption = elGamalAlg.Encrypt(data);
+
+                var rsaDecryption = rsaAlg.Decrypt(rsaEncryption);
+                var elGamalDecryption = elGamalAlg.Decrypt(elGamalEncryption);
+
+                
+
+                if (!rsaVer)
+                    Console.WriteLine("rsa sign error");
+                if (!dsaVer)
+                    Console.WriteLine("dsa sign error");
+                if (!elgamalVer)
+                    Console.WriteLine("el gamal sign error");
+
+                if (Encoding.UTF8.GetString(rsaDecryption) != message.ToString())
+                    Console.WriteLine("rsa crypt error");
+                if (Encoding.UTF8.GetString(elGamalDecryption) != message.ToString())
+                    Console.WriteLine("el gamal crypt error");
+
+
+            }
+
+
+            Console.WriteLine("s:" + s);
+            Console.WriteLine("count:" + count);
 
 
             //int keySize = 0;

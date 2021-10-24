@@ -1,0 +1,13 @@
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.exe
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.deps.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.runtimeconfig.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.runtimeconfig.dev.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\ConsoleApp.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.AssemblyInfo.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\ConsoleApp.genruntimeconfig.cache

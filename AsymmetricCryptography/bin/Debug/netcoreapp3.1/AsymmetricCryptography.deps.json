@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "AsymmetricCryptography/1.0.0": {
+        "dependencies": {
+          "AsymmetricCryptographyLib": "1.0.0"
+        },
         "runtime": {
           "AsymmetricCryptography.dll": {}
+        }
+      },
+      "AsymmetricCryptographyLib/1.0.0": {
+        "runtime": {
+          "AsymmetricCryptographyLib.dll": {}
         }
       }
     }
   },
   "libraries": {
     "AsymmetricCryptography/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AsymmetricCryptographyLib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

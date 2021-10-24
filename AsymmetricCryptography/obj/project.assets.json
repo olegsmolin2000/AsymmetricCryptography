@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "AsymmetricCryptographyLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/AsymmetricCryptographyLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AsymmetricCryptographyLib.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "AsymmetricCryptographyLib/1.0.0": {
+      "type": "project",
+      "path": "../AsymmetricCryptographyLib/AsymmetricCryptographyLib.csproj",
+      "msbuildProject": "../AsymmetricCryptographyLib/AsymmetricCryptographyLib.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "AsymmetricCryptographyLib >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\olegs\\.nuget\\packages\\": {},
@@ -37,7 +56,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyLib\\AsymmetricCryptographyLib.csproj": {
+              "projectPath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyLib\\AsymmetricCryptographyLib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
