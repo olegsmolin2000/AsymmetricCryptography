@@ -7,7 +7,8 @@ namespace AsymmetricCryptography.RSA
 {
     class RsaKeysGenerator : KeysGenerator
     {
-        public RsaKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator) : base(numberGenerator, primalityVerificator)
+        public RsaKeysGenerator(Parameters parameters) 
+            : base(parameters)
         {
         }
 

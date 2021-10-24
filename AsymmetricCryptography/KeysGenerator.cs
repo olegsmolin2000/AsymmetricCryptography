@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AsymmetricCryptography.CryptographicHash;
 
 namespace AsymmetricCryptography
 {
@@ -8,11 +9,13 @@ namespace AsymmetricCryptography
     {
         protected NumberGenerator numberGenerator;
         protected PrimalityVerificator primalityVerificator;
+        protected CryptographicHashAlgorithm hashAlgorithm;
 
-        protected KeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator)
+        protected KeysGenerator(Parameters parameters)
         {
-            this.numberGenerator = numberGenerator;
-            this.primalityVerificator = primalityVerificator;
+            this.numberGenerator = parameters.numberGenerator;
+            this.primalityVerificator = parameters.primalityVerificator;
+            this.hashAlgorithm = parameters.hashAlgorithm;
         }
 
         public abstract void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey); 

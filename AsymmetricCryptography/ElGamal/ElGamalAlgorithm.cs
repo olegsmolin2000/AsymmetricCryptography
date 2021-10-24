@@ -39,8 +39,7 @@ namespace AsymmetricCryptography.ElGamal
         public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
              : base(parameters)
         {
-            base.PrivateKey = privateKey;
-            base.PublicKey = publicKey;
+            SetKeys(privateKey, publicKey);
         }
 
         public byte[] Encrypt(byte[] data)
@@ -181,20 +180,6 @@ namespace AsymmetricCryptography.ElGamal
 
             //если левая и правая части равны то подпись верна
             return left == right;
-        }
-
-        // выбор сессионного ключа k. случайное целое число, взаимно простое с (p - 1)
-        // 1 < k < p - 1
-        private BigInteger GenerateSessionKey(BigInteger p)
-        {
-            BigInteger sessionKey = 0;
-
-            do
-            {
-                sessionKey = numberGenerator.GenerateNumber(2, p - 2);
-            } while (!primalityVerificator.IsCoprime(sessionKey, p - 1));
-
-            return sessionKey;
         }
     }
 }

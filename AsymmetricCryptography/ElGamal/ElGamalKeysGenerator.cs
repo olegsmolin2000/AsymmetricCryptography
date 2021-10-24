@@ -7,7 +7,8 @@ namespace AsymmetricCryptography.ElGamal
 {
     class ElGamalKeysGenerator : KeysGenerator
     {
-        public ElGamalKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator) : base(numberGenerator, primalityVerificator)
+        public ElGamalKeysGenerator(Parameters parameters)
+            : base(parameters)
         {
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 using AsymmetricCryptography.CryptographicHash;
+using AsymmetricCryptography.ElGamal;
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
@@ -22,7 +23,6 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                     base.PrivateKey = value;
             }
         }
-
         private new DsaPublicKey PublicKey
         {
             get
@@ -39,8 +39,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
         public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
              : base(parameters)
         {
-            base.PrivateKey = privateKey;
-            base.PublicKey = publicKey;
+            SetKeys(privateKey, publicKey);
         }
 
         public DigitalSignature CreateSignature(byte[] data)
@@ -103,11 +102,6 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
             //если v == r то подпись верна
             return v == digitalSignature.R;
-        }
-
-        private BigInteger GenerateSessionKey(BigInteger q)
-        {
-            return numberGenerator.GenerateNumber(2, q - 1);
         }
     }
 }

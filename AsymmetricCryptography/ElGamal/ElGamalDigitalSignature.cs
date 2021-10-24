@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 
-namespace AsymmetricCryptography
+namespace AsymmetricCryptography.ElGamal
 {
     //цифровая подпись по схеме Эль Гамаля
     class ElGamalDigitalSignature:DigitalSignature

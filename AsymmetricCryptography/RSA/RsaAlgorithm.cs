@@ -24,7 +24,6 @@ namespace AsymmetricCryptography.RSA
                     base.PublicKey = value;
             }
         }
-
         private new RsaPrivateKey PrivateKey
         {
             get
@@ -38,11 +37,18 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
+        public RsaAlgorithm(Parameters parameters)
+            :base(parameters)
+        {
+            keysGenerator = new RsaKeysGenerator(parameters);
+        }
+
         public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
              : base(parameters)
         {
-            base.PrivateKey = privateKey;
-            base.PublicKey = publicKey;
+            keysGenerator = new RsaKeysGenerator(parameters);
+
+            SetKeys(privateKey, publicKey);
         }
 
         //шифрование RSA с помощью открытого ключа
