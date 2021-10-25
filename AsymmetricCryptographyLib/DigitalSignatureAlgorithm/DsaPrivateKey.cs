@@ -12,7 +12,8 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
         public BigInteger X { get; }
         public BigInteger Y { get; }
 
-        public override string KeyType => "DSA private key";
+        public override string AlgorithmName => "DSA";
+        public override string Permittion => "Private";
 
         public DsaPrivateKey(DsaDomainParameters parameters,BigInteger x ,BigInteger y)
         {
@@ -33,6 +34,18 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             Console.WriteLine("Public key(Y):{0}({1} bits)", Y, BinaryConverter.GetBinaryLength(Y));
 
             Console.WriteLine(new string('-', 75));
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append(GetInfo());
+
+            result.Append("Modulus(n):" + X + " (" + BinaryConverter.GetBinaryLength(X) + " bits)\n");
+            //result.Append("Exponent(e):" + Y + " (" + BinaryConverter.GetBinaryLength(Y) + " bits)\n");
+
+            return result.ToString();
         }
     }
 }

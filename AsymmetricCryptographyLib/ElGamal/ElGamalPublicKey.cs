@@ -7,7 +7,8 @@ namespace AsymmetricCryptography.ElGamal
 {
     public class ElGamalPublicKey : AsymmetricKey
     {
-        public override string KeyType => "El Gamal public key";
+        public override string AlgorithmName => "ElGamal";
+        public override string Permittion => "Public";
 
         public ElGamalKeyParameters Parameters { get; }
 
@@ -30,6 +31,17 @@ namespace AsymmetricCryptography.ElGamal
             Console.WriteLine("Public key(Y):{0}({1} bits)", Y, BinaryConverter.GetBinaryLength(Y));
 
             Console.WriteLine(new string('-', 75));
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append(GetInfo());
+
+            result.Append("PublicKey(y):" + Y + " (" + BinaryConverter.GetBinaryLength(Y) + " bits)\n");
+
+            return result.ToString();
         }
     }
 }

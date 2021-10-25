@@ -16,7 +16,8 @@ namespace AsymmetricCryptography.RSA
         public BigInteger Exponent2 { get; }//d mod(q-1)
         public BigInteger Coefficient { get; }//(1/q) mod p
 
-        public override string KeyType => "RSA private key";
+        public override string AlgorithmName => "RSA";
+        public override string Permittion => "Private";
 
         public RsaPrivateKey(BigInteger n, BigInteger e, BigInteger d, BigInteger p, BigInteger q)
         {
@@ -48,6 +49,18 @@ namespace AsymmetricCryptography.RSA
             Console.WriteLine("Coefficient((1/q) mod p):{0}({1} bits)", Coefficient, BinaryConverter.GetBinaryLength(Coefficient));
 
             Console.WriteLine(new string('-', 50));
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append(GetInfo());
+
+            result.Append("Modulus(n):" + Modulus + " (" + BinaryConverter.GetBinaryLength(Modulus) + " bits)\n");
+            result.Append("Exponent(d):" + PrivateExponent + " (" + BinaryConverter.GetBinaryLength(PrivateExponent) + " bits)\n");
+
+            return result.ToString();
         }
     }
 }
