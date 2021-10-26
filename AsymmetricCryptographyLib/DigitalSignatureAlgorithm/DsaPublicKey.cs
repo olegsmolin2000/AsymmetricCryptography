@@ -39,7 +39,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
             result.Append(GetInfo());
 
-            result.Append("Modulus(n):" + Y + " (" + BinaryConverter.GetBinaryLength(Y) + " bits)\n");
+            result.Append("Y:" + Y + " (" + BinaryConverter.GetBinaryLength(Y) + " bits)\n");
 
             return result.ToString();
         }
