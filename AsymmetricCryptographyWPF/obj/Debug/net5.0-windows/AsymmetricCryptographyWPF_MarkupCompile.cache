@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\App.xaml
-21752265074
+3-1262533336
 
-18-1154683691
+20-838438286
 218-584770002
-View\GenerateKeysWindow.xaml;View\MainWindow.xaml;
+View\GenerateKeysWindow.xaml;View\MainWindow.xaml;View\ShowKeyWindow.xaml;
 
-False
+True
 

@@ -12,6 +12,7 @@ namespace AsymmetricCryptography
         public abstract void PrintConsole();
 
         public abstract override string ToString();
+
         public string GetInfo()
         {
             StringBuilder result = new StringBuilder();

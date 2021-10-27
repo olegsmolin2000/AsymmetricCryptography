@@ -15,7 +15,7 @@ namespace AsymmetricCryptography.RSA
         public BigInteger Exponent1 { get; }//d mod(p-1)
         public BigInteger Exponent2 { get; }//d mod(q-1)
         public BigInteger Coefficient { get; }//(1/q) mod p
-
+        
         public override string AlgorithmName => "RSA";
         public override string Permittion => "Private";
 
