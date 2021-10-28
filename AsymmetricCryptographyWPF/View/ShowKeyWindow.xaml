@@ -43,7 +43,7 @@
             <TextBox Margin="5" HorizontalContentAlignment="Center">
                 
             </TextBox>
-            <Button x:Name="CloseButton" Margin="0 20 0 0" Click="GenerateKeysButton_Click">
+            <Button x:Name="CloseButton" Margin="0 20 0 0">
                 Закрыть
             </Button>
         </StackPanel>

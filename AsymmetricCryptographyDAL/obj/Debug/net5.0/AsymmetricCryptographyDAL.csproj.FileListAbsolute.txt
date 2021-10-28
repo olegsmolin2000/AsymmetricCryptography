@@ -1,0 +1,14 @@
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\AsymmetricCryptographyDAL.deps.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\AsymmetricCryptographyDAL.runtimeconfig.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\AsymmetricCryptographyDAL.runtimeconfig.dev.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\AsymmetricCryptographyDAL.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\ref\AsymmetricCryptographyDAL.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\bin\Debug\net5.0\AsymmetricCryptographyDAL.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.AssemblyInfoInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.AssemblyInfo.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.csproj.CoreCompileInputs.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\ref\AsymmetricCryptographyDAL.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.genruntimeconfig.cache
