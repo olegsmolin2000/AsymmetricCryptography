@@ -14,4 +14,3 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\De
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptographyLib.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\bin\Debug\netcoreapp3.1\AsymmetricCryptographyLib.pdb
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptography\obj\Debug\netcoreapp3.1\AsymmetricCryptography.csproj.CopyComplete

@@ -2,7 +2,6 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLay
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\bin\Debug\net5.0\AsymmetrycCryptographyDataLayer.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\bin\Debug\net5.0\ref\AsymmetrycCryptographyDataLayer.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\bin\Debug\net5.0\AsymmetrycCryptographyDataLayer.pdb
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.csproj.AssemblyReference.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.AssemblyInfoInputs.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.AssemblyInfo.cs
@@ -10,3 +9,6 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLay
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\ref\AsymmetrycCryptographyDataLayer.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\bin\Debug\net5.0\AsymmetrycCryptographyDataLayer.runtimeconfig.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\bin\Debug\net5.0\AsymmetrycCryptographyDataLayer.runtimeconfig.dev.json
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetrycCryptographyDataLayer\obj\Debug\net5.0\AsymmetrycCryptographyDataLayer.genruntimeconfig.cache

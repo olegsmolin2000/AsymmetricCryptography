@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetrycCryptographyDataLayer\\AsymmetrycCryptographyDataLayer.csproj": {}
+    "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyDAL\\AsymmetricCryptographyDAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetrycCryptographyDataLayer\\AsymmetrycCryptographyDataLayer.csproj": {
+    "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyDAL\\AsymmetricCryptographyDAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetrycCryptographyDataLayer\\AsymmetrycCryptographyDataLayer.csproj",
-        "projectName": "AsymmetrycCryptographyDataLayer",
-        "projectPath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetrycCryptographyDataLayer\\AsymmetrycCryptographyDataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyDAL\\AsymmetricCryptographyDAL.csproj",
+        "projectName": "AsymmetricCryptographyDAL",
+        "projectPath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyDAL\\AsymmetricCryptographyDAL.csproj",
         "packagesPath": "C:\\Users\\olegs\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetrycCryptographyDataLayer\\obj\\",
+        "outputPath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyDAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
