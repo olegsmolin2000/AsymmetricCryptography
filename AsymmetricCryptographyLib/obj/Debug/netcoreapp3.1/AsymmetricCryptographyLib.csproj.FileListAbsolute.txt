@@ -7,4 +7,3 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\netcoreapp3.1\AsymmetricCryptographyLib.csproj.CoreCompileInputs.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\netcoreapp3.1\AsymmetricCryptographyLib.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\netcoreapp3.1\AsymmetricCryptographyLib.pdb
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\netcoreapp3.1\AsymmetricCryptographyLib.csproj.AssemblyReference.cache

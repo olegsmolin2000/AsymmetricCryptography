@@ -1,5 +1,6 @@
 ﻿using AsymmetricCryptographyDAL.Entities.Keys;
 using AsymmetricCryptographyDAL.Entities.Keys.DSA;
+using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -10,20 +11,28 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
     public class KeyContext : DbContext
     {
         public DbSet<AsymmetricKey> Keys { get; set; }
+
         public DbSet<RsaPrivateKey> RsaPrivateKeys { get; set; }
         public DbSet<RsaPublicKey> RsaPublicKeys { get; set; }
+
         public DbSet<DsaDomainParameter> DsaDomainParameters { get; set; }
         public DbSet<DsaPrivateKey> DsaPrivateKeys { get; set; }
         public DbSet<DsaPublicKey> DsaPublicKeys { get; set; }
 
+        public DbSet<ElGamalKeyParameter> ElGamalKeyParameters { get; set; }
+        public DbSet<ElGamalPrivateKey> ElGamalPrivateKeys { get; set; }
+        public DbSet<ElGamalPublicKey> ElGamalPublicKeys { get; set; }
+
         public KeyContext()
         {
-            Database.Migrate();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Определение таблиц для классов
+
             modelBuilder
                 .Entity<AsymmetricKey>()
                 .ToTable("Keys");
@@ -47,6 +56,19 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
             modelBuilder
                 .Entity<DsaPublicKey>()
                 .ToTable("DsaPublicKeys");
+
+            modelBuilder
+                .Entity<ElGamalKeyParameter>()
+                .ToTable("ElGamalKeyParameters");
+
+            modelBuilder
+                .Entity<ElGamalPrivateKey>()
+                .ToTable("ElGamalPrivateKeys");
+
+            modelBuilder
+                .Entity<ElGamalPublicKey>()
+                .ToTable("ElGamalPublicKeys");
+
             #endregion
 
             var BigIntToStringConverter = new ValueConverter<BigInteger, string>

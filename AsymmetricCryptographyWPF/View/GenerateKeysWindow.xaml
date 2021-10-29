@@ -52,7 +52,7 @@
             <TextBox x:Name="BinarySizeTextBox" Margin="5" HorizontalContentAlignment="Center">
                 256
             </TextBox>
-            <Button x:Name="GenerateKeysButon" Margin="0 20 0 0" Click="GenerateKeysButton_Click">
+            <Button x:Name="GenerateKeysButon" Margin="0 20 0 0">
                 Сгерерировать ключи
             </Button>
         </StackPanel>

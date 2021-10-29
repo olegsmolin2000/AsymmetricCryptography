@@ -27,8 +27,6 @@ namespace AsymmetricCryptographyWPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        AsymmetricKey privateKey, publicKey;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -36,27 +34,7 @@ namespace AsymmetricCryptographyWPF.View
 
         private void GenerateKeysButton_Click(object sender, RoutedEventArgs e)
         {
-            GenerateKeysWindow wind = new GenerateKeysWindow();
-            wind.Owner = Application.Current.MainWindow;
-            wind.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            wind.ShowDialog();
-            //wind.Closed += new EventHandler(PrintKeys);
-        }
 
-        public void SetCurrentKeys(AsymmetricKey privateKey,AsymmetricKey publicKey)
-        {
-            this.privateKey = privateKey;
-            this.publicKey = publicKey;
-
-            PrintKeys();
-        }
-
-        public void PrintKeys()
-        {
-            if (privateKey != null)
-                PrivateKeyTextBox.Text = privateKey.ToString();
-            if (publicKey != null)
-                PublicKeyTextBox.Text = publicKey.ToString();
         }
     }
 }

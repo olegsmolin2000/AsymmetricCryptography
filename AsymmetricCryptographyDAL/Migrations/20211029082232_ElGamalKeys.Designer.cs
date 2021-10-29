@@ -3,14 +3,16 @@ using AsymmetricCryptographyDAL.EFCore.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsymmetricCryptographyDAL.Migrations
 {
     [DbContext(typeof(KeyContext))]
-    partial class KeyContextModelSnapshot : ModelSnapshot
+    [Migration("20211029082232_ElGamalKeys")]
+    partial class ElGamalKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,7 +184,7 @@ namespace AsymmetricCryptographyDAL.Migrations
             modelBuilder.Entity("AsymmetricCryptographyDAL.Entities.Keys.DSA.DsaPrivateKey", b =>
                 {
                     b.HasOne("AsymmetricCryptographyDAL.Entities.Keys.DSA.DsaDomainParameter", "DomainParameter")
-                        .WithMany("DsaPrivateKeys")
+                        .WithMany("PrivateKeys")
                         .HasForeignKey("DomainParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,7 +201,7 @@ namespace AsymmetricCryptographyDAL.Migrations
             modelBuilder.Entity("AsymmetricCryptographyDAL.Entities.Keys.DSA.DsaPublicKey", b =>
                 {
                     b.HasOne("AsymmetricCryptographyDAL.Entities.Keys.DSA.DsaDomainParameter", "DomainParameter")
-                        .WithMany("DsaPublicKeys")
+                        .WithMany("PublicKeys")
                         .HasForeignKey("DomainParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -231,7 +233,7 @@ namespace AsymmetricCryptographyDAL.Migrations
                         .IsRequired();
 
                     b.HasOne("AsymmetricCryptographyDAL.Entities.Keys.ElGamal.ElGamalKeyParameter", "KeyParameter")
-                        .WithMany("ElGamalPrivateKeys")
+                        .WithMany()
                         .HasForeignKey("KeyParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -248,7 +250,7 @@ namespace AsymmetricCryptographyDAL.Migrations
                         .IsRequired();
 
                     b.HasOne("AsymmetricCryptographyDAL.Entities.Keys.ElGamal.ElGamalKeyParameter", "KeyParameter")
-                        .WithMany("ElGamalPublicKeys")
+                        .WithMany()
                         .HasForeignKey("KeyParameterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -276,16 +278,9 @@ namespace AsymmetricCryptographyDAL.Migrations
 
             modelBuilder.Entity("AsymmetricCryptographyDAL.Entities.Keys.DSA.DsaDomainParameter", b =>
                 {
-                    b.Navigation("DsaPrivateKeys");
+                    b.Navigation("PrivateKeys");
 
-                    b.Navigation("DsaPublicKeys");
-                });
-
-            modelBuilder.Entity("AsymmetricCryptographyDAL.Entities.Keys.ElGamal.ElGamalKeyParameter", b =>
-                {
-                    b.Navigation("ElGamalPrivateKeys");
-
-                    b.Navigation("ElGamalPublicKeys");
+                    b.Navigation("PublicKeys");
                 });
 #pragma warning restore 612, 618
         }

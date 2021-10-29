@@ -31,40 +31,5 @@ namespace AsymmetricCryptographyWPF.View
         {
             InitializeComponent();
         }
-
-        private void GenerateKeysButton_Click(object sender,RoutedEventArgs e)
-        {
-            PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
-            NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
-            primalityVerificator.SetNumberGenerator(numberGenerator);
-            CryptographicHashAlgorithm hashAlgorithm = new SHA_256();
-
-            Parameters parameters = new Parameters(numberGenerator, primalityVerificator, hashAlgorithm);
-
-            KeysGenerator generator;
-
-            switch (AlgNameComboBox.Text)
-            {
-                case "RSA":
-                    generator = new RsaKeysGenerator(parameters);
-                    break;
-                case "DSA":
-                    generator = new DsaKeysGenerator(parameters);
-                    break;
-                default:
-                    generator = new ElGamalKeysGenerator(parameters);
-                    break;
-            }
-
-            AsymmetricKey privateKey, publicKey;
-
-            int binarySize = Convert.ToInt32(BinarySizeTextBox.Text);
-
-            generator.GenerateKeyPair(binarySize, out privateKey, out publicKey);
-
-            (this.Owner as MainWindow).SetCurrentKeys(privateKey,publicKey);
-
-            this.Close();
-        }
     }
 }
