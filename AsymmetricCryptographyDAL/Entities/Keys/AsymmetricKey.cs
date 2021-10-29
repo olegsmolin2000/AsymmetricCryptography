@@ -5,7 +5,7 @@ namespace AsymmetricCryptographyDAL.Entities.Keys
     public abstract class AsymmetricKey
     {
         public int Id { get; set; }
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public string AlgorithmName { get; private set; }
         public string Type { get; private set; }
         public int BinarySize { get; private set; }

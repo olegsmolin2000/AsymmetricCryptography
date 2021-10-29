@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Text;
 
-namespace AsymmetricCryptographyDAL.Entities.Keys
+namespace AsymmetricCryptographyDAL.Entities.Keys.RSA
 {
     public class RsaPrivateKey : AsymmetricKey
     {

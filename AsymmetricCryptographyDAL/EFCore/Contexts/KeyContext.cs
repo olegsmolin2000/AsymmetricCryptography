@@ -1,4 +1,6 @@
 ﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.DSA;
+using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Numerics;
@@ -10,6 +12,9 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
         public DbSet<AsymmetricKey> Keys { get; set; }
         public DbSet<RsaPrivateKey> RsaPrivateKeys { get; set; }
         public DbSet<RsaPublicKey> RsaPublicKeys { get; set; }
+        public DbSet<DsaDomainParameter> DsaDomainParameters { get; set; }
+        public DbSet<DsaPrivateKey> DsaPrivateKeys { get; set; }
+        public DbSet<DsaPublicKey> DsaPublicKeys { get; set; }
 
         public KeyContext()
         {
@@ -30,6 +35,18 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
             modelBuilder
                 .Entity<RsaPublicKey>()
                 .ToTable("RsaPublicKeys");
+
+            modelBuilder
+                .Entity<DsaDomainParameter>()
+                .ToTable("DsaDomainParameters");
+
+            modelBuilder
+                .Entity<DsaPrivateKey>()
+                .ToTable("DsaPrivateKeys");
+
+            modelBuilder
+                .Entity<DsaPublicKey>()
+                .ToTable("DsaPublicKeys");
             #endregion
 
             var BigIntToStringConverter = new ValueConverter<BigInteger, string>
