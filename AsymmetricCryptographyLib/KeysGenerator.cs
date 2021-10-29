@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AsymmetricCryptography.CryptographicHash;
+﻿using AsymmetricCryptography.CryptographicHash;
+using AsymmetricCryptographyDAL.Entities.Keys;
 
 namespace AsymmetricCryptography
 {
@@ -18,6 +16,6 @@ namespace AsymmetricCryptography
             this.hashAlgorithm = parameters.hashAlgorithm;
         }
 
-        public abstract void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey); 
+        public abstract void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey); 
     }
 }

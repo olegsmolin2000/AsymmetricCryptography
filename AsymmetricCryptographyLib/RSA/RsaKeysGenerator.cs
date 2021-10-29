@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using System.Numerics;
-using System.Text;
 
 namespace AsymmetricCryptography.RSA
 {
@@ -12,7 +11,7 @@ namespace AsymmetricCryptography.RSA
         {
         }
 
-        public override void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             BigInteger p, q;
             BigInteger n, fi;
@@ -35,11 +34,11 @@ namespace AsymmetricCryptography.RSA
                 e = numberGenerator.GeneratePrimeNumber(1, fi);
             } while (!primalityVerificator.IsCoprime(e, fi));
 
-            //вычисление закрытой экспоненты, d*e (mod euler) =1 ( мультипликативно обратное к числу e по модулю euler)
+            //вычисление закрытой экспоненты, d*e (mod euler) = 1 ( мультипликативно обратное к числу e по модулю euler)
             d = ModularArithmetic.GetMultiplicativeModuloReverse(e, fi);
 
-            privateKey = new RsaPrivateKey(n, e, d, p, q);
-            publicKey = new RsaPublicKey(e, n);
+            privateKey = new RsaPrivateKey(name, binarySize, n, d);
+            publicKey = new RsaPublicKey(name, binarySize, n, e);
         }
     }
 }

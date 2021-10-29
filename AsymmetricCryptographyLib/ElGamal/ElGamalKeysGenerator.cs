@@ -12,7 +12,7 @@ namespace AsymmetricCryptography.ElGamal
         {
         }
 
-        public override void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             ElGamalKeyParameters parameters = ElGamalParametersGeneration(binarySize);
 

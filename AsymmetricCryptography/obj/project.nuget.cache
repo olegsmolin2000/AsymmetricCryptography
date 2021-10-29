@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "T+d/k3CasDRzkoVk6JYwIe0anKXOUR9onBVJX0+xoMjFMjFyk9aGIOTxpQe8BhkIuOjEyU4eFi7E2JG5D8XIQA==",
-  "success": true,
+  "dgSpecHash": "bjyW4vPO3bLUT76UeQrUKn96DvwYyxjIAbsRhG3tY3UGc8YZdFhH5kMfrmzSWRZ37pL+lG6/9/STlbQx3cO0fg==",
+  "success": false,
   "projectFilePath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptography\\AsymmetricCryptography.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Проект AsymmetricCryptographyLib несовместим с netcoreapp3.1 (.NETCoreApp,Version=v3.1). Проект AsymmetricCryptographyLib поддерживает: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "AsymmetricCryptographyLib",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

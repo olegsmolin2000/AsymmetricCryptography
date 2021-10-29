@@ -4,7 +4,7 @@
     ".NETCoreApp,Version=v3.1": {
       "AsymmetricCryptographyLib/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
+        "framework": "Unsupported,Version=v0.0",
         "compile": {
           "bin/placeholder/AsymmetricCryptographyLib.dll": {}
         },
@@ -90,5 +90,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Проект AsymmetricCryptographyLib несовместим с netcoreapp3.1 (.NETCoreApp,Version=v3.1). Проект AsymmetricCryptographyLib поддерживает: net5.0 (.NETCoreApp,Version=v5.0)",
+      "libraryId": "AsymmetricCryptographyLib",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
