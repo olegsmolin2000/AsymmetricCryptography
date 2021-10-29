@@ -1,19 +1,35 @@
-﻿namespace AsymmetricCryptographyDAL.Entities.Keys
+﻿using System.Text;
+
+namespace AsymmetricCryptographyDAL.Entities.Keys
 {
     public abstract class AsymmetricKey
     {
         public int Id { get; set; }
         public string Name { get; private set; }
         public string AlgorithmName { get; private set; }
-        public string Permission { get; private set; }
+        public string Type { get; private set; }
         public int BinarySize { get; private set; }
 
-        protected AsymmetricKey(string name,string algorithmName,string permission,int binarySize)
+        protected AsymmetricKey(string name,string algorithmName,string type, int binarySize)
         {
             this.Name = name;
             this.AlgorithmName = algorithmName;
-            this.Permission = permission;
+            this.Type = type;
             this.BinarySize = binarySize;
+        }
+
+        public abstract override string ToString();
+
+        public string GetInfo()
+        {
+            StringBuilder info = new StringBuilder();
+
+            info.Append("Name:" + Name + "\n");
+            info.Append("AlgorithmName:" + AlgorithmName + "\n");
+            info.Append("Type:" + Type + "\n");
+            info.Append("BinarySize:"+ BinarySize + "\n");
+
+            return info.ToString();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys
 {
@@ -16,6 +17,18 @@ namespace AsymmetricCryptographyDAL.Entities.Keys
         {
             this.Modulus = modulus;
             this.PublicExponent = publicExponent;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.Append(GetInfo());
+
+            result.Append("Modulus (n):" + Modulus + "\n");
+            result.Append("PublicExponent (e):" + PublicExponent + "\n");
+
+            return result.ToString();
         }
     }
 }
