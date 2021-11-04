@@ -209,5 +209,10 @@ namespace AsymmetricCryptography.CryptographicHash
         {
             return RotateRight(x, 17) ^ RotateRight(x, 19) ^ (x >> 10);
         }
+
+        public override string ToString()
+        {
+            return "SHA-256";
+        }
     }
 }

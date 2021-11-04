@@ -52,5 +52,10 @@ namespace AsymmetricCryptography.PrimalityVerificators
 
             return true;
         }
+
+        public override string ToString()
+        {
+            return "Miller-Rabin";
+        }
     }
 }

@@ -10,11 +10,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
         public int KeyParameterId { get; set; }
         public ElGamalKeyParameter KeyParameter { get; set; }
 
-        private ElGamalPrivateKey(string name,int binarySize)
-            :base(name,"ElGamal","Private",binarySize) { }
+        private ElGamalPrivateKey(string name,int binarySize,string[] generationParameters)
+            :base(name,"ElGamal","Private",binarySize, generationParameters) { }
 
-        public ElGamalPrivateKey(string name,int binarySize,BigInteger x)
-            :this(name,binarySize)
+        public ElGamalPrivateKey(string name,int binarySize,string[] generationParameters, BigInteger x)
+            :this(name,binarySize, generationParameters)
         {
             this.X = x;
         }

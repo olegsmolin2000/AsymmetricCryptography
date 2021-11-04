@@ -16,6 +16,8 @@ namespace AsymmetricCryptography
 
         public abstract bool IsPrimal(BigInteger number, int k = 0);
 
+        public abstract override string ToString();
+
         public bool IsCoprime(BigInteger num1, BigInteger num2)
         {
             while (num1 != 0 && num2 != 0)

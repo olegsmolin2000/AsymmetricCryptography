@@ -125,5 +125,10 @@ namespace AsymmetricCryptography.RandomNumberGenerators
 
             return number;
         }
+
+        public override string ToString()
+        {
+            return "Lagged Fibonacci";
+        }
     }
 }

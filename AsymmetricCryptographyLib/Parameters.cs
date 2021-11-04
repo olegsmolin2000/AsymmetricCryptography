@@ -17,5 +17,16 @@ namespace AsymmetricCryptography
             this.primalityVerificator = primalityVerificator;
             this.hashAlgorithm = hashAlgorithm;
         }
+
+        public string[] GetParameters()
+        {
+            string[] parameters = new string[3];
+
+            parameters[0] = numberGenerator.ToString();
+            parameters[1] = primalityVerificator.ToString();
+            parameters[2] = hashAlgorithm.ToString();
+
+            return parameters;
+        }
     }
 }

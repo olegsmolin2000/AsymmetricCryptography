@@ -9,11 +9,18 @@ namespace AsymmetricCryptography
         protected PrimalityVerificator primalityVerificator;
         protected CryptographicHashAlgorithm hashAlgorithm;
 
+        protected string[] generationParameters;
+
         protected KeysGenerator(Parameters parameters)
         {
             this.numberGenerator = parameters.numberGenerator;
             this.primalityVerificator = parameters.primalityVerificator;
             this.hashAlgorithm = parameters.hashAlgorithm;
+
+            this.generationParameters[0] = numberGenerator.ToString();
+            this.generationParameters[1] = primalityVerificator.ToString();
+            this.generationParameters[2] = hashAlgorithm.ToString();
+
         }
 
         public abstract void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey); 

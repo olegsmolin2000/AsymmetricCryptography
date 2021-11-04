@@ -21,5 +21,7 @@ namespace AsymmetricCryptography
 
         public abstract BigInteger GeneratePrimeNumber(int binarySize);
         public abstract BigInteger GeneratePrimeNumber(BigInteger min,BigInteger max);
+
+        public abstract override string ToString();
     }
 }

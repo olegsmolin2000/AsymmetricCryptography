@@ -7,9 +7,7 @@ namespace AsymmetricCryptography.RSA
     public class RsaKeysGenerator : KeysGenerator
     {
         public RsaKeysGenerator(Parameters parameters) 
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
@@ -37,8 +35,8 @@ namespace AsymmetricCryptography.RSA
             //вычисление закрытой экспоненты, d*e (mod euler) = 1 ( мультипликативно обратное к числу e по модулю euler)
             d = ModularArithmetic.GetMultiplicativeModuloReverse(e, fi);
 
-            privateKey = new RsaPrivateKey(name, binarySize, n, d);
-            publicKey = new RsaPublicKey(name, binarySize, n, e);
+            privateKey = new RsaPrivateKey(name, binarySize,generationParameters, n, d);
+            publicKey = new RsaPublicKey(name, binarySize,generationParameters, n, e);
         }
     }
 }

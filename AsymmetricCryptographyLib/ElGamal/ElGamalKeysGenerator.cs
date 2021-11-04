@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
 using System.Numerics;
-using System.Text;
 
 namespace AsymmetricCryptography.ElGamal
 {
@@ -14,12 +13,12 @@ namespace AsymmetricCryptography.ElGamal
 
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
-            ElGamalKeyParameters parameters = ElGamalParametersGeneration(binarySize);
+            ElGamalKeyParameter parameters = ElGamalParametersGeneration(name, binarySize);
 
-            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+            ElGamalKeysGeneration(name, parameters, out privateKey, out publicKey);
         }
 
-        public ElGamalKeyParameters ElGamalParametersGeneration(int binarySize)
+        public ElGamalKeyParameter ElGamalParametersGeneration(string name, int binarySize)
         {
             //генерация случайного простого числа p
             BigInteger p = numberGenerator.GeneratePrimeNumber(binarySize);
@@ -27,17 +26,17 @@ namespace AsymmetricCryptography.ElGamal
             //вычисление g - первообразного корня p
             BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
 
-            return new ElGamalKeyParameters(p, g);
+            return new ElGamalKeyParameter(name,binarySize,generationParameters, p, g);
         }
 
-        public void ElGamalKeysGeneration(int binarySize, out ElGamalKeyParameters parameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public void ElGamalKeysGeneration(string name, int binarySize, out ElGamalKeyParameter parameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
-            parameters = ElGamalParametersGeneration(binarySize);
+            parameters = ElGamalParametersGeneration(name, binarySize);
 
-            ElGamalKeysGeneration(parameters, out privateKey, out publicKey);
+            ElGamalKeysGeneration(name, parameters, out privateKey, out publicKey);
         }
 
-        public void ElGamalKeysGeneration(ElGamalKeyParameters parameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public void ElGamalKeysGeneration(string name, ElGamalKeyParameter parameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             BigInteger p = parameters.P;
             BigInteger g = parameters.G;
@@ -48,8 +47,8 @@ namespace AsymmetricCryptography.ElGamal
             //вычисляется y=g^x mod p
             BigInteger y = BigInteger.ModPow(g, x, p);
 
-            privateKey = new ElGamalPrivateKey(parameters, x);
-            publicKey = new ElGamalPublicKey(parameters, y);
+            privateKey = new ElGamalPrivateKey(name, parameters.BinarySize, generationParameters, x);
+            publicKey = new ElGamalPublicKey(name, parameters.BinarySize, generationParameters , y);
         }
     }
 }

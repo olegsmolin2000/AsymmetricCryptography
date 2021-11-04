@@ -23,6 +23,8 @@ namespace AsymmetricCryptography.CryptographicHash
         //метод получения хеша в виде массива байтов
         public abstract byte[] GetHash(byte[] message);
 
+        public abstract override string ToString();
+
         //операция циклического битового сдвига вправо
         protected UInt32 RotateRight(UInt32 word, int rotateCount)
         {

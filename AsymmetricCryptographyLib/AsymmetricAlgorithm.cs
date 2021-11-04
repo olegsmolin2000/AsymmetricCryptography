@@ -1,7 +1,5 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using AsymmetricCryptography.CryptographicHash;
-
 using AsymmetricCryptographyDAL.Entities.Keys;
 
 namespace AsymmetricCryptography

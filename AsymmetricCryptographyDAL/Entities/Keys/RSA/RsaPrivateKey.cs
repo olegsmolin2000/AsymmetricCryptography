@@ -9,11 +9,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.RSA
         public BigInteger PrivateExponent { get; private set; }//d
 
         // ctor for ef core
-        private RsaPrivateKey(string name, int binarySize)
-            : base(name, "RSA", "Private", binarySize) { }
+        private RsaPrivateKey(string name, int binarySize, string[] generationParameters)
+            : base(name, "RSA", "Private", binarySize,generationParameters) { }
 
-        public RsaPrivateKey(string name, int binarySize, BigInteger modulus, BigInteger privateExponent)
-            : this(name, binarySize)
+        public RsaPrivateKey(string name, int binarySize, string[] generationParameters, BigInteger modulus, BigInteger privateExponent)
+            : this(name, binarySize, generationParameters)
         {
             this.Modulus = modulus;
             this.PrivateExponent = privateExponent;

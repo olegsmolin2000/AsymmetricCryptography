@@ -10,11 +10,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
         public int DomainParameterId { get; set; }
         public DsaDomainParameter DomainParameter { get; set; }
 
-        private DsaPublicKey(string name, int binarySize)
-            : base(name, "DSA", "Public", binarySize) { }
+        private DsaPublicKey(string name, int binarySize, string[] generationParameters)
+            : base(name, "DSA", "Public", binarySize, generationParameters) { }
 
-        public DsaPublicKey(string name, int binarySize, BigInteger y)
-            : this(name, binarySize)
+        public DsaPublicKey(string name, int binarySize,string[] generationParameters, BigInteger y)
+            : this(name, binarySize, generationParameters)
         {
             this.Y = y;
         }

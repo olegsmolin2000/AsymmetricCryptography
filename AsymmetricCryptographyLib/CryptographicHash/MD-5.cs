@@ -236,5 +236,10 @@ namespace AsymmetricCryptography.CryptographicHash
         {
             return y ^ (x | (~z));
         }
+
+        public override string ToString()
+        {
+            return "MD-5";
+        }
     }
 }
