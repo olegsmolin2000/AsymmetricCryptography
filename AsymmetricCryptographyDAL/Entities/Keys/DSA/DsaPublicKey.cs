@@ -13,10 +13,12 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
         private DsaPublicKey(string name, int binarySize, string[] generationParameters)
             : base(name, "DSA", "Public", binarySize, generationParameters) { }
 
-        public DsaPublicKey(string name, int binarySize,string[] generationParameters, BigInteger y)
+        public DsaPublicKey(string name, int binarySize,DsaDomainParameter domainParameter, string[] generationParameters, BigInteger y)
             : this(name, binarySize, generationParameters)
         {
             this.Y = y;
+
+            this.DomainParameter = domainParameter;
         }
 
         public override string ToString()

@@ -1,52 +1,50 @@
-﻿using AsymmetricCryptography.CryptographicHash;
-using System;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
 using System.Collections.Generic;
-using System.Text;
 using System.Numerics;
 
 namespace AsymmetricCryptography.ElGamal
 {
     public sealed class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
-        public override string AlgorithmName => "El Gamal";
-
-        private new ElGamalPublicKey PublicKey
+        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
+            : base(privateKey, publicKey, parameters)
         {
-            get
-            {
-                return base.PublicKey as ElGamalPublicKey;
-            }
-            set
-            {
-                if (value is ElGamalPublicKey)
-                    base.PublicKey = value;
-            }
         }
 
-        private new ElGamalPrivateKey PrivateKey
+        public ElGamalPrivateKey PrivateKey
         {
             get
             {
-                return base.PrivateKey as ElGamalPrivateKey;
+                return base.privateKey as ElGamalPrivateKey;
             }
+
             set
             {
                 if (value is ElGamalPrivateKey)
-                    base.PrivateKey = value;
+                    base.privateKey = value;
             }
         }
 
-        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
-             : base(parameters)
+        public ElGamalPublicKey PublicKey
         {
-            SetKeys(privateKey, publicKey);
+            get
+            {
+                return base.publicKey as ElGamalPublicKey;
+            }
+
+            set
+            {
+                if (value is ElGamalPublicKey)
+                    base.publicKey = value;
+            }
         }
 
         public byte[] Encrypt(byte[] data)
         {
             //получение параметров
-            BigInteger p = PublicKey.Parameters.P;
-            BigInteger g = PublicKey.Parameters.G;
+            BigInteger p = PublicKey.KeyParameter.P;
+            BigInteger g = PublicKey.KeyParameter.G;
 
             //получение открытого ключа
             BigInteger y = PublicKey.Y;
@@ -84,8 +82,8 @@ namespace AsymmetricCryptography.ElGamal
         public byte[] Decrypt(byte[] encryptedData)
         {
             // получение параметров
-            BigInteger p = PrivateKey.Parameters.P;
-            BigInteger g = PrivateKey.Parameters.G;
+            BigInteger p = PrivateKey.KeyParameter.P;
+            BigInteger g = PrivateKey.KeyParameter.G;
 
             // получение закрытого ключа
             BigInteger x = PrivateKey.X;
@@ -123,8 +121,8 @@ namespace AsymmetricCryptography.ElGamal
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
 
             //получение параметров
-            BigInteger p = PrivateKey.Parameters.P;
-            BigInteger g = PrivateKey.Parameters.G;
+            BigInteger p = PrivateKey.KeyParameter.P;
+            BigInteger g = PrivateKey.KeyParameter.G;
 
             //хеш берётся по модулю p - 1, чтобы не было проблем с ним 
             hash = ModularArithmetic.Modulus(hash, p - 1);
@@ -154,8 +152,8 @@ namespace AsymmetricCryptography.ElGamal
             BigInteger s = digitalSignature.S;
 
             //получение параметров
-            BigInteger p = PublicKey.Parameters.P;
-            BigInteger g = PublicKey.Parameters.G;
+            BigInteger p = PublicKey.KeyParameter.P;
+            BigInteger g = PublicKey.KeyParameter.G;
 
             //если условия ниже не выполняются то подпись точно неверна
             if (r <= 0 || r >= p)

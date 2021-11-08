@@ -1,6 +1,5 @@
-﻿using AsymmetricCryptographyDAL.Entities.Keys;
-using AsymmetricCryptographyDAL.Entities.Keys.RSA;
-using System;
+﻿using AsymmetricCryptographyDAL.Entities.Keys.RSA;
+using AsymmetricCryptographyDAL.Entities.Keys;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -8,6 +7,39 @@ namespace AsymmetricCryptography.RSA
 {
     public sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
+        public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
+            : base(privateKey, publicKey, parameters)
+        {
+        }
+
+        public RsaPrivateKey PrivateKey
+        {
+            get
+            {
+                return base.privateKey as RsaPrivateKey;
+            }
+
+            set
+            {
+                if (value is RsaPrivateKey)
+                    base.privateKey = value;
+            }
+        }
+
+        public RsaPublicKey PublicKey
+        {
+            get
+            {
+                return base.publicKey as RsaPublicKey;
+            }
+
+            set
+            {
+                if (value is RsaPublicKey)
+                    base.publicKey = value;
+            }
+        }
+
         //шифрование RSA с помощью открытого ключа
         public byte[] Encrypt(byte[] data)
         {

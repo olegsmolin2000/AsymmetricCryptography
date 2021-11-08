@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 using System.Numerics;
-using System.Text;
+
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
@@ -12,22 +12,22 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
         {
         }
 
-        public override void GenerateKeyPair(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
-            DsaDomainParameters domainParameters = DsaDomainParametersGeneration(binarySize, hashAlgorithm.GetDigestBitLength());
+            DsaDomainParameter domainParameters = DsaDomainParametersGeneration(name, binarySize, hashAlgorithm.GetDigestBitLength());
 
-            DsaKeysGeneration(domainParameters, out privateKey, out publicKey);
+            DsaKeysGeneration(name, domainParameters, out privateKey, out publicKey);
         }
 
-        public void DsaKeysGeneration(int L, int N, out DsaDomainParameters domainParameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public void DsaKeysGeneration(string name, int L, int N, out DsaDomainParameter domainParameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
-            domainParameters = DsaDomainParametersGeneration(L, N);
+            domainParameters = DsaDomainParametersGeneration(name, L, N);
 
-            DsaKeysGeneration(domainParameters, out privateKey, out publicKey);
+            DsaKeysGeneration(name, domainParameters, out privateKey, out publicKey);
         }
 
         // генерация ключей по доменным параметрам
-        public void DsaKeysGeneration(DsaDomainParameters domainParameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
+        public void DsaKeysGeneration(string name, DsaDomainParameter domainParameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             //x - закрытый ключ. случайное число в промежутке (2, q)
             BigInteger x = numberGenerator.GenerateNumber(2, domainParameters.Q - 1);
@@ -35,14 +35,14 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             //y - открытый ключ. y=g^x mod p
             BigInteger y = BigInteger.ModPow(domainParameters.G, x, domainParameters.P);
 
-            privateKey = new DsaPrivateKey(domainParameters, x, y);
-            publicKey = new DsaPublicKey(domainParameters, y);
+            privateKey = new DsaPrivateKey(name,domainParameters.BinarySize,domainParameters, generationParameters,x);
+            publicKey = new DsaPublicKey(name,domainParameters.BinarySize, domainParameters, generationParameters,y);
         }
 
         //генерация доменных параметров DSA, которые можно использовать для нескольких пользователей
         //L - битовый размер параметра p
         //N - число бит размером, совпадающим с числом бит в значении криптографической хеш функции
-        public DsaDomainParameters DsaDomainParametersGeneration(int L, int N)
+        public DsaDomainParameter DsaDomainParametersGeneration(string name, int L, int N)
         {
             //q - простое число, размер которого в битах совпадает с размерностью в битах значения хеш-функции
             BigInteger q = numberGenerator.GeneratePrimeNumber(N);
@@ -75,7 +75,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                 g = BigInteger.ModPow(h, (p - 1) / q, p);
             }
 
-            return new DsaDomainParameters(q, p, g);
+            return new DsaDomainParameter(name,L, generationParameters, q, p, g);
         }
     }
 }

@@ -13,10 +13,12 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
         private ElGamalPrivateKey(string name,int binarySize,string[] generationParameters)
             :base(name,"ElGamal","Private",binarySize, generationParameters) { }
 
-        public ElGamalPrivateKey(string name,int binarySize,string[] generationParameters, BigInteger x)
+        public ElGamalPrivateKey(string name,int binarySize,ElGamalKeyParameter keyParameter, string[] generationParameters, BigInteger x)
             :this(name,binarySize, generationParameters)
         {
             this.X = x;
+
+            this.KeyParameter = keyParameter;
         }
 
         public override string ToString()

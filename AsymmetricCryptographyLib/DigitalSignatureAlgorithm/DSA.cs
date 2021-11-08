@@ -1,52 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Numerics;
-using AsymmetricCryptography.CryptographicHash;
+﻿using System.Numerics;
 using AsymmetricCryptography.ElGamal;
+using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 
 namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public sealed class DSA:AsymmetricAlgorithm, IDigitalSignatutator
     {
-        public override string AlgorithmName => "DSA";
+        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
+            : base(privateKey, publicKey, parameters)
+        {
+        }
 
-        private new DsaPrivateKey PrivateKey
+        public DsaPrivateKey PrivateKey
         {
             get
             {
-                return base.PrivateKey as DsaPrivateKey;
+                return base.privateKey as DsaPrivateKey;
             }
+
             set
             {
                 if (value is DsaPrivateKey)
-                    base.PrivateKey = value;
-            }
-        }
-        private new DsaPublicKey PublicKey
-        {
-            get
-            {
-                return base.PublicKey as DsaPublicKey;
-            }
-            set
-            {
-                if (value is DsaPublicKey)
-                    base.PublicKey = value;
+                    base.privateKey = value;
             }
         }
 
-        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters)
-             : base(parameters)
+        public DsaPublicKey PublicKey
         {
-            SetKeys(privateKey, publicKey);
+            get
+            {
+                return base.publicKey as DsaPublicKey;
+            }
+
+            set
+            {
+                if (value is DsaPublicKey)
+                    base.publicKey = value;
+            }
         }
 
         public DigitalSignature CreateSignature(byte[] data)
         {
-            BigInteger q = PrivateKey.Parameters.Q;
-            BigInteger p = PrivateKey.Parameters.P;
-            BigInteger g = PrivateKey.Parameters.G;
+            BigInteger q = PrivateKey.DomainParameter.Q;
+            BigInteger p = PrivateKey.DomainParameter.P;
+            BigInteger g = PrivateKey.DomainParameter.G;
 
             BigInteger r = 0, s = 0;
 
@@ -80,9 +78,9 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
         {
             ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
 
-            BigInteger q = PublicKey.Parameters.Q;
-            BigInteger p = PublicKey.Parameters.P;
-            BigInteger g = PublicKey.Parameters.G;
+            BigInteger q = PublicKey.DomainParameter.Q;
+            BigInteger p = PublicKey.DomainParameter.P;
+            BigInteger g = PublicKey.DomainParameter.G;
 
             //вычисление w = s^-1 mod q
             BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(digitalSignature.S, q);

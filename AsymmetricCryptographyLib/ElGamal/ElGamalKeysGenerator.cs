@@ -47,8 +47,8 @@ namespace AsymmetricCryptography.ElGamal
             //вычисляется y=g^x mod p
             BigInteger y = BigInteger.ModPow(g, x, p);
 
-            privateKey = new ElGamalPrivateKey(name, parameters.BinarySize, generationParameters, x);
-            publicKey = new ElGamalPublicKey(name, parameters.BinarySize, generationParameters , y);
+            privateKey = new ElGamalPrivateKey(name, parameters.BinarySize, parameters, generationParameters, x);
+            publicKey = new ElGamalPublicKey(name, parameters.BinarySize, parameters, generationParameters , y);
         }
     }
 }

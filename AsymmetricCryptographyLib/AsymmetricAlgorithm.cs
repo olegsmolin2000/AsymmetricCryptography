@@ -15,6 +15,16 @@ namespace AsymmetricCryptography
         protected AsymmetricKey privateKey;
         protected AsymmetricKey publicKey;
 
+        protected AsymmetricAlgorithm(AsymmetricKey privateKey,AsymmetricKey publicKey, Parameters parameters)
+        {
+            this.privateKey = privateKey;
+            this.publicKey = publicKey;
+
+            this.numberGenerator = parameters.numberGenerator;
+            this.primalityVerificator = parameters.primalityVerificator;
+            this.hashAlgorithm = parameters.hashAlgorithm;
+        }
+
         // выбор сессионного ключа k. случайное целое число, взаимно простое с (p - 1), 1 < k < p - 1
         protected BigInteger GenerateSessionKey(BigInteger p)
         {

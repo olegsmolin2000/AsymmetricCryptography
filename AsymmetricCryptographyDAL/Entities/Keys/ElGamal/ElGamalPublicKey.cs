@@ -13,10 +13,12 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
         private ElGamalPublicKey(string name, int binarySize, string[] generationParameters)
             : base(name, "ElGamal", "Public", binarySize, generationParameters) { }
 
-        public ElGamalPublicKey(string name, int binarySize,string[] generationParameters, BigInteger y)
+        public ElGamalPublicKey(string name, int binarySize, ElGamalKeyParameter keyParameter, string[] generationParameters, BigInteger y)
             : this(name, binarySize, generationParameters)
         {
             this.Y = y;
+
+            this.KeyParameter = keyParameter;
         }
 
         public override string ToString()
