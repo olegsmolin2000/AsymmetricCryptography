@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
 {
-    public class DsaDomainParameter:AsymmetricKey
+    public class DsaDomainParameter : AsymmetricKey
     {
         public BigInteger Q { get; private set; }
         public BigInteger P { get; private set; }
@@ -13,11 +13,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
         public List<DsaPrivateKey> DsaPrivateKeys { get; set; }
         public List<DsaPublicKey> DsaPublicKeys { get; set; }
 
-        private DsaDomainParameter(string name, int binarySize,string[] generationParameters)
-            : base(name, "DSA", "Parameters", binarySize, generationParameters) { }
+        private DsaDomainParameter(string name, int binarySize)
+            : base(name, "DSA", "Parameters", binarySize) { }
 
-        public DsaDomainParameter(string name, int binarySize,string[] generationParameters, BigInteger q, BigInteger p, BigInteger g)
-            : this(name, binarySize, generationParameters)
+        public DsaDomainParameter(string name, int binarySize, BigInteger q, BigInteger p, BigInteger g)
+            : this(name, binarySize)
         {
             this.Q = q;
             this.P = p;

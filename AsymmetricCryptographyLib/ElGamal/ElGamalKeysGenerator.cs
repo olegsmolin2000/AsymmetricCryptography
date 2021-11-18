@@ -26,7 +26,7 @@ namespace AsymmetricCryptography.ElGamal
             //вычисление g - первообразного корня p
             BigInteger g = ModularArithmetic.GetPrimitiveRoot(p);
 
-            return new ElGamalKeyParameter(name,binarySize,generationParameters, p, g);
+            return new ElGamalKeyParameter(name,binarySize, p, g);
         }
 
         public void ElGamalKeysGeneration(string name, int binarySize, out ElGamalKeyParameter parameters, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
@@ -47,8 +47,8 @@ namespace AsymmetricCryptography.ElGamal
             //вычисляется y=g^x mod p
             BigInteger y = BigInteger.ModPow(g, x, p);
 
-            privateKey = new ElGamalPrivateKey(name, parameters.BinarySize, parameters, generationParameters, x);
-            publicKey = new ElGamalPublicKey(name, parameters.BinarySize, parameters, generationParameters , y);
+            privateKey = new ElGamalPrivateKey(name, parameters.BinarySize, parameters, x);
+            publicKey = new ElGamalPublicKey(name, parameters.BinarySize, parameters , y);
         }
     }
 }

@@ -10,20 +10,16 @@ namespace AsymmetricCryptographyDAL.Entities.Keys
         public string Type { get; private set; }
         public int BinarySize { get; private set; }
 
-        public string NumberGenerator { get; private set; }
-        public string PrimalityVerificator { get; private set; }
-        public string HashAlgorithm { get; private set; }
+        public string NumberGenerator { get; set; }
+        public string PrimalityVerificator { get; set; }
+        public string HashAlgorithm { get; set; }
 
-        protected AsymmetricKey(string name,string algorithmName,string type, int binarySize, string[] generationParameters)
+        protected AsymmetricKey(string name, string algorithmName, string type, int binarySize)
         {
             this.Name = name;
             this.AlgorithmName = algorithmName;
             this.Type = type;
             this.BinarySize = binarySize;
-
-            this.NumberGenerator = generationParameters[0];
-            this.PrimalityVerificator = generationParameters[1];
-            this.HashAlgorithm = generationParameters[2];
         }
 
         public abstract override string ToString();

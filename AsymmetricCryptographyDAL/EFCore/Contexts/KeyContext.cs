@@ -75,7 +75,7 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
                 (BigInt => BigInt.ToString(),
                 str => BigInteger.Parse(str));
 
-            // для каждой модели все её свойства типа BigInteger конвертируются в string
+            //для каждой модели все её свойства типа BigInteger конвертируются в string
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 foreach (var property in entity.ClrType.GetProperties())
@@ -93,7 +93,9 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CryptographyDB;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=KeysDB;");
+
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

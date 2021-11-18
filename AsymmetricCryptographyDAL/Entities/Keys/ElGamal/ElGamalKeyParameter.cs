@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
 {
-    public class ElGamalKeyParameter:AsymmetricKey
+    public class ElGamalKeyParameter : AsymmetricKey
     {
         public BigInteger P { get; private set; }
         public BigInteger G { get; private set; }
@@ -12,11 +12,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
         public List<ElGamalPrivateKey> ElGamalPrivateKeys { get; set; }
         public List<ElGamalPublicKey> ElGamalPublicKeys { get; set; }
 
-        private ElGamalKeyParameter(string name,int binarySize,string[] generationParameters)
-            :base(name,"ElGamal","Parameter",binarySize, generationParameters) { }
+        private ElGamalKeyParameter(string name, int binarySize)
+            : base(name, "ElGamal", "Parameter", binarySize) { }
 
-        public ElGamalKeyParameter(string name,int binarySize,string[] generationParameters, BigInteger p,BigInteger g)
-            :this(name,binarySize, generationParameters)
+        public ElGamalKeyParameter(string name, int binarySize, BigInteger p, BigInteger g)
+            : this(name, binarySize)
         {
             this.P = p;
             this.G = g;

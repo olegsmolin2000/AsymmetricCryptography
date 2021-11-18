@@ -3,18 +3,17 @@ using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
 {
-    public class ElGamalPublicKey:AsymmetricKey
+    public class ElGamalPublicKey : AsymmetricKey
     {
         public BigInteger Y { get; private set; }
 
-        public int KeyParameterId { get; set; }
-        public ElGamalKeyParameter KeyParameter { get; set; }
+        public virtual ElGamalKeyParameter KeyParameter { get; set; }
 
-        private ElGamalPublicKey(string name, int binarySize, string[] generationParameters)
-            : base(name, "ElGamal", "Public", binarySize, generationParameters) { }
+        private ElGamalPublicKey(string name, int binarySize)
+            : base(name, "ElGamal", "Public", binarySize) { }
 
-        public ElGamalPublicKey(string name, int binarySize, ElGamalKeyParameter keyParameter, string[] generationParameters, BigInteger y)
-            : this(name, binarySize, generationParameters)
+        public ElGamalPublicKey(string name, int binarySize, ElGamalKeyParameter keyParameter, BigInteger y)
+            : this(name, binarySize)
         {
             this.Y = y;
 

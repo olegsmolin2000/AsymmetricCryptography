@@ -7,16 +7,13 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
     {
         public BigInteger X { get; private set; }
 
-        public int DomainParameterId { get; set; }
-        public DsaDomainParameter DomainParameter { get; set; }
+        public virtual DsaDomainParameter DomainParameter { get; set; }
 
-        private DsaPrivateKey(string name, int binarySize,string[] generationParameters)
-            : base(name, "DSA", "Private", binarySize, generationParameters) 
-        {
-        }
+        private DsaPrivateKey(string name, int binarySize)
+            : base(name, "DSA", "Private", binarySize) { }
 
-        public DsaPrivateKey(string name, int binarySize,DsaDomainParameter domainParameter, string[] generationParameters, BigInteger x)
-            : this(name, binarySize, generationParameters)
+        public DsaPrivateKey(string name, int binarySize, DsaDomainParameter domainParameter, BigInteger x)
+            : this(name, binarySize)
         {
             this.X = x;
 
