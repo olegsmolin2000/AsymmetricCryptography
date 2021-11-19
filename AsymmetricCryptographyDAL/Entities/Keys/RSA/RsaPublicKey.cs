@@ -10,7 +10,7 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.RSA
 
         //ctor for ef core
         private RsaPublicKey(string name, int binarySize)
-            : base(name, "RSA", "Private", binarySize) { }
+            : base(name, "RSA", "Public", binarySize) { }
 
         public RsaPublicKey(string name, int binarySize, BigInteger modulus, BigInteger publicExponent)
             : this(name, binarySize)

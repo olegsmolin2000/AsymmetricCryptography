@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AsymmetricCryptographyWPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace AsymmetricCryptographyWPF.View
         public ShowKeyWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new ShowKeyViewModel();
         }
     }
 }

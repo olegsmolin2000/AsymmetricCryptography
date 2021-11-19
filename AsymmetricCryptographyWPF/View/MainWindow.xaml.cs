@@ -30,6 +30,10 @@ namespace AsymmetricCryptographyWPF.View
         public MainWindow()
         {
             InitializeComponent();
+
+            Window w = new ShowKeyWindow();
+
+            w.ShowDialog();
         }
 
         private void GenerateKeysButton_Click(object sender, RoutedEventArgs e)

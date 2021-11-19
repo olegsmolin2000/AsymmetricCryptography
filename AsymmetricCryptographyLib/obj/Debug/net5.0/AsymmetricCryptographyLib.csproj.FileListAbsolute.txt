@@ -12,3 +12,4 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\net5.0\AsymmetricCryptographyLib.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\net5.0\ref\AsymmetricCryptographyLib.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\net5.0\AsymmetricCryptographyLib.pdb
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyLib\obj\Debug\net5.0\AsymmetricCryptographyLib.csproj.CopyComplete

@@ -25,8 +25,7 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
 
         public KeyContext()
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +39,10 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
             modelBuilder
                 .Entity<RsaPrivateKey>()
                 .ToTable("RsaPrivateKeys");
+
+            modelBuilder
+                .Entity<RsaPrivateKey>()
+                .HasBaseType<AsymmetricKey>();
 
             modelBuilder
                 .Entity<RsaPublicKey>()

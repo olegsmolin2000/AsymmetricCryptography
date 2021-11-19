@@ -3,48 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View"
+        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View" xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ShowKeyViewModel}"
         mc:Ignorable="d"
-        Title="ShowKeyWindow" Height="550" Width="225">
+        Title="ShowKeyWindow" Height="575" Width="225">
     <Grid>
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Height="500" Width="200">
+                    Height="525" Width="200">
             <Label Content="Название" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
+            <TextBox Margin="5" Text="{Binding Name}" HorizontalContentAlignment="Center">
 
             </TextBox>
             <Label Content="Генератор чиел" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
-                    Фибоначчи
+            <TextBox Margin="5" Text="{Binding NumberGenerator}" HorizontalContentAlignment="Center">
+                    
             </TextBox>
             <Label Content="Тест простоты" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
-                Миллера-рабина
+            <TextBox Margin="5" Text="{Binding PrimalityVerificator}" HorizontalContentAlignment="Center">
+                
             </TextBox>
             <Label Content="Хеш функция" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
-                Sha-256
+            <TextBox Margin="5" Text="{Binding HashAlgorithm}" HorizontalContentAlignment="Center">
+                
             </TextBox>
             <Label Content="Название алгоритма" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" 
+            <TextBox Margin="5" Text="{Binding AlgorithmName}"
                       HorizontalContentAlignment="Center">
-                RSA
+                
+            </TextBox>
+            <Label Content="Тип ключа" HorizontalContentAlignment="Center"/>
+            <TextBox Margin="5" Text="{Binding Permission}"
+                      HorizontalContentAlignment="Center">
+                
             </TextBox>
             <Label Content="Размер ключа" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
-                256
+            <TextBox Margin="5" Text="{Binding BinarySize}" HorizontalContentAlignment="Center">
+                
             </TextBox>
             <Label Content="Modulus" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
+            <TextBox Margin="5" Text="{Binding Modulus}" HorizontalContentAlignment="Center">
                 
             </TextBox>
             <Label Content="Exponent" HorizontalContentAlignment="Center"/>
-            <TextBox Margin="5" HorizontalContentAlignment="Center">
+            <TextBox Margin="5" Text="{Binding Exponent}" HorizontalContentAlignment="Center">
                 
             </TextBox>
-            <Button x:Name="CloseButton" Margin="0 20 0 0">
-                Закрыть
+            <Button x:Name="btn" Command="{Binding ShowKey}" Margin="0 20 0 0">
+                Show
             </Button>
         </StackPanel>
     </Grid>

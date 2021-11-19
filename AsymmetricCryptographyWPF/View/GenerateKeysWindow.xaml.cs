@@ -18,7 +18,7 @@ using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
 using AsymmetricCryptography.ElGamal;
 using AsymmetricCryptography.CryptographicHash;
-
+using AsymmetricCryptographyWPF.ViewModel;
 
 namespace AsymmetricCryptographyWPF.View
 {
@@ -30,6 +30,8 @@ namespace AsymmetricCryptographyWPF.View
         public GenerateKeysWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new GenerateKeysViewModel();
         }
     }
 }

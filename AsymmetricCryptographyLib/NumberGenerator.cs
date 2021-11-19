@@ -14,6 +14,10 @@ namespace AsymmetricCryptography
         protected NumberGenerator(PrimalityVerificator primalityVerificator)
         {
             this.primalityVerificator = primalityVerificator;
+
+            var thisRef = this;
+
+            primalityVerificator.SetNumberGenerator(thisRef);
         }
 
         public abstract BigInteger GenerateNumber(int binarySize);
