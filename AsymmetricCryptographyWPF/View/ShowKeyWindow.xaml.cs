@@ -1,17 +1,6 @@
-﻿using AsymmetricCryptographyWPF.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyWPF.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AsymmetricCryptographyWPF.View
 {
@@ -20,11 +9,18 @@ namespace AsymmetricCryptographyWPF.View
     /// </summary>
     public partial class ShowKeyWindow : Window
     {
-        public ShowKeyWindow()
+        public ShowKeyWindow(AsymmetricKey key)
         {
-            InitializeComponent();
 
-            this.DataContext = new ShowKeyViewModel();
+            
+            InitializeComponent();
+            this.DataContext = new ShowKeyViewModel(key);
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

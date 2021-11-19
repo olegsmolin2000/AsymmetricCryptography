@@ -1,20 +1,14 @@
 ﻿using AsymmetricCryptographyDAL.EFCore;
 using AsymmetricCryptographyDAL.Entities.Keys;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class ShowKeyViewModel:INotifyPropertyChanged
+    class ShowKeyViewModel:ViewModel
     {
+        #region Properties
         private string name;
-
         public string Name
         {
             get => name;
@@ -28,7 +22,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string numberGenerator;
-
         public string NumberGenerator
         {
             get => numberGenerator;
@@ -42,7 +35,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string primalityVerificator;
-
         public string PrimalityVerificator
         {
             get => primalityVerificator;
@@ -56,7 +48,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string hashAlgorithm;
-
         public string HashAlgorithm
         {
             get => hashAlgorithm;
@@ -70,7 +61,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string algorithmName;
-
         public string AlgorithmName
         {
             get => algorithmName;
@@ -84,7 +74,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string permission;
-
         public string Permission
         {
             get => permission;
@@ -97,22 +86,20 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-        private int binarySizb;
-
+        private int binarySize;
         public int BinarySize
         {
-            get => binarySizb;
+            get => binarySize;
 
             set
             {
-                binarySizb = value;
+                binarySize = value;
 
                 NotifyPropertyChanged("BinarySize");
             }
         }
 
         private string modulus;
-
         public string Modulus
         {
             get => modulus;
@@ -126,7 +113,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         private string exponent;
-
         public string Exponent
         {
             get => exponent;
@@ -138,65 +124,69 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 NotifyPropertyChanged("Exponent");
             }
         }
+        #endregion
 
-
-
-
-
-        private RelayCommand showKey;
-
-        public RelayCommand ShowKey
+        public ShowKeyViewModel(AsymmetricKey key)
         {
-            get
+            if (!(key is RsaPrivateKey) && (!(key is RsaPublicKey)))
+                MessageBox.Show("pezdec");
+            else
             {
-                return showKey ?? new RelayCommand(obj =>
+                Name = key.Name;
+                BinarySize = key.BinarySize;
+                AlgorithmName = key.AlgorithmName;
+                NumberGenerator = key.NumberGenerator;
+                PrimalityVerificator = key.PrimalityVerificator;
+                HashAlgorithm = key.HashAlgorithm;
+                Permission = key.Type;
+
+                if (key is RsaPrivateKey)
                 {
-                    AsymmetricKey key = DataWorker.GetKey(2);
-
-                    if (!(key is RsaPrivateKey) && (!(key is RsaPublicKey)))
-                        MessageBox.Show("pezdec");
-                    else
-                    {
-                        Name = key.Name;
-                        BinarySize = key.BinarySize;
-                        AlgorithmName = key.AlgorithmName;
-                        NumberGenerator = key.NumberGenerator;
-                        PrimalityVerificator = key.PrimalityVerificator;
-                        HashAlgorithm = key.HashAlgorithm;
-                        Permission = key.Type;
-
-                        if(key is RsaPrivateKey)
-                        {
-                            Modulus = ((RsaPrivateKey)key).Modulus.ToString();
-                            Exponent = ((RsaPrivateKey)key).PrivateExponent.ToString();
-                        }
-                        if (key is RsaPublicKey)
-                        {
-                            Modulus = ((RsaPublicKey)key).Modulus.ToString();
-                            Exponent = ((RsaPublicKey)key).PublicExponent.ToString();
-                        }
-                    }
-                        
-
-
-
-
-
+                    Modulus = ((RsaPrivateKey)key).Modulus.ToString();
+                    Exponent = ((RsaPrivateKey)key).PrivateExponent.ToString();
                 }
-                );
+                if (key is RsaPublicKey)
+                {
+                    Modulus = ((RsaPublicKey)key).Modulus.ToString();
+                    Exponent = ((RsaPublicKey)key).PublicExponent.ToString();
+                }
             }
         }
 
+        //private RelayCommand loadData;
 
+        //public RelayCommand LoadData
+        //{
+        //    get
+        //    {
+        //        return loadData ?? new RelayCommand(obj =>
+        //        {
+        //            if (!(key is RsaPrivateKey) && (!(key is RsaPublicKey)))
+        //                MessageBox.Show("pezdec");
+        //            else
+        //            {
+        //                Name = key.Name;
+        //                BinarySize = key.BinarySize;
+        //                AlgorithmName = key.AlgorithmName;
+        //                NumberGenerator = key.NumberGenerator;
+        //                PrimalityVerificator = key.PrimalityVerificator;
+        //                HashAlgorithm = key.HashAlgorithm;
+        //                Permission = key.Type;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //                if (key is RsaPrivateKey)
+        //                {
+        //                    Modulus = ((RsaPrivateKey)key).Modulus.ToString();
+        //                    Exponent = ((RsaPrivateKey)key).PrivateExponent.ToString();
+        //                }
+        //                if (key is RsaPublicKey)
+        //                {
+        //                    Modulus = ((RsaPublicKey)key).Modulus.ToString();
+        //                    Exponent = ((RsaPublicKey)key).PublicExponent.ToString();
+        //                }
+        //            }
+        //        });
+        //    }
+        //}
 
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

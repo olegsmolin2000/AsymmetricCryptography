@@ -7,18 +7,13 @@ using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptographyDAL.EFCore;
 using AsymmetricCryptographyDAL.Entities.Keys;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class GenerateKeysViewModel:INotifyPropertyChanged
+    class GenerateKeysViewModel:ViewModel
     {
+        #region Properties
         string name;
         public string Name
         {
@@ -54,8 +49,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         public TextBlock HashAlgorithm { get; set; }
         public TextBlock AlgorithmName { get; set; }
         public int BinarySize { get; set; }
-
-
+        #endregion
 
         private RelayCommand generateKeys;
 
@@ -124,16 +118,5 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

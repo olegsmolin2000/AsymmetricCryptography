@@ -12,3 +12,4 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\ref\AsymmetricCryptographyDAL.dll
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.pdb
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.genruntimeconfig.cache
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyDAL\obj\Debug\net5.0\AsymmetricCryptographyDAL.csproj.AssemblyReference.cache

@@ -19,6 +19,7 @@ using AsymmetricCryptography.ElGamal;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptography.RSA;
+using AsymmetricCryptographyWPF.ViewModel;
 
 namespace AsymmetricCryptographyWPF.View
 {
@@ -31,14 +32,7 @@ namespace AsymmetricCryptographyWPF.View
         {
             InitializeComponent();
 
-            Window w = new ShowKeyWindow();
-
-            w.ShowDialog();
-        }
-
-        private void GenerateKeysButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = new MainViewModel();
         }
     }
 }

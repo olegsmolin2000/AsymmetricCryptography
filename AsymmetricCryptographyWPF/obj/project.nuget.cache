@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XDnENo1xt0AG3tPiW1uR6IKHT5XyUPIIinEtyo+9kZrMY081ssTlBucL+h+fuZjbxtc6lhIn6N0T9Yp3fSQWnQ==",
+  "dgSpecHash": "bujS7A/QRqORUflZYg56DZmqgmfkpzQJR4wEkOYkUy0xX/XSGOqnbj6lFXLZOkrSEG2+CZJ2ig57RCFv41CjJQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\olegs\\source\\repos\\AsymmetricCryptography\\AsymmetricCryptographyWPF\\AsymmetricCryptographyWPF.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\olegs\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\olegs\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\olegs\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\olegs\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
