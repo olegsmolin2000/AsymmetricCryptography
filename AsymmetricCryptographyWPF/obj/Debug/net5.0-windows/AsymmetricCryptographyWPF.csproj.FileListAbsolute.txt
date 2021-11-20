@@ -47,13 +47,11 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\bin
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.csproj.AssemblyReference.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\GenerateKeysWindow.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\MainWindow.g.cs
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\ShowKeyWindow.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF_MarkupCompile.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF_MarkupCompile.lref
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\GenerateKeysWindow.baml
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\MainWindow.baml
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\ShowKeyWindow.baml
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.g.resources
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.AssemblyInfoInputs.cache
@@ -64,3 +62,5 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.pdb
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.genruntimeconfig.cache
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\bin\Debug\net5.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\ShowKeyWindows\ShowRsaKeyWindow.g.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\ShowKeyWindows\ShowRsaKeyWindow.baml

@@ -3,11 +3,11 @@ using System.ComponentModel;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class ViewModel:INotifyPropertyChanged
+    internal abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(String propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {

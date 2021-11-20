@@ -10,7 +10,7 @@
     <Compile Update="View\GenerateKeysWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ShowKeyWindow.xaml.cs">
+    <Compile Update="View\ShowKeyWindows\ShowRsaKeyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -21,7 +21,7 @@
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ShowKeyWindow.xaml">
+    <Page Update="View\ShowKeyWindows\ShowRsaKeyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

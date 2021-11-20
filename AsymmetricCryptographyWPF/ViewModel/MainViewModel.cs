@@ -1,9 +1,9 @@
 ﻿using AsymmetricCryptographyDAL.EFCore;
 using AsymmetricCryptographyDAL.Entities.Keys;
 using System.Collections.Generic;
-using Microsoft.Xaml.Behaviors.Core;
 using System.Windows;
-using AsymmetricCryptographyWPF.View;
+using AsymmetricCryptographyDAL.Entities.Keys.RSA;
+using AsymmetricCryptographyWPF.View.ShowKeyWindows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -35,9 +35,9 @@ namespace AsymmetricCryptographyWPF.ViewModel
             {
                 return new RelayCommand(obj =>
                 {
-                    if (SelectedKey != null)
+                    if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
                     {
-                        Window showKeyWindow = new ShowKeyWindow(SelectedKey);
+                        Window showKeyWindow = new ShowRsaKeyWindow(SelectedKey);
 
                         showKeyWindow.Show();
                     }

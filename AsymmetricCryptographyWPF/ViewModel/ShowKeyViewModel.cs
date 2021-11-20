@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class ShowKeyViewModel:ViewModel
+    internal abstract class ShowKeyViewModel : ViewModel
     {
         #region Properties
         private string name;
@@ -98,95 +98,17 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 NotifyPropertyChanged("BinarySize");
             }
         }
-
-        private string modulus;
-        public string Modulus
-        {
-            get => modulus;
-
-            set
-            {
-                modulus = value;
-
-                NotifyPropertyChanged("Modulus");
-            }
-        }
-
-        private string exponent;
-        public string Exponent
-        {
-            get => exponent;
-
-            set
-            {
-                exponent = value;
-
-                NotifyPropertyChanged("Exponent");
-            }
-        }
         #endregion
 
         public ShowKeyViewModel(AsymmetricKey key)
         {
-            if (!(key is RsaPrivateKey) && (!(key is RsaPublicKey)))
-                MessageBox.Show("pezdec");
-            else
-            {
-                Name = key.Name;
-                BinarySize = key.BinarySize;
-                AlgorithmName = key.AlgorithmName;
-                NumberGenerator = key.NumberGenerator;
-                PrimalityVerificator = key.PrimalityVerificator;
-                HashAlgorithm = key.HashAlgorithm;
-                Permission = key.Type;
-
-                if (key is RsaPrivateKey)
-                {
-                    Modulus = ((RsaPrivateKey)key).Modulus.ToString();
-                    Exponent = ((RsaPrivateKey)key).PrivateExponent.ToString();
-                }
-                if (key is RsaPublicKey)
-                {
-                    Modulus = ((RsaPublicKey)key).Modulus.ToString();
-                    Exponent = ((RsaPublicKey)key).PublicExponent.ToString();
-                }
-            }
+            Name = key.Name;
+            AlgorithmName = key.AlgorithmName;
+            NumberGenerator = key.NumberGenerator;
+            PrimalityVerificator = key.PrimalityVerificator;
+            HashAlgorithm = key.HashAlgorithm;
+            Permission = key.Type;
+            BinarySize = key.BinarySize;
         }
-
-        //private RelayCommand loadData;
-
-        //public RelayCommand LoadData
-        //{
-        //    get
-        //    {
-        //        return loadData ?? new RelayCommand(obj =>
-        //        {
-        //            if (!(key is RsaPrivateKey) && (!(key is RsaPublicKey)))
-        //                MessageBox.Show("pezdec");
-        //            else
-        //            {
-        //                Name = key.Name;
-        //                BinarySize = key.BinarySize;
-        //                AlgorithmName = key.AlgorithmName;
-        //                NumberGenerator = key.NumberGenerator;
-        //                PrimalityVerificator = key.PrimalityVerificator;
-        //                HashAlgorithm = key.HashAlgorithm;
-        //                Permission = key.Type;
-
-        //                if (key is RsaPrivateKey)
-        //                {
-        //                    Modulus = ((RsaPrivateKey)key).Modulus.ToString();
-        //                    Exponent = ((RsaPrivateKey)key).PrivateExponent.ToString();
-        //                }
-        //                if (key is RsaPublicKey)
-        //                {
-        //                    Modulus = ((RsaPublicKey)key).Modulus.ToString();
-        //                    Exponent = ((RsaPublicKey)key).PublicExponent.ToString();
-        //                }
-        //            }
-        //        });
-        //    }
-        //}
-
     }
 }
