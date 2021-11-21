@@ -8,6 +8,11 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="Cryptographer" Height="600" Width="1200"
         WindowStartupLocation="CenterScreen">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadKeys}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -15,17 +20,26 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.25*"/>
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Grid.Column="2" 
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Ключи">
+                <MenuItem Header="Генерация">
+                    <MenuItem Header="RSA" Command="{Binding OpenGenerateRsaKeysWindow}"/>
+                    <MenuItem Header="DSA"/>
+                    <MenuItem Header="ElGamal"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ListView Grid.Row="1" Grid.Column="2" 
                   ItemsSource="{Binding AllKeys}" 
                   HorizontalAlignment="Center"
                   Margin="15"
                   Width="350"
-                  SelectedItem="{Binding SelectedKey}"
-                  >
+                  SelectedItem="{Binding SelectedKey}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="150">

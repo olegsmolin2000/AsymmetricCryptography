@@ -3,59 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View" xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GenerateKeysViewModel}"
+        xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:GenerateKeysViewModel}"
         mc:Ignorable="d"
-        Title="Генерация ключей" Height="425" Width="225">
+        Title="Генерация ключей RSA" Height="400" Width="225"
+        WindowStartupLocation="CenterScreen"
+        Name="GenerateRsaKeysWindow">
     <Grid>
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Height="400" Width="200">
-            <Label Content="Название ключей" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="KeysNameTextBox"
-                     Text="{Binding Name}" Margin="5" HorizontalContentAlignment="Center">
-                
-            </TextBox>
-            <Label Content="Генератор чиел" HorizontalContentAlignment="Center"/>
-            <ComboBox Margin="5" SelectedValue="{Binding RNG}" SelectedIndex="0" HorizontalContentAlignment="Center">
-                <TextBlock>
-                    Фибоначчи
-                </TextBlock>
-            </ComboBox>
-            <Label Content="Тест простоты" HorizontalContentAlignment="Center"/>
-            <ComboBox Margin="5" SelectedValue="{Binding PrimalityVerificator}" SelectedIndex="0" HorizontalContentAlignment="Center">
-                <TextBlock>
-                    Миллера-рабина
-                </TextBlock>
-            </ComboBox>
-            <Label Content="Хеш функция" HorizontalContentAlignment="Center"/>
-            <ComboBox Margin="5" SelectedValue="{Binding HashAlgorithm}" SelectedIndex="0" HorizontalContentAlignment="Center">
-                <TextBlock>
-                    Sha-256
-                </TextBlock>
-                <TextBlock>
-                     Md-5
-                </TextBlock>
-            </ComboBox>
-            <Label Content="Название алгоритма" HorizontalContentAlignment="Center"/>
-            <ComboBox Name="AlgNameComboBox" SelectedValue="{Binding AlgorithmName}" Margin="5" SelectedIndex="0"
-                      HorizontalContentAlignment="Center">
-                <TextBlock>
-                        RSA
-                </TextBlock>
-                <TextBlock>
-                        DSA
-                </TextBlock>
-                <TextBlock>
-                        ElGamal
-                </TextBlock>
-            </ComboBox>
-            <Label Content="Размер ключа" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="BinarySizeTextBox" Text="{Binding BinarySize}" Margin="5" HorizontalContentAlignment="Center">
-                
-            </TextBox>
-            <Button x:Name="GenerateKeysButon" Command="{Binding GenerateKeys}" Margin="0 20 0 0">
-                Сгерерировать ключи
-            </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="5">
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <Label Content="Название ключей"/>
+            <TextBox Text="{Binding Name}"/>
+            
+            <Label Content="Генератор чисел"/>
+            <ComboBox ItemsSource="{Binding NumberGenerators}" SelectedValue="{Binding SelectedNumberGenerator}"/>
+
+            <Label Content="Тест простоты"/>
+            <ComboBox ItemsSource="{Binding PrimalityVerificators}" SelectedValue="{Binding SelectedPrimalityVerificator}"/>
+
+            <Label Content="Хеш функция"/>
+            <ComboBox ItemsSource="{Binding HashAlgorithmNames}" SelectedValue="{Binding SelectedHashAlgorithm}"/>
+
+            <Label Content="Размер ключа"/>
+            <TextBox Text="{Binding BinarySize}"/>
         </StackPanel>
+        
+        <Button Grid.Row="1" Command="{Binding GenerateKeysCommand}" CommandParameter="{Binding ElementName=GenerateRsaKeysWindow}" Margin="20">
+            Сгерерировать ключи
+        </Button>
     </Grid>
 </Window>

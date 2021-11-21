@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AsymmetricCryptographyDAL.EFCore
 {
@@ -29,15 +27,25 @@ namespace AsymmetricCryptographyDAL.EFCore
             }
         }
 
-        public static void AddKey<T>(T key) where T: class
+        public static bool ContainsKey(string name)
+        {
+            using (KeyContext db = new KeyContext())
+            {
+                if (db.Keys.FirstOrDefault(o=>o.Name==name)!=null)
+                    return true;
+                return false;
+            }
+        }
+
+        public static void AddKey(AsymmetricKey key)
         {
             using(KeyContext db=new KeyContext())
             {
-                var set = db.Set<T>();
+                //var set = db.Set<T>();
 
-                if (!set.Contains(key))
+                if (!db.Keys.Contains(key))
                 {
-                    set.Add(key);
+                    db.Keys.Add(key);
 
                     db.SaveChanges();
                 }

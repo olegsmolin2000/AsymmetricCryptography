@@ -1,26 +1,64 @@
 ﻿using AsymmetricCryptography;
 using AsymmetricCryptography.CryptographicHash;
-using AsymmetricCryptography.DigitalSignatureAlgorithm;
-using AsymmetricCryptography.ElGamal;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptographyDAL.EFCore;
 using AsymmetricCryptographyDAL.Entities.Keys;
-using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
     class GenerateKeysViewModel:ViewModel
     {
+        #region ListsForComboBoxes
+        private List<string> numberGenerators = new List<string> { "Фибоначчи" };
+        public List<string> NumberGenerators
+        {
+            get => numberGenerators;
+
+            set
+            {
+                numberGenerators = value;
+
+                NotifyPropertyChanged("NumberGenerators");
+            }
+        }
+
+        private List<string> primalityVerificators = new List<string> { "Миллера-рабина" };
+        public List<string> PrimalityVerificators
+        {
+            get => primalityVerificators;
+
+            set
+            {
+                primalityVerificators = value;
+
+                NotifyPropertyChanged("PrimalityVerificators");
+            }
+        }
+
+        private List<string> hashAlgorithmNames = new List<string> { "Sha-256", "MD-5" };
+        public List<string> HashAlgorithmNames
+        {
+            get => hashAlgorithmNames;
+
+            set
+            {
+                hashAlgorithmNames = value;
+
+                NotifyPropertyChanged("HashAlgorithmNames");
+            }
+        }
+        #endregion
+
         #region Properties
-        string name;
+        private string name;
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
+
             set
             {
                 name = value;
@@ -29,93 +67,136 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-        TextBlock rng;
-        public TextBlock RNG
+        private string selectedNumberGenerator;
+        public string SelectedNumberGenerator
         {
-            get
-            {
-                return rng;
-            }
+            get => selectedNumberGenerator;
             set
             {
-                rng = value;
+                selectedNumberGenerator = value;
 
-                NotifyPropertyChanged("RNG");
+                NotifyPropertyChanged("SelectedNumberGenerator");
             }
         }
 
-        //public string NumberGenerator { get; set; }
-        public TextBlock PrimalityVerificator { get; set; }
-        public TextBlock HashAlgorithm { get; set; }
-        public TextBlock AlgorithmName { get; set; }
-        public int BinarySize { get; set; }
+        private string selectedPrimalityVerificator;
+        public string SelectedPrimalityVerificator
+        {
+            get => selectedPrimalityVerificator;
+
+            set
+            {
+                selectedPrimalityVerificator = value;
+
+                NotifyPropertyChanged("SelectedPrimalityVerificator");
+            }
+        }
+
+        private string selectedHashAlgorithm;
+        public string SelectedHashAlgorithm
+        {
+            get => selectedHashAlgorithm;
+
+            set
+            {
+                selectedHashAlgorithm = value;
+
+                NotifyPropertyChanged("SelectedHashAlgorithm");
+            }
+        }
+
+        private int binarySize;
+        public int BinarySize
+        {
+            get => binarySize;
+
+            set
+            {
+                binarySize = value;
+
+                NotifyPropertyChanged("BinarySize");
+            }
+        }
         #endregion
 
-        private RelayCommand generateKeys;
-
-        public RelayCommand GenerateKeys
+        public GenerateKeysViewModel()
         {
-            get
-            {
-                return generateKeys ?? new RelayCommand(obj =>
-                {
-                    string rngName = rng.Text;
-                    string primalityVerificatorName = PrimalityVerificator.Text;
-                    string hashAlgName = HashAlgorithm.Text;
-                    string algorithmName = AlgorithmName.Text;
+            SelectedNumberGenerator = numberGenerators[0];
+            SelectedPrimalityVerificator = primalityVerificators[0];
+            SelectedHashAlgorithm = hashAlgorithmNames[0];
+        }
 
-                    AsymmetricKey privateKey, publicKey;
+        public RelayCommand GenerateKeysCommand
+        {
+            get => new RelayCommand(obj =>
+              {
+                  Window cuurentWindow = obj as Window;
 
-                    PrimalityVerificator primality = new MillerRabinPrimalityVerificator();
+                  if(name==null|| name.Replace(" ", "").Length == 0)
+                  {
+                      MessageBox.Show("Введите название ключей!");
+                  }
+                  else if (binarySize <= 8 || binarySize > 4096)
+                  {
+                      MessageBox.Show("Размер ключей должен быть от 8 до 4096!");
+                  }
+                  else
+                  {
+                      if (DataWorker.ContainsKey(name))
+                          MessageBox.Show("Ключи с таким названием уже существует!");
+                      else
+                      {
+                          AsymmetricKey privateKey, publicKey;
 
-                    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primality);
+                          PrimalityVerificator primality = new MillerRabinPrimalityVerificator();
 
-                    //primality.SetNumberGenerator(numberGenerator);
+                          NumberGenerator numberGenerator = new FibonacciNumberGenerator(primality);
 
-                    CryptographicHashAlgorithm hashAlgorithm = new SHA_256();
+                          CryptographicHashAlgorithm hashAlgorithm;
 
-                    Parameters parameters = new Parameters(numberGenerator, primality, hashAlgorithm);
+                          switch (SelectedHashAlgorithm)
+                          {
+                              case "Sha-256":
+                                  {
+                                      hashAlgorithm = new SHA_256();
+                                      break;
+                                  }
+                              default:
+                                  {
+                                      hashAlgorithm = new MD_5();
+                                      break;
+                                  }
+                          }
 
-                    KeysGenerator keysGenerator;
+                          Parameters parameters = new Parameters(numberGenerator, primality, hashAlgorithm);
 
-                    switch (algorithmName)
-                    {
-                        case "RSA":
-                            {
-                                keysGenerator = new RsaKeysGenerator(parameters);
-                                break;
-                            }
-                        case "DSA":
-                            {
-                                keysGenerator = new DsaKeysGenerator(parameters);
-                                break;
-                            }
-                        //case "ElGamal":
-                        default:
-                            {
-                                keysGenerator = new ElGamalKeysGenerator(parameters);
-                                break;
-                            }
-                    }
+                          KeysGenerator keysGenerator = new RsaKeysGenerator(parameters);
 
-                    string[] paramsInfo= parameters.GetParameters();
+                          string[] paramsInfo = parameters.GetParameters();
 
-                    keysGenerator.GenerateKeyPair(name, BinarySize, out privateKey, out publicKey);
+                          keysGenerator.GenerateKeyPair(name, BinarySize, out privateKey, out publicKey);
 
-                    privateKey.NumberGenerator = paramsInfo[0];
-                    publicKey.NumberGenerator = paramsInfo[0];
+                          privateKey.NumberGenerator = paramsInfo[0];
+                          publicKey.NumberGenerator = paramsInfo[0];
 
-                    privateKey.PrimalityVerificator = paramsInfo[1];
-                    publicKey.PrimalityVerificator = paramsInfo[1];
+                          privateKey.PrimalityVerificator = paramsInfo[1];
+                          publicKey.PrimalityVerificator = paramsInfo[1];
 
-                    privateKey.HashAlgorithm = paramsInfo[2];
-                    publicKey.HashAlgorithm = paramsInfo[2];
+                          privateKey.HashAlgorithm = paramsInfo[2];
+                          publicKey.HashAlgorithm = paramsInfo[2];
 
-                    DataWorker.AddKey(privateKey);
-                    DataWorker.AddKey(publicKey);
-                }
-                );
-            }
+                          DataWorker.AddKey(privateKey);
+                          DataWorker.AddKey(publicKey);
+
+                          MessageBox.Show("Ключи успешно созданы!");
+
+                          (cuurentWindow.Owner.DataContext as MainViewModel).RefreshData();
+                          cuurentWindow.Owner.Activate();
+
+                          cuurentWindow.Close();
+                      }
+                  }
+              });
         }
 
     }

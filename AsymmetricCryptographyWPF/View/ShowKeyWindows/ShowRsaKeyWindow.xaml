@@ -21,7 +21,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-            
+
         <StackPanel Grid.Row="0" VerticalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="TextBox">
@@ -34,29 +34,29 @@
                     <Setter Property="IsReadOnly" Value="True"/>
                 </Style>
             </StackPanel.Resources>
-            
+
             <Label Content="Название ключа"/>
             <TextBox Text="{Binding Name}"/>
 
             <Label Content="Генератор чисел"/>
             <TextBox Text="{Binding NumberGenerator}"/>
-            
+
             <Label Content="Тест простоты"/>
             <TextBox Text="{Binding PrimalityVerificator}"/>
-            
-            <Label Content="Хеш функция"/>
-            <TextBox Text="{Binding HashAlgorithm}"/>
-            
+
+            <!--<Label Content="Хеш функция"/>
+            <TextBox Text="{Binding HashAlgorithm}"/>-->
+
             <Label Content="Название алгоритма"/>
             <TextBox Text="{Binding AlgorithmName}"/>
-            
+
             <Label Content="Тип ключа"/>
             <TextBox Text="{Binding Permission}"/>
-            
+
             <Label Content="Размер ключа"/>
             <TextBox Text="{Binding BinarySize}"/>
-            </StackPanel>
-        
+        </StackPanel>
+
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="TextBox">
