@@ -66,6 +66,7 @@
                     <Setter Property="TextWrapping" Value="Wrap"/>
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="IsReadOnly" Value="True"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </StackPanel.Resources>
 

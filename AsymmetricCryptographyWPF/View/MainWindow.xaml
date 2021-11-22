@@ -25,6 +25,7 @@
             <RowDefinition Height="0.25*"/>
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
+        
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="Ключи">
                 <MenuItem Header="Генерация">
@@ -34,6 +35,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+        
         <ListView Grid.Row="1" Grid.Column="2" 
                   ItemsSource="{Binding AllKeys}" 
                   HorizontalAlignment="Center"
@@ -65,5 +67,8 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
+        
+        
+        
     </Grid>
 </Window>

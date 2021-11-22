@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using AsymmetricCryptographyWPF.View.ShowKeyWindows;
-using AsymmetricCryptographyWPF.View;
+using AsymmetricCryptographyWPF.View.GenerationKeysWindows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -55,7 +55,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         {
             get => new RelayCommand(obj =>
              {
-                 Window rsaKeysGenerationWindow = new GenerateKeysWindow();
+                 Window rsaKeysGenerationWindow = new RsaKeysGeneratingWindow();
 
                  rsaKeysGenerationWindow.Owner = Application.Current.MainWindow;
 

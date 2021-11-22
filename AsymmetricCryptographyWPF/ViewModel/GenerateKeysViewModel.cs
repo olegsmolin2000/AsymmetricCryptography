@@ -2,7 +2,6 @@
 using AsymmetricCryptography.CryptographicHash;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
-using AsymmetricCryptography.RSA;
 using AsymmetricCryptographyDAL.EFCore;
 using AsymmetricCryptographyDAL.Entities.Keys;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class GenerateKeysViewModel:ViewModel
+    internal abstract class GenerateKeysViewModel:ViewModel
     {
         #region ListsForComboBoxes
         private List<string> numberGenerators = new List<string> { "Фибоначчи" };
@@ -126,78 +125,91 @@ namespace AsymmetricCryptographyWPF.ViewModel
             SelectedHashAlgorithm = hashAlgorithmNames[0];
         }
 
-        public RelayCommand GenerateKeysCommand
+        protected Parameters generationParameters;
+        protected AsymmetricKey privateKey, publicKey;
+
+        public abstract RelayCommand GenerateKeys { get; }
+
+        protected bool TryReadProperties()
         {
-            get => new RelayCommand(obj =>
-              {
-                  Window cuurentWindow = obj as Window;
+            if (name == null || name.Replace(" ", "").Length == 0)
+            {
+                MessageBox.Show("Введите название ключей!");
 
-                  if(name==null|| name.Replace(" ", "").Length == 0)
-                  {
-                      MessageBox.Show("Введите название ключей!");
-                  }
-                  else if (binarySize <= 8 || binarySize > 4096)
-                  {
-                      MessageBox.Show("Размер ключей должен быть от 8 до 4096!");
-                  }
-                  else
-                  {
-                      if (DataWorker.ContainsKey(name))
-                          MessageBox.Show("Ключи с таким названием уже существует!");
-                      else
-                      {
-                          AsymmetricKey privateKey, publicKey;
+                return false;
+            }
+            else if (binarySize <= 8 || binarySize > 4096)
+            {
+                MessageBox.Show("Размер ключей должен быть от 8 до 4096!");
 
-                          PrimalityVerificator primality = new MillerRabinPrimalityVerificator();
+                return false;
+            }
+            else
+            {
+                if (DataWorker.ContainsKey(name))
+                {
+                    MessageBox.Show("Ключи с таким названием уже существует!");
 
-                          NumberGenerator numberGenerator = new FibonacciNumberGenerator(primality);
+                    return false;
+                }
+                else
+                {
+                    PrimalityVerificator primality = new MillerRabinPrimalityVerificator();
 
-                          CryptographicHashAlgorithm hashAlgorithm;
+                    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primality);
 
-                          switch (SelectedHashAlgorithm)
-                          {
-                              case "Sha-256":
-                                  {
-                                      hashAlgorithm = new SHA_256();
-                                      break;
-                                  }
-                              default:
-                                  {
-                                      hashAlgorithm = new MD_5();
-                                      break;
-                                  }
-                          }
+                    CryptographicHashAlgorithm hashAlgorithm;
 
-                          Parameters parameters = new Parameters(numberGenerator, primality, hashAlgorithm);
+                    switch (SelectedHashAlgorithm)
+                    {
+                        case "Sha-256":
+                            {
+                                hashAlgorithm = new SHA_256();
+                                break;
+                            }
+                        default:
+                            {
+                                hashAlgorithm = new MD_5();
+                                break;
+                            }
+                    }
 
-                          KeysGenerator keysGenerator = new RsaKeysGenerator(parameters);
+                    generationParameters = new Parameters(numberGenerator, primality, hashAlgorithm);
+                }
+            }
 
-                          string[] paramsInfo = parameters.GetParameters();
-
-                          keysGenerator.GenerateKeyPair(name, BinarySize, out privateKey, out publicKey);
-
-                          privateKey.NumberGenerator = paramsInfo[0];
-                          publicKey.NumberGenerator = paramsInfo[0];
-
-                          privateKey.PrimalityVerificator = paramsInfo[1];
-                          publicKey.PrimalityVerificator = paramsInfo[1];
-
-                          privateKey.HashAlgorithm = paramsInfo[2];
-                          publicKey.HashAlgorithm = paramsInfo[2];
-
-                          DataWorker.AddKey(privateKey);
-                          DataWorker.AddKey(publicKey);
-
-                          MessageBox.Show("Ключи успешно созданы!");
-
-                          (cuurentWindow.Owner.DataContext as MainViewModel).RefreshData();
-                          cuurentWindow.Owner.Activate();
-
-                          cuurentWindow.Close();
-                      }
-                  }
-              });
+            return true;
         }
 
+        protected void FillDBAndClose(Window window)
+        {
+            if (generationParameters != null)
+            {
+                string[] paramsInfo = generationParameters.GetParameters();
+
+                privateKey.NumberGenerator = paramsInfo[0];
+                publicKey.NumberGenerator = paramsInfo[0];
+
+                privateKey.PrimalityVerificator = paramsInfo[1];
+                publicKey.PrimalityVerificator = paramsInfo[1];
+
+                privateKey.HashAlgorithm = paramsInfo[2];
+                publicKey.HashAlgorithm = paramsInfo[2];
+            }
+
+            if (privateKey != null && publicKey != null)
+            {
+                DataWorker.AddKey(privateKey);
+                DataWorker.AddKey(publicKey);
+            }
+
+            MessageBox.Show("Ключи успешно созданы!");
+
+            ((MainViewModel)window.Owner.DataContext).RefreshData();
+
+            window.Owner.Activate();
+
+            window.Close();
+        }
     }
 }
