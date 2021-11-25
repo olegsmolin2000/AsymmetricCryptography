@@ -61,8 +61,8 @@ namespace AsymmetricCryptographyWPF.View.KeysGeneratingWindows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;V1.0.0.0;component/view/keysgeneratingwindows/rsakeysg" +
-                    "eneratingwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;component/view/keysgeneratingwindows/rsakeysgenerating" +
+                    "window.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

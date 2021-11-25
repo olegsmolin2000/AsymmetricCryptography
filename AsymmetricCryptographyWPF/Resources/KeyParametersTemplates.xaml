@@ -56,15 +56,6 @@
             <Label Content="Название"/>
             <TextBox Text="{Binding Name}"/>
 
-            <Label Content="Генератор чисел"/>
-            <TextBox Text="{Binding NumberGenerator}"/>
-
-            <Label Content="Тест простоты"/>
-            <TextBox Text="{Binding PrimalityVerificator}"/>
-
-            <Label Content="Хеш функция"/>
-            <TextBox Text="{Binding HashAlgorithm}"/>
-
             <Label Content="Название алгоритма"/>
             <TextBox Text="{Binding AlgorithmName}"/>
 
@@ -73,6 +64,15 @@
 
             <Label Content="Размер"/>
             <TextBox Text="{Binding BinarySize}"/>
+
+            <Label Content="Генератор чисел"/>
+            <TextBox Text="{Binding NumberGenerator}"/>
+
+            <Label Content="Тест простоты"/>
+            <TextBox Text="{Binding PrimalityVerificator}"/>
+
+            <Label Content="Хеш функция"/>
+            <TextBox Text="{Binding HashAlgorithm}"/>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

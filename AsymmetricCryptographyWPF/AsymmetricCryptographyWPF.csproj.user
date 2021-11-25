@@ -19,6 +19,9 @@
     <Compile Update="View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml">

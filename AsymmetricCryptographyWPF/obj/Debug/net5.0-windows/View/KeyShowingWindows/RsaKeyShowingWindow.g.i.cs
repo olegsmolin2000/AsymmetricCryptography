@@ -61,8 +61,8 @@ namespace AsymmetricCryptographyWPF.View.KeyShowingWindows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;V1.0.0.0;component/view/keyshowingwindows/rsakeyshowin" +
-                    "gwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;component/view/keyshowingwindows/rsakeyshowingwindow.x" +
+                    "aml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\KeyShowingWindows\RsaKeyShowingWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

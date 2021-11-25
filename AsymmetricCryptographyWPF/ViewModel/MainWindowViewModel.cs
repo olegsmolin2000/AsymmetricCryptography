@@ -108,10 +108,12 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 Window window;
 
                 if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
-                
+
                     window = new RsaKeyShowingWindow(SelectedKey);
-                else //(selectedKey is DsaDomainParameter)
+                else if (selectedKey is DsaDomainParameter)
                     window = new DsaDomainParametersShowingWindow(SelectedKey);
+                else
+                    window = new DsaKeyShowingWindow(selectedKey);
 
                 window.Show();
             });
