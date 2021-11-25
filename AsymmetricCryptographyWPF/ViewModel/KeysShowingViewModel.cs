@@ -2,7 +2,7 @@
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    internal abstract class KeysShowingViewModel:ViewModel
+    internal class KeysShowingViewModel:ViewModel
     {
         #region Properties
         private string name;

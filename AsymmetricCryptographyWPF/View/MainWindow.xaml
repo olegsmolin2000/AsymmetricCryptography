@@ -6,8 +6,9 @@
         xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        Title="Cryptographer" Height="600" Width="1200"
-        WindowStartupLocation="CenterScreen">
+        Title="Cryptographer" Height="720" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Name="MainWnd">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadKeys}" />
@@ -15,14 +16,13 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.8*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
@@ -48,7 +48,7 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="150">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="125">
                         <TextBlock TextAlignment="Center">
                             Название
                         </TextBlock>
@@ -58,13 +58,13 @@
                             Алгоритм
                         </TextBlock>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="120">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="100">
                         <TextBlock TextAlignment="Center">
                             Тип
                         </TextBlock>
                         
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=BinarySize}" Width="100">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=BinarySize}" Width="90">
                         <TextBlock TextAlignment="Center">
                             Размер
                         </TextBlock>
@@ -78,8 +78,51 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        
-        
-        
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <ContentControl Grid.Row="0" VerticalAlignment="Top" Content="{Binding SelectedKeyShowingVM}"
+            ContentTemplate="{StaticResource ShowKeyParameters}"/>
+            <Button Margin="10" Grid.Row="1" Content="Открыть полностью" Command="{Binding OpenShowKeyWindow}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.35*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="0 15 0 15"/>
+                    <Setter Property="Width" Value="110"/>
+                    <Setter Property="Height" Value="25"/>
+                </Style>
+            </Grid.Resources>
+            
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding InputedText}"/>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <Button Content="Зашифровать"/>
+                <Button Content="Расшифровать"/>
+                <Button Content="Создать ЭЦП"/>
+                <Button Content="Проверить ЭЦП"/>
+            </StackPanel>
+
+            <TextBox Grid.Row="2" Grid.Column="0" IsReadOnly="True" Text="{Binding ResultText}"/>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <Button Content="1"/>
+                <Button Content="2"/>
+                <Button Content="3"/>
+                <Button Content="4"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

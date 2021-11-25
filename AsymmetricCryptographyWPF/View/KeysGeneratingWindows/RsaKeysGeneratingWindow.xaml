@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type=keysgeneratingviewmodels:RsaKeysGeneratingViewModel}"
         mc:Ignorable="d"
         Title="Генерация RSA ключей" 
-        Height="400" Width="225"
+        Height="400" Width="325"
         Name="RsaKeysGeneratingWnd"
         WindowStartupLocation="CenterScreen">
     <Grid>

@@ -5,6 +5,7 @@ using System.Windows;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using AsymmetricCryptographyWPF.View.KeysGeneratingWindows;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows;
+using AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -28,8 +29,74 @@ namespace AsymmetricCryptographyWPF.ViewModel
             LoadKeys.Execute(null);
         }
 
-        public AsymmetricKey SelectedKey { get; set; }
+        public RelayCommand LoadKeys
+        {
+            get => new RelayCommand(obj =>
+            {
+                AllKeys = DataWorker.GetAll();
+            });
+        }
 
+
+        #region SelectedKey
+        private KeysShowingViewModel selectedKeyShowingVM;
+        public KeysShowingViewModel SelectedKeyShowingVM
+        {
+            get => selectedKeyShowingVM;
+
+            set
+            {
+                selectedKeyShowingVM = value;
+
+                NotifyPropertyChanged("SelectedKeyShowingVM");
+            }
+        }
+
+
+        private AsymmetricKey selectedKey;
+        public AsymmetricKey SelectedKey
+        {
+            get => selectedKey;
+
+            set
+            {
+                selectedKey = value;
+
+                NotifyPropertyChanged("SelectedKey");
+
+                SelectedKeyShowingVM = new KeysShowingViewModel(SelectedKey); 
+            }
+        }
+        #endregion
+
+        private string inputedText = "zhopa";
+        public string InputedText
+        {
+            get => inputedText;
+
+            set
+            {
+                inputedText = value;
+
+                NotifyPropertyChanged("InputedText");
+            }
+        }
+
+        private string resultText = "pizda";
+
+        public string ResultText
+        {
+            get => resultText;
+            set
+            {
+                resultText = value;
+
+                NotifyPropertyChanged("ResultText");
+            }
+        }
+
+
+        #region OpenWindows
         public RelayCommand OpenShowKeyWindow
         {
             get => new RelayCommand(obj =>
@@ -43,24 +110,17 @@ namespace AsymmetricCryptographyWPF.ViewModel
             });
         }
 
-        public RelayCommand LoadKeys
-        {
-            get => new RelayCommand(obj =>
-            {
-                AllKeys = DataWorker.GetAll();
-            });
-        }
-
         public RelayCommand OpenGenerateRsaKeysWindow
         {
             get => new RelayCommand(obj =>
-             {
-                 Window rsaKeysGenerationWindow = new RsaKeysGeneratingWindow();
+            {
+                Window rsaKeysGenerationWindow = new RsaKeysGeneratingWindow();
 
-                 rsaKeysGenerationWindow.Owner = Application.Current.MainWindow;
+                rsaKeysGenerationWindow.Owner = Application.Current.MainWindow;
 
-                 rsaKeysGenerationWindow.Show();
-             });
+                rsaKeysGenerationWindow.Show();
+            });
         }
+        #endregion
     }
 }
