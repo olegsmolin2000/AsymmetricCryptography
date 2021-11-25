@@ -154,6 +154,18 @@ namespace AsymmetricCryptographyWPF.ViewModel
                   generatingWindow.Show();
               });
         }
+
+        public RelayCommand OpenDsaKeysGeneratingWindow
+        {
+            get => new RelayCommand(obj =>
+              {
+                  Window generatingWindow = new DsaKeysGeneratingWindow();
+
+                  generatingWindow.Owner = Application.Current.MainWindow;
+
+                  generatingWindow.Show();
+              });
+        }
         #endregion
     }
 }

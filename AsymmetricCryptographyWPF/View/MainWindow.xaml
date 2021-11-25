@@ -30,6 +30,7 @@
                 <MenuItem Header="Генерация">
                     <MenuItem Header="RSA" Command="{Binding OpenGenerateRsaKeysWindow}"/>
                     <MenuItem Header="DSA">
+                        <MenuItem Header="Ключи" Command="{Binding OpenDsaKeysGeneratingWindow}"/>
                         <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/>
                         <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
                     </MenuItem>

@@ -4,15 +4,15 @@ using System.Windows;
 namespace AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA
 {
     /// <summary>
-    /// Логика взаимодействия для DsaKeysGeneratingByDPWindow.xaml
+    /// Логика взаимодействия для DsaKeysGeneratingWindow.xaml
     /// </summary>
-    public partial class DsaKeysGeneratingByDPWindow : Window
+    public partial class DsaKeysGeneratingWindow : Window
     {
-        public DsaKeysGeneratingByDPWindow()
+        public DsaKeysGeneratingWindow()
         {
             InitializeComponent();
 
-            DataContext = new DsaKeysGeneratingByDPViewModel();
+            DataContext = new DsaKeysGeneratingViewModel();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA
 {
-    internal sealed class DsaKeysGenerationByDPViewModel : KeysGeneratingViewModel
+    internal sealed class DsaKeysGeneratingByDPViewModel : KeysGeneratingViewModel
     {
         private List<DsaDomainParameter> dsaDomainParameters;
 

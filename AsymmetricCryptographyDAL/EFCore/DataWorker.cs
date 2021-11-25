@@ -58,5 +58,15 @@ namespace AsymmetricCryptographyDAL.EFCore
                 }
             }
         }
+
+        public static AsymmetricKey GetLastDomainParameter()
+        {
+            using (KeyContext db = new KeyContext())
+            {
+                int lastId = db.DsaDomainParameters.Max(x => x.Id);
+
+                return db.DsaDomainParameters.FirstOrDefault(x => x.Id == lastId);
+            }
+        }
     }
 }

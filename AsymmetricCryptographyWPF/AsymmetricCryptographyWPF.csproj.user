@@ -13,6 +13,9 @@
     <Compile Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml">
