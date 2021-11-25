@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="Cryptographer" Height="600" Width="1200"
@@ -15,15 +15,14 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.25*"/>
-            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
@@ -36,12 +35,17 @@
             </MenuItem>
         </Menu>
         
-        <ListView Grid.Row="1" Grid.Column="2" 
+        <ListView Grid.Row="1" Grid.Column="0" 
                   ItemsSource="{Binding AllKeys}" 
-                  HorizontalAlignment="Center"
                   Margin="15"
-                  Width="350"
-                  SelectedItem="{Binding SelectedKey}">
+                  HorizontalAlignment="Stretch"
+                  SelectedItem="{Binding SelectedKey}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="150">
@@ -49,18 +53,25 @@
                             Название
                         </TextBlock>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="100">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AlgorithmName}" Width="85">
+                        <TextBlock TextAlignment="Center">
+                            Алгоритм
+                        </TextBlock>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Width="120">
                         <TextBlock TextAlignment="Center">
                             Тип
                         </TextBlock>
+                        
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=BinarySize}" Width="75">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=BinarySize}" Width="100">
                         <TextBlock TextAlignment="Center">
                             Размер
                         </TextBlock>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding OpenShowKeyWindow}"/>

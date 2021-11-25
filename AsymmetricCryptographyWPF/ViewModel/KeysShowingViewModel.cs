@@ -1,11 +1,8 @@
-﻿using AsymmetricCryptographyDAL.EFCore;
-using AsymmetricCryptographyDAL.Entities.Keys;
-using AsymmetricCryptographyDAL.Entities.Keys.RSA;
-using System.Windows;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    internal abstract class ShowKeyViewModel : ViewModel
+    internal abstract class KeysShowingViewModel:ViewModel
     {
         #region Properties
         private string name;
@@ -100,7 +97,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
         #endregion
 
-        public ShowKeyViewModel(AsymmetricKey key)
+        public KeysShowingViewModel(AsymmetricKey key)
         {
             Name = key.Name;
             AlgorithmName = key.AlgorithmName;

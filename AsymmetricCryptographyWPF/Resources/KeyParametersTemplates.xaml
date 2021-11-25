@@ -35,4 +35,41 @@
             <TextBox Text="{Binding BinarySize}"/>
         </StackPanel>
     </DataTemplate>
+    
+    <DataTemplate x:Key="ShowKeyParameters">
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Width" Value="175"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Height" Value="20"/>
+                    <Setter Property="IsReadOnly" Value="True"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Label Content="Название ключа"/>
+            <TextBox Text="{Binding Name}"/>
+
+            <Label Content="Генератор чисел"/>
+            <TextBox Text="{Binding NumberGenerator}"/>
+
+            <Label Content="Тест простоты"/>
+            <TextBox Text="{Binding PrimalityVerificator}"/>
+
+            <Label Content="Хеш функция"/>
+            <TextBox Text="{Binding HashAlgorithm}"/>
+
+            <Label Content="Название алгоритма"/>
+            <TextBox Text="{Binding AlgorithmName}"/>
+
+            <Label Content="Тип ключа"/>
+            <TextBox Text="{Binding Permission}"/>
+
+            <Label Content="Размер ключа"/>
+            <TextBox Text="{Binding BinarySize}"/>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

@@ -2,9 +2,9 @@
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using System.Windows;
 
-namespace AsymmetricCryptographyWPF.ViewModel.ShowKeyViewModels
+namespace AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels
 {
-    internal sealed class ShowRsaKeyViewModel : ShowKeyViewModel
+    internal sealed class RsaKeysShowingViewModel:KeysShowingViewModel
     {
         #region Properties
         private string modulus;
@@ -34,8 +34,8 @@ namespace AsymmetricCryptographyWPF.ViewModel.ShowKeyViewModels
         }
         #endregion
 
-        public ShowRsaKeyViewModel(AsymmetricKey key)
-            :base(key)
+        public RsaKeysShowingViewModel(AsymmetricKey key)
+            : base(key)
         {
             if (key is RsaPrivateKey)
             {

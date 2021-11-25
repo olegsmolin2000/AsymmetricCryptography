@@ -3,12 +3,12 @@ using AsymmetricCryptographyDAL.Entities.Keys;
 using System.Collections.Generic;
 using System.Windows;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
-using AsymmetricCryptographyWPF.View.ShowKeyWindows;
-using AsymmetricCryptographyWPF.View.GenerationKeysWindows;
+using AsymmetricCryptographyWPF.View.KeysGeneratingWindows;
+using AsymmetricCryptographyWPF.View.KeyShowingWindows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    class MainViewModel:ViewModel
+    class MainWindowViewModel:ViewModel
     {
         private List<AsymmetricKey> allKeys;
 
@@ -36,7 +36,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             {
                 if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
                 {
-                    Window showKeyWindow = new ShowRsaKeyWindow(SelectedKey);
+                    Window showKeyWindow = new RsaKeyShowingWindow(SelectedKey);
 
                     showKeyWindow.Show();
                 }

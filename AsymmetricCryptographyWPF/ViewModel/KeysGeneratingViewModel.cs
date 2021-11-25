@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
-    internal abstract class GenerateKeysViewModel:ViewModel
+    internal abstract class KeysGeneratingViewModel:ViewModel
     {
         #region ListsForComboBoxes
         private List<string> numberGenerators = new List<string> { "Фибоначчи" };
@@ -118,7 +118,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
         #endregion
 
-        public GenerateKeysViewModel()
+        public KeysGeneratingViewModel()
         {
             SelectedNumberGenerator = numberGenerators[0];
             SelectedPrimalityVerificator = primalityVerificators[0];
@@ -148,7 +148,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             {
                 if (DataWorker.ContainsKey(name))
                 {
-                    MessageBox.Show("Ключи с таким названием уже существует!");
+                    MessageBox.Show("Ключи с таким названием уже существуют!");
 
                     return false;
                 }
@@ -205,7 +205,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
             MessageBox.Show("Ключи успешно созданы!");
 
-            ((MainViewModel)window.Owner.DataContext).RefreshData();
+            ((MainWindowViewModel)window.Owner.DataContext).RefreshData();
 
             window.Owner.Activate();
 

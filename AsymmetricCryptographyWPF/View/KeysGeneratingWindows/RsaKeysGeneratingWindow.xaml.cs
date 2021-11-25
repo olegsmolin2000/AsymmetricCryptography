@@ -1,7 +1,7 @@
-﻿using AsymmetricCryptographyWPF.ViewModel.GenerateKeysViewModels;
+﻿using AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels;
 using System.Windows;
 
-namespace AsymmetricCryptographyWPF.View.GenerationKeysWindows
+namespace AsymmetricCryptographyWPF.View.KeysGeneratingWindows
 {
     /// <summary>
     /// Логика взаимодействия для RsaKeysGeneratingWindow.xaml
@@ -10,11 +10,9 @@ namespace AsymmetricCryptographyWPF.View.GenerationKeysWindows
     {
         public RsaKeysGeneratingWindow()
         {
-            
-
             InitializeComponent();
 
-            DataContext = new GenerateRsaKeysViewModel();
+            DataContext = new RsaKeysGeneratingViewModel();
         }
     }
 }

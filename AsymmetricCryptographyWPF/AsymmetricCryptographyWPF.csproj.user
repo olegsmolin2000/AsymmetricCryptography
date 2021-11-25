@@ -7,10 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\GenerationKeysWindows\RsaKeysGeneratingWindow.xaml.cs">
+    <Compile Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ShowKeyWindows\ShowRsaKeyWindow.xaml.cs">
+    <Compile Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,13 +18,13 @@
     <Page Update="Resources\KeyParametersTemplates.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\GenerationKeysWindows\RsaKeysGeneratingWindow.xaml">
+    <Page Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ShowKeyWindows\ShowRsaKeyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

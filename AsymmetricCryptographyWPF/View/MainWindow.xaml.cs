@@ -12,7 +12,7 @@ namespace AsymmetricCryptographyWPF.View
         {
             InitializeComponent();
 
-            DataContext = new MainViewModel();
+            DataContext = new MainWindowViewModel();
         }
     }
 }
