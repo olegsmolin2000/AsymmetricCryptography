@@ -72,6 +72,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
         #endregion
 
+        #region TextFields
         private string inputedText = "zhopa";
         public string InputedText
         {
@@ -97,7 +98,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 NotifyPropertyChanged("ResultText");
             }
         }
-
+        #endregion
 
         #region OpenWindows
         public RelayCommand OpenShowKeyWindow
@@ -138,6 +139,18 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                  generatingWindow.Show();
              });
+        }
+
+        public RelayCommand OpenDsaKeysGeneratingByDPWindow
+        {
+            get => new RelayCommand(obj =>
+              {
+                  Window generatingWindow = new DsaKeysGeneratingByDPWindow();
+
+                  generatingWindow.Owner = Application.Current.MainWindow;
+
+                  generatingWindow.Show();
+              });
         }
         #endregion
     }

@@ -7,6 +7,7 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
     {
         public BigInteger X { get; private set; }
 
+        public int? DomainParameterId { get; set; }
         public virtual DsaDomainParameter DomainParameter { get; set; }
 
         private DsaPrivateKey(string name, int binarySize)
@@ -17,7 +18,8 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
         {
             this.X = x;
 
-            this.DomainParameter = domainParameter;
+            DomainParameterId = domainParameter.Id;
+            //this.DomainParameter = domainParameter;
         }
 
         public override string ToString()

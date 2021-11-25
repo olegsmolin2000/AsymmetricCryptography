@@ -62,8 +62,8 @@ namespace AsymmetricCryptographyWPF.View.KeyShowingWindows.DSA {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;component/view/keyshowingwindows/dsa/dsadomainparamete" +
-                    "rsshowingwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AsymmetricCryptographyWPF;V1.0.0.0;component/view/keyshowingwindows/dsa/dsadomai" +
+                    "nparametersshowingwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

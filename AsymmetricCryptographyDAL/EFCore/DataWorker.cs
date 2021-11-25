@@ -1,5 +1,6 @@
 ﻿using AsymmetricCryptographyDAL.EFCore.Contexts;
 using AsymmetricCryptographyDAL.Entities.Keys;
+using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,14 @@ namespace AsymmetricCryptographyDAL.EFCore
             using (KeyContext db = new KeyContext())
             {
                 return db.Keys.ToList();
+            }
+        }
+
+        public static List<DsaDomainParameter> GetDsaDomainParameters()
+        {
+            using(KeyContext db=new KeyContext())
+            {
+                return db.DsaDomainParameters.ToList();
             }
         }
 
@@ -41,8 +50,6 @@ namespace AsymmetricCryptographyDAL.EFCore
         {
             using(KeyContext db=new KeyContext())
             {
-                //var set = db.Set<T>();
-
                 if (!db.Keys.Contains(key))
                 {
                     db.Keys.Add(key);

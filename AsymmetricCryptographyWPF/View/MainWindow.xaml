@@ -30,7 +30,8 @@
                 <MenuItem Header="Генерация">
                     <MenuItem Header="RSA" Command="{Binding OpenGenerateRsaKeysWindow}"/>
                     <MenuItem Header="DSA">
-                        <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/>
+                        <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/><MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/>
+                        <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
                     </MenuItem>
                     <MenuItem Header="ElGamal"/>
                 </MenuItem>
@@ -74,11 +75,11 @@
                 </GridView>
             </ListView.View>
             
-            <i:Interaction.Triggers>
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding OpenShowKeyWindow}"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
         </ListView>
 
         <Grid Grid.Column="1" Grid.Row="1">
@@ -107,6 +108,9 @@
                     <Setter Property="Margin" Value="0 15 0 15"/>
                     <Setter Property="Width" Value="110"/>
                     <Setter Property="Height" Value="25"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0 15 0 15"/>
                 </Style>
             </Grid.Resources>
             

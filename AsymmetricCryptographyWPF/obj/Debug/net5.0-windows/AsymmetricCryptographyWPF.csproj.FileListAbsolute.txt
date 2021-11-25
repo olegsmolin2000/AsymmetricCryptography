@@ -70,3 +70,6 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.baml
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.baml
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.g.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.baml
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.csproj.CopyComplete
