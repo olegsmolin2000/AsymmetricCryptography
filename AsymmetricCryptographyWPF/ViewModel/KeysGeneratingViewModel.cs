@@ -203,6 +203,11 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 DataWorker.AddKey(publicKey);
             }
 
+            CloseWindow(window);
+        }
+
+        protected void CloseWindow(Window window)
+        {
             MessageBox.Show("Ключи успешно созданы!");
 
             ((MainWindowViewModel)window.Owner.DataContext).RefreshData();

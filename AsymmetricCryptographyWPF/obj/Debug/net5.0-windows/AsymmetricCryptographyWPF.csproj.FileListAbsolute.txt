@@ -66,3 +66,7 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\RsaKeyShowingWindow.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\RsaKeysGeneratingWindow.baml
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\RsaKeyShowingWindow.baml
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.g.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.baml
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.g.cs
+C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.baml

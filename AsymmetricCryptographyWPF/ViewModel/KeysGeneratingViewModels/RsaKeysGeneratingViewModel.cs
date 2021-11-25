@@ -13,6 +13,7 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels
                 if (TryReadProperties())
                 {
                     KeysGenerator keysGenerator = new RsaKeysGenerator(generationParameters);
+
                     keysGenerator.GenerateKeyPair(Name, BinarySize, out privateKey, out publicKey);
 
                     FillDBAndClose(obj as Window);

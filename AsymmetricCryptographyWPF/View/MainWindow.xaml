@@ -29,7 +29,9 @@
             <MenuItem Header="Ключи">
                 <MenuItem Header="Генерация">
                     <MenuItem Header="RSA" Command="{Binding OpenGenerateRsaKeysWindow}"/>
-                    <MenuItem Header="DSA"/>
+                    <MenuItem Header="DSA">
+                        <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/>
+                    </MenuItem>
                     <MenuItem Header="ElGamal"/>
                 </MenuItem>
             </MenuItem>

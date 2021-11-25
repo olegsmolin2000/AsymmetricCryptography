@@ -7,10 +7,8 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public class DsaKeysGenerator : KeysGenerator
     {
-        public DsaKeysGenerator(Parameters parameters) 
-           : base(parameters)
-        {
-        }
+        public DsaKeysGenerator(Parameters parameters)
+           : base(parameters) { }
 
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
@@ -58,10 +56,6 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                 p *= q;
                 p++;
             } while (!primalityVerificator.IsPrimal(p, 100));
-            //do
-            //{
-            //    p = numberGenerator.GeneratePrimeNumber(L);
-            //} while ((p - 1) % q != 0);
 
             //вычисляется g по формуле g = h^((p - 1) / q) mod p, такое что g != 1
             //обычно h = 2 подходит

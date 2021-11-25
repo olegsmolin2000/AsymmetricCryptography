@@ -19,7 +19,7 @@
             </Style>
         </DataTemplate.Resources>
         <StackPanel>
-            <Label Content="Название ключей"/>
+            <Label Content="Название"/>
             <TextBox Text="{Binding Name}"/>
 
             <Label Content="Генератор чисел"/>
@@ -31,7 +31,7 @@
             <Label Content="Хеш функция"/>
             <ComboBox ItemsSource="{Binding HashAlgorithmNames}" SelectedValue="{Binding SelectedHashAlgorithm}"/>
 
-            <Label Content="Размер ключа"/>
+            <Label Content="Размер"/>
             <TextBox Text="{Binding BinarySize}"/>
         </StackPanel>
     </DataTemplate>
@@ -53,7 +53,7 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Label Content="Название ключа"/>
+            <Label Content="Название"/>
             <TextBox Text="{Binding Name}"/>
 
             <Label Content="Генератор чисел"/>
@@ -68,10 +68,10 @@
             <Label Content="Название алгоритма"/>
             <TextBox Text="{Binding AlgorithmName}"/>
 
-            <Label Content="Тип ключа"/>
+            <Label Content="Тип"/>
             <TextBox Text="{Binding Permission}"/>
 
-            <Label Content="Размер ключа"/>
+            <Label Content="Размер"/>
             <TextBox Text="{Binding BinarySize}"/>
         </StackPanel>
     </DataTemplate>

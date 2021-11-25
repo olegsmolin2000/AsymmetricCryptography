@@ -6,6 +6,9 @@ using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using AsymmetricCryptographyWPF.View.KeysGeneratingWindows;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows;
 using AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels;
+using AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA;
+using AsymmetricCryptographyDAL.Entities.Keys.DSA;
+using AsymmetricCryptographyWPF.View.KeyShowingWindows.DSA;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -101,12 +104,15 @@ namespace AsymmetricCryptographyWPF.ViewModel
         {
             get => new RelayCommand(obj =>
             {
-                if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
-                {
-                    Window showKeyWindow = new RsaKeyShowingWindow(SelectedKey);
+                Window window;
 
-                    showKeyWindow.Show();
-                }
+                if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
+                
+                    window = new RsaKeyShowingWindow(SelectedKey);
+                else //(selectedKey is DsaDomainParameter)
+                    window = new DsaDomainParametersShowingWindow(SelectedKey);
+
+                window.Show();
             });
         }
 
@@ -120,6 +126,18 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                 rsaKeysGenerationWindow.Show();
             });
+        }
+
+        public RelayCommand OpenDsaDPGeneratingWindow
+        {
+            get => new RelayCommand(obj =>
+             {
+                 Window generatingWindow = new DsaDomainParameterGeneratingWindow();
+
+                 generatingWindow.Owner = Application.Current.MainWindow;
+
+                 generatingWindow.Show();
+             });
         }
         #endregion
     }

@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml.cs">
@@ -18,7 +24,13 @@
     <Page Update="Resources\KeyParametersTemplates.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml">
