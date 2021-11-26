@@ -7,7 +7,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public class DsaKeysGenerator : KeysGenerator
     {
-        public DsaKeysGenerator(Parameters parameters)
+        public DsaKeysGenerator(GeneratingParameters parameters)
            : base(parameters) { }
 
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)

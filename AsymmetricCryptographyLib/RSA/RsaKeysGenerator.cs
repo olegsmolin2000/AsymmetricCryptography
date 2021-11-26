@@ -6,7 +6,7 @@ namespace AsymmetricCryptography.RSA
 {
     public class RsaKeysGenerator : KeysGenerator
     {
-        public RsaKeysGenerator(Parameters parameters) 
+        public RsaKeysGenerator(GeneratingParameters parameters) 
             : base(parameters) { }
 
         public bool IsFixedPublicExponent { get; set; } = false;

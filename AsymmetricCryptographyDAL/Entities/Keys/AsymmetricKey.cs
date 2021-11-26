@@ -24,6 +24,17 @@ namespace AsymmetricCryptographyDAL.Entities.Keys
 
         public abstract override string ToString();
 
+        public string[] GetParametersInfo()
+        {
+            string[] parameters = new string[3];
+
+            parameters[0] = NumberGenerator;
+            parameters[1] = PrimalityVerificator;
+            parameters[2] = HashAlgorithm;
+
+            return parameters;
+        }
+
         public string GetInfo()
         {
             StringBuilder info = new StringBuilder();

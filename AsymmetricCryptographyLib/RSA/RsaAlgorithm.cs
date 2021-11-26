@@ -7,11 +7,6 @@ namespace AsymmetricCryptography.RSA
 {
     public sealed class RsaAlgorithm: AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
-        public RsaAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
-            : base(privateKey, publicKey, parameters)
-        {
-        }
-
         public RsaPrivateKey PrivateKey
         {
             get
@@ -40,9 +35,14 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
+        public RsaAlgorithm(GeneratingParameters parameters)
+            :base(parameters) { }
+
         //шифрование RSA с помощью открытого ключа
-        public byte[] Encrypt(byte[] data)
+        public byte[] Encrypt(byte[] data,AsymmetricKey publicKey)
         {
+            PublicKey = publicKey as RsaPublicKey;
+
             //получение отклытой экпоненты и модуля
             BigInteger exponent = PublicKey.PublicExponent;
             BigInteger modulus = PublicKey.Modulus;
@@ -69,8 +69,10 @@ namespace AsymmetricCryptography.RSA
         }
 
         //расшифровка RSA с помощью закрытого ключа
-        public byte[] Decrypt(byte[] encryptedData)
+        public byte[] Decrypt(byte[] encryptedData, AsymmetricKey privateKey)
         {
+            PrivateKey = privateKey as RsaPrivateKey;
+
             //получение закрытой экспоненты и модуля
             BigInteger exponent = PrivateKey.PrivateExponent;
             BigInteger modulus = PrivateKey.Modulus;

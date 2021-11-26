@@ -9,6 +9,11 @@ using AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA;
 using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows.DSA;
 using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
+using AsymmetricCryptography;
+using AsymmetricCryptography.RSA;
+using AsymmetricCryptography.ElGamal;
+using System.Text;
+using System;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -73,7 +78,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         #endregion
 
         #region TextFields
-        private string inputedText = "zhopa";
+        private string inputedText;
         public string InputedText
         {
             get => inputedText;
@@ -86,8 +91,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-        private string resultText = "pizda";
-
+        private string resultText;
         public string ResultText
         {
             get => resultText;
@@ -97,6 +101,112 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                 NotifyPropertyChanged("ResultText");
             }
+        }
+        #endregion
+
+        #region EncryptionCommands
+        private byte[] StringToByte(string str)
+        {
+            byte[] bytes = new byte[str.Length];
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                bytes[i]= Convert.ToByte(str[i]);
+            }
+
+            return bytes;
+        }
+
+        private string BytesToString(byte[] arr)
+        {
+            string str = "";
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                str += Convert.ToChar(arr[i]);
+            }
+
+            return str;
+        }
+
+        private bool IsValidKey(string type)
+        {
+            if (selectedKey == null)
+            {
+                MessageBox.Show("Выберите ключ!");
+
+                return false;
+            }
+            else if (selectedKey.Type != type)
+            {
+                MessageBox.Show("Выберите открытый ключ!");
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public RelayCommand Encrypt
+        {
+            get => new RelayCommand(obj =>
+            {
+                if (IsValidKey("Public"))
+                {
+                    if (selectedKey.AlgorithmName == "DSA")
+                        MessageBox.Show("Алгоритм DSA не поддерживает шифрование!");
+                    else
+                    {
+                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
+
+                        IEncryptor encryptor = null;
+
+                        if (selectedKey.AlgorithmName == "RSA")
+                            encryptor = new RsaAlgorithm(parameters);
+                        else if (selectedKey.AlgorithmName == "ElGamal")
+                            encryptor = new ElGamalAlgorithm(parameters);
+                        else
+                            MessageBox.Show("Ключ такого типа не поддерживается!");
+
+                        var inputedTextBytes = StringToByte(inputedText);
+
+                        var encryption = encryptor.Encrypt(inputedTextBytes, selectedKey);
+
+                        ResultText = BytesToString(encryption);
+                    }
+                }
+            });
+        }
+
+        public RelayCommand Decrypt
+        {
+            get => new RelayCommand(obj =>
+            {
+                if (IsValidKey("Private"))
+                {
+                    if (selectedKey.AlgorithmName == "DSA")
+                        MessageBox.Show("Алгоритм DSA не поддерживает шифрование!");
+                    else
+                    {
+                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
+
+                        IEncryptor encryptor = null;
+
+                        if (selectedKey.AlgorithmName == "RSA")
+                            encryptor = new RsaAlgorithm(parameters);
+                        else if (selectedKey.AlgorithmName == "ElGamal")
+                            encryptor = new ElGamalAlgorithm(parameters);
+                        else
+                            MessageBox.Show("Ключ такого типа не поддерживается!");
+
+                        var inputedTextBytes = StringToByte(inputedText);
+
+                        var encryption = encryptor.Decrypt(inputedTextBytes, selectedKey);
+
+                        ResultText = BytesToString(encryption);
+                    }
+                }
+            });
         }
         #endregion
 

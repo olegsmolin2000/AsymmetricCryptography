@@ -6,7 +6,7 @@ namespace AsymmetricCryptography.ElGamal
 {
     public class ElGamalKeysGenerator : KeysGenerator
     {
-        public ElGamalKeysGenerator(Parameters parameters)
+        public ElGamalKeysGenerator(GeneratingParameters parameters)
             : base(parameters)
         {
         }

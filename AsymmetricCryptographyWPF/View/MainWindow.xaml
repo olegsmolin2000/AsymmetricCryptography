@@ -6,7 +6,7 @@
         xmlns:viewmodel="clr-namespace:AsymmetricCryptographyWPF.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        Title="Cryptographer" Height="720" Width="1200"
+        Title="Курсач" Height="720" Width="1200"
         WindowStartupLocation="CenterScreen"
         Name="MainWnd">
     <i:Interaction.Triggers>
@@ -112,13 +112,16 @@
                 </Style>
                 <Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0 15 0 15"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="AcceptsReturn" Value="True"/>
+                    <Setter Property="AcceptsTab" Value="True"/>
                 </Style>
             </Grid.Resources>
             
             <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding InputedText}"/>
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                <Button Content="Зашифровать"/>
-                <Button Content="Расшифровать"/>
+                <Button Content="Зашифровать" Command="{Binding Encrypt}"/>
+                <Button Content="Расшифровать" Command="{Binding Decrypt}"/>
                 <Button Content="Создать ЭЦП"/>
                 <Button Content="Проверить ЭЦП"/>
             </StackPanel>

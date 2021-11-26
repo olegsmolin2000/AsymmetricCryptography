@@ -7,10 +7,8 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public sealed class DSA:AsymmetricAlgorithm, IDigitalSignatutator
     {
-        public DSA(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
-            : base(privateKey, publicKey, parameters)
-        {
-        }
+        public DSA(GeneratingParameters parameters) 
+            : base(parameters) { }
 
         public DsaPrivateKey PrivateKey
         {

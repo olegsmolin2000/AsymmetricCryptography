@@ -15,11 +15,8 @@ namespace AsymmetricCryptography
         protected AsymmetricKey privateKey;
         protected AsymmetricKey publicKey;
 
-        protected AsymmetricAlgorithm(AsymmetricKey privateKey,AsymmetricKey publicKey, Parameters parameters)
+        protected AsymmetricAlgorithm(GeneratingParameters parameters)
         {
-            this.privateKey = privateKey;
-            this.publicKey = publicKey;
-
             this.numberGenerator = parameters.numberGenerator;
             this.primalityVerificator = parameters.primalityVerificator;
             this.hashAlgorithm = parameters.hashAlgorithm;

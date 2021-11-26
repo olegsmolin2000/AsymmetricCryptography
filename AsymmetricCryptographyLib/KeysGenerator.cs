@@ -11,7 +11,7 @@ namespace AsymmetricCryptography
 
         protected string[] generationParameters;
 
-        protected KeysGenerator(Parameters parameters)
+        protected KeysGenerator(GeneratingParameters parameters)
         {
             this.numberGenerator = parameters.numberGenerator;
             this.primalityVerificator = parameters.primalityVerificator;

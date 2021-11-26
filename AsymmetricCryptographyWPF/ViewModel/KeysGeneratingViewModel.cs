@@ -125,7 +125,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             SelectedHashAlgorithm = hashAlgorithmNames[0];
         }
 
-        protected Parameters generationParameters;
+        protected GeneratingParameters generationParameters;
         protected AsymmetricKey privateKey, publicKey;
 
         public abstract RelayCommand GenerateKeys { get; }
@@ -174,7 +174,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
                             }
                     }
 
-                    generationParameters = new Parameters(numberGenerator, primality, hashAlgorithm);
+                    generationParameters = new GeneratingParameters(numberGenerator, primality, hashAlgorithm);
                 }
             }
 

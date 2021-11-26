@@ -7,11 +7,6 @@ namespace AsymmetricCryptography.ElGamal
 {
     public sealed class ElGamalAlgorithm : AsymmetricAlgorithm, IEncryptor, IDigitalSignatutator
     {
-        public ElGamalAlgorithm(AsymmetricKey privateKey, AsymmetricKey publicKey, Parameters parameters) 
-            : base(privateKey, publicKey, parameters)
-        {
-        }
-
         public ElGamalPrivateKey PrivateKey
         {
             get
@@ -40,8 +35,13 @@ namespace AsymmetricCryptography.ElGamal
             }
         }
 
-        public byte[] Encrypt(byte[] data)
+        public ElGamalAlgorithm(GeneratingParameters parameters)
+            :base(parameters) { }
+
+        public byte[] Encrypt(byte[] data,AsymmetricKey publicKey)
         {
+            PublicKey = publicKey as ElGamalPublicKey;
+
             //получение параметров
             BigInteger p = PublicKey.P;
             BigInteger g = PublicKey.G;
@@ -79,8 +79,10 @@ namespace AsymmetricCryptography.ElGamal
             return encryptedBytes.ToArray();
         }
 
-        public byte[] Decrypt(byte[] encryptedData)
+        public byte[] Decrypt(byte[] encryptedData,AsymmetricKey privateKey)
         {
+            PrivateKey = privateKey as ElGamalPrivateKey;
+
             // получение параметров
             BigInteger p = PrivateKey.P;
             BigInteger g = PrivateKey.G;
