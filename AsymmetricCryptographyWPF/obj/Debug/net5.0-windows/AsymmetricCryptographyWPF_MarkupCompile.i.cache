@@ -16,5 +16,5 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\App
 217-290505837
 Resources\KeyParametersTemplates.xaml;View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml;View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml;View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml;View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml;View\KeyShowingWindows\RsaKeyShowingWindow.xaml;View\MainWindow.xaml;
 
-False
+True
 

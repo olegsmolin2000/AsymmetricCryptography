@@ -19,7 +19,6 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
         public DbSet<DsaPrivateKey> DsaPrivateKeys { get; set; }
         public DbSet<DsaPublicKey> DsaPublicKeys { get; set; }
 
-        public DbSet<ElGamalKeyParameter> ElGamalKeyParameters { get; set; }
         public DbSet<ElGamalPrivateKey> ElGamalPrivateKeys { get; set; }
         public DbSet<ElGamalPublicKey> ElGamalPublicKeys { get; set; }
 
@@ -59,10 +58,6 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
             modelBuilder
                 .Entity<DsaPublicKey>()
                 .ToTable("DsaPublicKeys");
-
-            modelBuilder
-                .Entity<ElGamalKeyParameter>()
-                .ToTable("ElGamalKeyParameters");
 
             modelBuilder
                 .Entity<ElGamalPrivateKey>()

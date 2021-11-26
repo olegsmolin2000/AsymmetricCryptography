@@ -43,8 +43,8 @@ namespace AsymmetricCryptography.ElGamal
         public byte[] Encrypt(byte[] data)
         {
             //получение параметров
-            BigInteger p = PublicKey.KeyParameter.P;
-            BigInteger g = PublicKey.KeyParameter.G;
+            BigInteger p = PublicKey.P;
+            BigInteger g = PublicKey.G;
 
             //получение открытого ключа
             BigInteger y = PublicKey.Y;
@@ -82,8 +82,8 @@ namespace AsymmetricCryptography.ElGamal
         public byte[] Decrypt(byte[] encryptedData)
         {
             // получение параметров
-            BigInteger p = PrivateKey.KeyParameter.P;
-            BigInteger g = PrivateKey.KeyParameter.G;
+            BigInteger p = PrivateKey.P;
+            BigInteger g = PrivateKey.G;
 
             // получение закрытого ключа
             BigInteger x = PrivateKey.X;
@@ -121,8 +121,8 @@ namespace AsymmetricCryptography.ElGamal
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
 
             //получение параметров
-            BigInteger p = PrivateKey.KeyParameter.P;
-            BigInteger g = PrivateKey.KeyParameter.G;
+            BigInteger p = PrivateKey.P;
+            BigInteger g = PrivateKey.G;
 
             //хеш берётся по модулю p - 1, чтобы не было проблем с ним 
             hash = ModularArithmetic.Modulus(hash, p - 1);
@@ -152,8 +152,8 @@ namespace AsymmetricCryptography.ElGamal
             BigInteger s = digitalSignature.S;
 
             //получение параметров
-            BigInteger p = PublicKey.KeyParameter.P;
-            BigInteger g = PublicKey.KeyParameter.G;
+            BigInteger p = PublicKey.P;
+            BigInteger g = PublicKey.G;
 
             //если условия ниже не выполняются то подпись точно неверна
             if (r <= 0 || r >= p)

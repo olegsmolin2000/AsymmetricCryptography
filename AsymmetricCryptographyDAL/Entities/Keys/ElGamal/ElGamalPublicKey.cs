@@ -5,19 +5,21 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
 {
     public class ElGamalPublicKey : AsymmetricKey
     {
-        public BigInteger Y { get; private set; }
+        public BigInteger P { get; private set; }
+        public BigInteger G { get; private set; }
 
-        public virtual ElGamalKeyParameter KeyParameter { get; set; }
+        public BigInteger Y { get; private set; }
 
         private ElGamalPublicKey(string name, int binarySize)
             : base(name, "ElGamal", "Public", binarySize) { }
 
-        public ElGamalPublicKey(string name, int binarySize, ElGamalKeyParameter keyParameter, BigInteger y)
+        public ElGamalPublicKey(string name, int binarySize, BigInteger y,BigInteger p,BigInteger g)
             : this(name, binarySize)
         {
-            this.Y = y;
+            this.P = p;
+            this.G = g;
 
-            this.KeyParameter = keyParameter;
+            this.Y = y;
         }
 
         public override string ToString()
@@ -25,10 +27,6 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
             StringBuilder result = new StringBuilder();
 
             result.Append(GetInfo());
-
-            result.Append("\nKeyParameter:\n");
-            result.Append(KeyParameter.ToString());
-            result.Append("\n");
 
             result.Append("Y:" + Y + "\n");
 
