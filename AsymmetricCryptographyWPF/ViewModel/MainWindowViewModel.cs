@@ -14,6 +14,9 @@ using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.ElGamal;
 using System.Text;
 using System;
+using AsymmetricCryptography.DigitalSignatureAlgorithm;
+using AsymmetricCryptographyWPF.View.DigitalSignatureVerificationWindows;
+using AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewModels;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -139,7 +142,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
             else if (selectedKey.Type != type)
             {
-                MessageBox.Show("Выберите открытый ключ!");
+                MessageBox.Show("Выберите " + type + " ключ!");
 
                 return false;
             }
@@ -205,6 +208,58 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                         ResultText = BytesToString(encryption);
                     }
+                }
+            });
+        }
+        #endregion
+
+        #region DigitalSignature
+        public RelayCommand CreatingDigitalSignatur
+        {
+            get => new RelayCommand(obj =>
+              {
+                  if (IsValidKey("Private"))
+                  {
+                      GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
+
+                      IDigitalSignatutator signatutor = null;
+
+                      if (selectedKey.AlgorithmName == "RSA")
+                          signatutor = new RsaAlgorithm(parameters);
+                      else if (selectedKey.AlgorithmName == "ElGamal")
+                          signatutor = new ElGamalAlgorithm(parameters);
+                      else if (selectedKey.AlgorithmName == "DSA")
+                          signatutor = new DSA(parameters,(selectedKey as DsaPrivateKey).DomainParameter);
+                      else
+                          MessageBox.Show("Ключ такого типа не поддерживается!");
+
+                      var inputedTextBytes = StringToByte(inputedText);
+
+                      var sign = signatutor.CreateSignature(inputedTextBytes, selectedKey);
+
+                      ResultText = sign.ToString();
+                  }
+              });
+        }
+
+        public RelayCommand VerificationDigitalSignatur
+        {
+            get => new RelayCommand(obj =>
+            {
+                if (IsValidKey("Public"))
+                {
+                    var inputedTextBytes = StringToByte(inputedText);
+
+                    Window window = null;
+
+                    if (selectedKey.AlgorithmName == "RSA")
+                    {
+                        window = new RsaDSVerificationWindow();
+
+                        window.DataContext = new RsaDSVerificationViewModel(selectedKey, inputedTextBytes);
+                    }
+                   
+                    window.Show();
                 }
             });
         }

@@ -18,17 +18,14 @@ namespace AsymmetricCryptography.ElGamal
             this.R = r;
             this.S = s;
         }
-
-        public override void PrintConsole()
+        public override string ToString()
         {
-            Console.WriteLine(new string('-', 50));
+            StringBuilder result = new StringBuilder();
 
-            Console.WriteLine("Type: ElGamal scheme digital signature");
+            result.Append("R: " + R + "\n");
+            result.Append("S: " + S);
 
-            Console.WriteLine("R:{0}({1} bits)\n", R, BinaryConverter.GetBinaryLength(R));
-            Console.WriteLine("S:{0}({1} bits)", S, BinaryConverter.GetBinaryLength(S));
-
-            Console.WriteLine(new string('-', 50));
+            return result.ToString();
         }
     }
 }

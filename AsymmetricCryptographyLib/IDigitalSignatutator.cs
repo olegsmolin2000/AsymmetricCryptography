@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AsymmetricCryptography.CryptographicHash;
+﻿using AsymmetricCryptographyDAL.Entities.Keys;
 
 namespace AsymmetricCryptography
 {
     public interface IDigitalSignatutator
     {
-        public DigitalSignature CreateSignature(byte[] data);
-        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data);
+        public DigitalSignature CreateSignature(byte[] data,AsymmetricKey privateKey);
+        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data,AsymmetricKey publicKey);
     }
 }

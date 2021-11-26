@@ -7,8 +7,13 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public sealed class DSA:AsymmetricAlgorithm, IDigitalSignatutator
     {
-        public DSA(GeneratingParameters parameters) 
-            : base(parameters) { }
+        public DSA(GeneratingParameters parameters,DsaDomainParameter domainParameter) 
+            : base(parameters) 
+        {
+            this.DomainParameter = domainParameter;
+        }
+
+        private DsaDomainParameter DomainParameter;
 
         public DsaPrivateKey PrivateKey
         {
@@ -38,11 +43,13 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             }
         }
 
-        public DigitalSignature CreateSignature(byte[] data)
+        public DigitalSignature CreateSignature(byte[] data,AsymmetricKey privateKey)
         {
-            BigInteger q = PrivateKey.DomainParameter.Q;
-            BigInteger p = PrivateKey.DomainParameter.P;
-            BigInteger g = PrivateKey.DomainParameter.G;
+            PrivateKey = privateKey as DsaPrivateKey;
+
+            BigInteger q = DomainParameter.Q;
+            BigInteger p = DomainParameter.P;
+            BigInteger g = DomainParameter.G;
 
             BigInteger r = 0, s = 0;
 
@@ -72,13 +79,15 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             return new ElGamalDigitalSignature(r, s);
         }
 
-        public bool VerifyDigitalSignature(DigitalSignature signature ,byte[] data)
+        public bool VerifyDigitalSignature(DigitalSignature signature ,byte[] data,AsymmetricKey publicKey)
         {
             ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
 
-            BigInteger q = PublicKey.DomainParameter.Q;
-            BigInteger p = PublicKey.DomainParameter.P;
-            BigInteger g = PublicKey.DomainParameter.G;
+            PublicKey = publicKey as DsaPublicKey;
+
+            BigInteger q = DomainParameter.Q;
+            BigInteger p = DomainParameter.P;
+            BigInteger g = DomainParameter.G;
 
             //вычисление w = s^-1 mod q
             BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(digitalSignature.S, q);

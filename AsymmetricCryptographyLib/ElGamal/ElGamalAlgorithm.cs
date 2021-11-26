@@ -117,10 +117,12 @@ namespace AsymmetricCryptography.ElGamal
             return decryptedBytes.ToArray();
         }
 
-        public DigitalSignature CreateSignature(byte[] data)
+        public DigitalSignature CreateSignature(byte[] data, AsymmetricKey privateKey)
         {
             //вычисление хеша по криптографической хеш функции
             BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
+
+            PrivateKey = privateKey as ElGamalPrivateKey;
 
             //получение параметров
             BigInteger p = PrivateKey.P;
@@ -145,9 +147,11 @@ namespace AsymmetricCryptography.ElGamal
             return new ElGamalDigitalSignature(r, s);
         }
 
-        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data)
+        public bool VerifyDigitalSignature(DigitalSignature signature, byte[] data, AsymmetricKey publicKey)
         {
             ElGamalDigitalSignature digitalSignature = (ElGamalDigitalSignature)signature;
+
+            PublicKey = publicKey as ElGamalPublicKey;
 
             //получение значений подписи
             BigInteger r = digitalSignature.R;

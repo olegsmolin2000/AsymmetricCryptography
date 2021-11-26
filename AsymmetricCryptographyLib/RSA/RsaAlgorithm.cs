@@ -101,8 +101,10 @@ namespace AsymmetricCryptography.RSA
         }
 
         //создание цифровой подписи RSA путём возведения хеша в степень закрытой экспоненты
-        public DigitalSignature CreateSignature(byte[] data)
+        public DigitalSignature CreateSignature(byte[] data,AsymmetricKey privateKey)
         {
+            PrivateKey = privateKey as RsaPrivateKey;
+
             BigInteger digest = new BigInteger(hashAlgorithm.GetHash(data));
 
             //если модуль ключа не может вместить хеш или хеш будет меньше нуля, то будут проблемы
@@ -115,9 +117,11 @@ namespace AsymmetricCryptography.RSA
         }
 
         //проверка цифровой подписи RSA с помощью возведения подписи в степень открытой экспоненты и сравнением с хешем
-        public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data)
+        public bool VerifyDigitalSignature(DigitalSignature signature,byte[] data,AsymmetricKey publicKey)
         {
             RsaDigitalSignature digitalSignature = (RsaDigitalSignature)signature;
+
+            PublicKey = publicKey as RsaPublicKey;
 
             BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(data));
 

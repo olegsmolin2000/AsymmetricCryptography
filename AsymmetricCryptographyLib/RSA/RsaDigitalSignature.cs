@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace AsymmetricCryptography.RSA
 {
@@ -15,10 +12,9 @@ namespace AsymmetricCryptography.RSA
         {
             this.signValue = signValue;
         }
-
-        public override void PrintConsole()
+        public override string ToString()
         {
-            Console.WriteLine(Type + "\nSign value:" + signValue);
+            return new string("Sign value: " + signValue);
         }
     }
 }

@@ -85,8 +85,8 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ContentControl Grid.Row="0" VerticalAlignment="Top" Content="{Binding SelectedKeyShowingVM}"
             ContentTemplate="{StaticResource ShowKeyParameters}"/>
@@ -122,8 +122,8 @@
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                 <Button Content="Зашифровать" Command="{Binding Encrypt}"/>
                 <Button Content="Расшифровать" Command="{Binding Decrypt}"/>
-                <Button Content="Создать ЭЦП"/>
-                <Button Content="Проверить ЭЦП"/>
+                <Button Content="Создать ЭЦП" Command="{Binding CreatingDigitalSignatur}"/>
+                <Button Content="Проверить ЭЦП" Command="{Binding VerificationDigitalSignatur}"/>
             </StackPanel>
 
             <TextBox Grid.Row="2" Grid.Column="0" IsReadOnly="True" Text="{Binding ResultText}"/>
