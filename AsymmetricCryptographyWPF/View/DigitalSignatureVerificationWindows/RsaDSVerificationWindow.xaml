@@ -6,12 +6,11 @@
         xmlns:digitalsignatureverificationviewmodels="clr-namespace:AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewModels"
         d:DataContext="{d:DesignInstance Type=digitalsignatureverificationviewmodels:RsaDSVerificationViewModel}"
         mc:Ignorable="d"
-        Title="RSA проверка подписи" Height="250" Width="200"
+        Title="RSA проверка подписи" Height="300" Width="300"
         WindowStartupLocation="CenterScreen">
-    <Grid 
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="10">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>

@@ -12,7 +12,6 @@ using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
 using AsymmetricCryptography;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.ElGamal;
-using System.Text;
 using System;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
 using AsymmetricCryptographyWPF.View.DigitalSignatureVerificationWindows;
@@ -257,6 +256,12 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         window = new RsaDSVerificationWindow();
 
                         window.DataContext = new RsaDSVerificationViewModel(selectedKey, inputedTextBytes);
+                    }
+                    else if (selectedKey.AlgorithmName == "ElGamal" || selectedKey.AlgorithmName == "DSA")
+                    {
+                        window = new ElGamalDSVerificationWindow();
+
+                        window.DataContext = new ElGamalDSVerificationViewModel(selectedKey, inputedTextBytes);
                     }
                    
                     window.Show();

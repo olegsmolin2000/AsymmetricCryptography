@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\DigitalSignatureVerificationWindows\RsaDSVerificationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Resources\KeyParametersTemplates.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\DigitalSignatureVerificationWindows\RsaDSVerificationWindow.xaml">

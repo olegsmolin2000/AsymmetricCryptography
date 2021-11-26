@@ -1,12 +1,7 @@
 ﻿using AsymmetricCryptography;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptographyDAL.Entities.Keys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewModels
@@ -44,7 +39,7 @@ namespace AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewMo
                   BigInteger sign = new BigInteger();
 
                   if (SignValue == "" || !BigInteger.TryParse(SignValue, out sign))
-                      MessageBox.Show("Значение ключа должно содержать только цифры!");
+                      MessageBox.Show("Значение подписи должно содержать только цифры!");
                   else
                   {
                       GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(Key.GetParametersInfo());
