@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View.KeyShowingWindows"
+        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View.KeyShowingWindows" xmlns:keysshowingviewmodels="clr-namespace:AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels" d:DataContext="{d:DesignInstance Type=keysshowingviewmodels:RsaKeysShowingViewModel}"
         mc:Ignorable="d"
         Name="RsaKeyShowingWnd"
-        Title="RSA ключ" Height="700" Width="350"
+        Title="RSA ключ" Height="450" Width="500"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.Resources>
@@ -18,10 +18,10 @@
             </Style>
         </Grid.Resources>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
         <ContentControl 
             Grid.Row="0"             
@@ -29,23 +29,39 @@
             Content="{Binding ElementName=RsaKeyShowingWnd,Path=DataContext}"
             ContentTemplate="{StaticResource ShowKeyParameters}"/>
 
-        <StackPanel Grid.Row="1" VerticalAlignment="Center">
-            <StackPanel.Resources>
+        <Grid Grid.Column="1" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
                 <Style TargetType="TextBox">
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
                     <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-                    <Setter Property="Height" Value="75"/>
                     <Setter Property="TextWrapping" Value="Wrap"/>
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="IsReadOnly" Value="True"/>
                 </Style>
-            </StackPanel.Resources>
+            </Grid.Resources>
+            
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" DockPanel.Dock="Top" Content="Exponent"/>
+                <TextBox Grid.Row="1" Text="{Binding Exponent}"/>
+            </Grid>
 
-            <Label Content="Exponent"/>
-            <TextBox Text="{Binding Exponent}"/>
-
-            <Label Content="Modulus"/>
-            <TextBox Text="{Binding Modulus}"/>
-        </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Modulus"/>
+                <TextBox Grid.Row="1" Text="{Binding Modulus}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

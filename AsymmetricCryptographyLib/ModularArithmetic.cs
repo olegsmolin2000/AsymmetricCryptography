@@ -20,15 +20,13 @@ namespace AsymmetricCryptography
         }
 
         //функция получения примитивного корня
-        //код спизжен, поэтому сказать ничего не могу
-        //только то, что работает быстрее наивного метода
         public static BigInteger GetPrimitiveRoot(BigInteger number)
         {
             List<BigInteger> fact = new List<BigInteger>();
 
             BigInteger phi = number - 1, n = phi;
 
-            for (int i = 2; i * i <= n; ++i)
+            for (BigInteger i = 2; i * i <= n; ++i)
                 if (n % i == 0)
                 {
                     fact.Add(i);

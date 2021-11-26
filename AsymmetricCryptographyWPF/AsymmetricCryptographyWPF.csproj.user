@@ -16,6 +16,9 @@
     <Compile Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\KeysGeneratingWindows\ElGamalKeysGeneratingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +26,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\KeyShowingWindows\ElGamalKeyShowingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml.cs">
@@ -42,6 +48,9 @@
     <Page Update="View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\KeysGeneratingWindows\ElGamalKeysGeneratingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -49,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\KeyShowingWindows\ElGamalKeyShowingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\KeyShowingWindows\RsaKeyShowingWindow.xaml">

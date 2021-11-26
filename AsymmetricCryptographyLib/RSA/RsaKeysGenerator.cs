@@ -9,6 +9,8 @@ namespace AsymmetricCryptography.RSA
         public RsaKeysGenerator(Parameters parameters) 
             : base(parameters) { }
 
+        public bool IsFixedPublicExponent { get; set; } = false;
+
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             BigInteger p, q;
@@ -26,11 +28,19 @@ namespace AsymmetricCryptography.RSA
             //нахождение функции Эйлера от числа n
             fi = (p - 1) * (q - 1);
 
-            //генерация открытой экспоненты e (1 < e < euler), взаимно простой с euler
-            do
+            if (IsFixedPublicExponent)
             {
-                e = numberGenerator.GeneratePrimeNumber(1, fi);
-            } while (!primalityVerificator.IsCoprime(e, fi));
+                e = 65537;
+            }
+            else
+            {
+                //генерация открытой экспоненты e (1 < e < euler), взаимно простой с euler
+                do
+                {
+                    e = numberGenerator.GeneratePrimeNumber(1, fi);
+                } while (!primalityVerificator.IsCoprime(e, fi));
+            }
+            
 
             //вычисление закрытой экспоненты, d*e (mod euler) = 1 ( мультипликативно обратное к числу e по модулю euler)
             d = ModularArithmetic.GetMultiplicativeModuloReverse(e, fi);

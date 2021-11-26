@@ -71,7 +71,7 @@ namespace AsymmetricCryptographyConsoleApp
 
                 AsymmetricKey rsaPrivateKey;
                 AsymmetricKey rsaPublicKey;
-                DsaDomainParameter dsaDomainParameters;
+                //DsaDomainParameter dsaDomainParameters;
                 AsymmetricKey dsaPrivateKey;
                 AsymmetricKey dsaPublicKey;
                 AsymmetricKey elGamalPrivateKey;
@@ -82,8 +82,9 @@ namespace AsymmetricCryptographyConsoleApp
                 KeysGenerator elGamalGenerator = new ElGamalKeysGenerator(parameters);
 
                 rsaGenerator.GenerateKeyPair("1", 64, out rsaPrivateKey, out rsaPublicKey);
-                dsaGenerator.GenerateKeyPair("2", 384, out dsaPrivateKey, out dsaPublicKey);
-                elGamalGenerator.GenerateKeyPair("3", 24, out elGamalPrivateKey, out elGamalPublicKey);
+                (rsaGenerator as RsaKeysGenerator).IsFixedPublicExponent = false;
+                //dsaGenerator.GenerateKeyPair("2", 384, out dsaPrivateKey, out dsaPublicKey);
+                //elGamalGenerator.GenerateKeyPair("3", 64, out elGamalPrivateKey, out elGamalPublicKey);
 
 
 
@@ -101,37 +102,37 @@ namespace AsymmetricCryptographyConsoleApp
 
 
                 RsaAlgorithm rsaAlg = new RsaAlgorithm(rsaPrivateKey, rsaPublicKey, parameters);
-                DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, parameters);
-                ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, parameters);
+                //DSA dsaAlg = new DSA(dsaPrivateKey, dsaPublicKey, parameters);
+                //ElGamalAlgorithm elGamalAlg = new ElGamalAlgorithm(elGamalPrivateKey, elGamalPublicKey, parameters);
 
                 DigitalSignature rsaSign = rsaAlg.CreateSignature(data);
-                DigitalSignature dsaSign = dsaAlg.CreateSignature(data);
-                DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data);
+               // DigitalSignature dsaSign = dsaAlg.CreateSignature(data);
+                //DigitalSignature elGamalsign = elGamalAlg.CreateSignature(data);
 
                 bool rsaVer = rsaAlg.VerifyDigitalSignature(rsaSign, data);
-                bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data);
-                bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data);
+                //bool dsaVer = dsaAlg.VerifyDigitalSignature(dsaSign, data);
+               // bool elgamalVer = elGamalAlg.VerifyDigitalSignature(elGamalsign, data);
 
 
                 var rsaEncryption = rsaAlg.Encrypt(data);
-                var elGamalEncryption = elGamalAlg.Encrypt(data);
+                //var elGamalEncryption = elGamalAlg.Encrypt(data);
 
                 var rsaDecryption = rsaAlg.Decrypt(rsaEncryption);
-                var elGamalDecryption = elGamalAlg.Decrypt(elGamalEncryption);
+                //var elGamalDecryption = elGamalAlg.Decrypt(elGamalEncryption);
 
 
 
                 if (!rsaVer)
                     Console.WriteLine("rsa sign error");
-                if (!dsaVer)
-                    Console.WriteLine("dsa sign error");
-                if (!elgamalVer)
-                    Console.WriteLine("el gamal sign error");
+                //if (!dsaVer)
+                //  Console.WriteLine("dsa sign error");
+                //if (!elgamalVer)
+                //  Console.WriteLine("el gamal sign error");
 
                 if (Encoding.UTF8.GetString(rsaDecryption) != message.ToString())
                     Console.WriteLine("rsa crypt error");
-                if (Encoding.UTF8.GetString(elGamalDecryption) != message.ToString())
-                    Console.WriteLine("el gamal crypt error");
+                //if (Encoding.UTF8.GetString(elGamalDecryption) != message.ToString())
+                //    Console.WriteLine("el gamal crypt error");
 
 
             }

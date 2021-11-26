@@ -25,23 +25,25 @@
                 <ContentControl Grid.Row="1" VerticalAlignment="Center" Content="{Binding ElementName=DsaKeyShowingWnd,Path=DataContext}"
             ContentTemplate="{StaticResource ShowKeyParameters}"/>
 
-            <StackPanel Orientation="Vertical"
-                        Grid.Row="2"
-                        VerticalAlignment="Center">
-                <StackPanel.Resources>
+            <Grid Grid.Row="2" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
                     <Style TargetType="TextBox">
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-                        <Setter Property="Height" Value="75"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
                         <Setter Property="TextWrapping" Value="Wrap"/>
                         <Setter Property="Foreground" Value="Black"/>
                         <Setter Property="IsReadOnly" Value="True"/>
                         <Setter Property="Margin" Value="15"/>
                     </Style>
-                </StackPanel.Resources>
-                <Label Content="KeyValue" HorizontalAlignment="Center"/>
-                <TextBox Text="{Binding KeyValue}"/>
-            </StackPanel>
+                </Grid.Resources>
+                <Label Grid.Row="0" Content="KeyValue" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="1" Text="{Binding KeyValue}"/>
+            </Grid>
         </Grid>
 
 

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\App.xaml
-9269423273
+11-1039949331
 
-22531071175
+26-430322697
 217-290505837
-Resources\KeyParametersTemplates.xaml;View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml;View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml;View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml;View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml;View\KeyShowingWindows\RsaKeyShowingWindow.xaml;View\MainWindow.xaml;
+Resources\KeyParametersTemplates.xaml;View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml;View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml;View\KeysGeneratingWindows\ElGamalKeysGeneratingWindow.xaml;View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml;View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml;View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml;View\KeyShowingWindows\ElGamalKeyShowingWindow.xaml;View\KeyShowingWindows\RsaKeyShowingWindow.xaml;View\MainWindow.xaml;
 
 False
 

@@ -5,10 +5,10 @@ using System.Windows;
 using AsymmetricCryptographyDAL.Entities.Keys.RSA;
 using AsymmetricCryptographyWPF.View.KeysGeneratingWindows;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows;
-using AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels;
 using AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA;
 using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows.DSA;
+using AsymmetricCryptographyDAL.Entities.Keys.ElGamal;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -108,14 +108,25 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 Window window;
 
                 if (SelectedKey is RsaPrivateKey || SelectedKey is RsaPublicKey)
-
+                {
                     window = new RsaKeyShowingWindow(SelectedKey);
+                    window.Show();
+                }
                 else if (selectedKey is DsaDomainParameter)
+                {
                     window = new DsaDomainParametersShowingWindow(SelectedKey);
-                else
+                    window.Show();
+                }
+                else if (selectedKey is DsaPrivateKey || selectedKey is DsaPublicKey)
+                {
                     window = new DsaKeyShowingWindow(selectedKey);
-
-                window.Show();
+                    window.Show();
+                }
+                else if (selectedKey is ElGamalPrivateKey || selectedKey is ElGamalPublicKey)
+                {
+                    window = new ElGamalKeyShowingWindow(selectedKey);
+                    window.Show();
+                }
             });
         }
 
@@ -160,6 +171,18 @@ namespace AsymmetricCryptographyWPF.ViewModel
             get => new RelayCommand(obj =>
               {
                   Window generatingWindow = new DsaKeysGeneratingWindow();
+
+                  generatingWindow.Owner = Application.Current.MainWindow;
+
+                  generatingWindow.Show();
+              });
+        }
+
+        public RelayCommand OpenElGamalKeysGeneratingWindow
+        {
+            get => new RelayCommand(obj =>
+              {
+                  Window generatingWindow = new ElGamalKeysGeneratingWindow();
 
                   generatingWindow.Owner = Application.Current.MainWindow;
 

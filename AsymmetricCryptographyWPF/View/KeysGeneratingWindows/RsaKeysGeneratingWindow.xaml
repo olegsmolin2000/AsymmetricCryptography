@@ -7,13 +7,13 @@
         d:DataContext="{d:DesignInstance Type=keysgeneratingviewmodels:RsaKeysGeneratingViewModel}"
         mc:Ignorable="d"
         Title="Генерация RSA ключей" 
-        Height="400" Width="325"
+        Height="450" Width="325"
         Name="RsaKeysGeneratingWnd"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.4*"/>
         </Grid.RowDefinitions>
 
         <ContentControl 
@@ -21,11 +21,24 @@
             Margin="5"
             Content="{Binding ElementName=RsaKeysGeneratingWnd,Path=DataContext}"
             ContentTemplate="{StaticResource InputParametersElement}"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Button Grid.Row="1" 
+            <CheckBox Grid.Row="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Content="Фиксированная публичная экспонента"
+                      IsChecked="{Binding IsFixedPublicExponent}"/>
+
+            <Button Grid.Row="1" 
                 Command="{Binding GenerateKeys}" 
                 CommandParameter="{Binding ElementName=RsaKeysGeneratingWnd}"
-                Margin="20" 
+                Margin="10" 
                 Content="Сгенерировать ключи"/>
+        </Grid>
+        
     </Grid>
 </Window>

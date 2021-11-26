@@ -34,7 +34,7 @@
                         <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDPGeneratingWindow}"/>
                         <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
                     </MenuItem>
-                    <MenuItem Header="ElGamal"/>
+                    <MenuItem Header="ElGamal" Command="{Binding OpenElGamalKeysGeneratingWindow}"/>
                 </MenuItem>
             </MenuItem>
         </Menu>

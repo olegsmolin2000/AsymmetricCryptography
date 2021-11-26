@@ -1,11 +1,5 @@
 ﻿
 
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\DSA\DsaKeysGeneratingWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\RsaKeysGeneratingWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\DSA\DsaDomainParametersShowingWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\DSA\DsaKeyShowingWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\RsaKeyShowingWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\MainWindow.xaml;;
+FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\ElGamalKeyShowingWindow.xaml;;
 
