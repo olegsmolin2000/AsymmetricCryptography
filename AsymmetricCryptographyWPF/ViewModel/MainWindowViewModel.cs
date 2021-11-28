@@ -16,6 +16,10 @@ using System;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
 using AsymmetricCryptographyWPF.View.DigitalSignatureVerificationWindows;
 using AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewModels;
+using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
+using Microsoft.Win32;
+using System.IO;
+using System.Text;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -93,6 +97,13 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
+        byte[] initialBytes;
+
+        byte[] encryptedBytes;
+        byte[] decryptedBytes;
+
+        byte[] openedFileBytes;
+
         private string resultText;
         public string ResultText
         {
@@ -109,26 +120,36 @@ namespace AsymmetricCryptographyWPF.ViewModel
         #region EncryptionCommands
         private byte[] StringToByte(string str)
         {
-            byte[] bytes = new byte[str.Length];
+            //byte[] bytes = new byte[str.Length];
 
-            for (int i = 0; i < str.Length; i++)
-            {
-                bytes[i]= Convert.ToByte(str[i]);
-            }
+            //for (int i = 0; i < str.Length; i++)
+            //{
+            //    char currentSymb = str[i];
+            //    //ASCIIEncoding
+            //    int s = str[i];
 
-            return bytes;
+            //    var encoding = Encoding.ASCII;
+                
+            //    bytes[i] = Convert.ToByte(currentSymb);
+            //}
+
+            //return bytes;
+
+            return Encoding.Unicode.GetBytes(str);
         }
 
         private string BytesToString(byte[] arr)
         {
-            string str = "";
+            //string str = "";
 
-            for (int i = 0; i < arr.Length; i++)
-            {
-                str += Convert.ToChar(arr[i]);
-            }
+            //for (int i = 0; i < arr.Length; i++)
+            //{
+            //    str += Convert.ToChar(arr[i]);
+            //}
 
-            return str;
+            //return str;
+
+            return Encoding.Unicode.GetString(arr);
         }
 
         private bool IsValidKey(string type)
@@ -157,6 +178,8 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 {
                     if (selectedKey.AlgorithmName == "DSA")
                         MessageBox.Show("Алгоритм DSA не поддерживает шифрование!");
+                    else if (InputedText == null || InputedText == "")
+                        MessageBox.Show("Введите текст!");
                     else
                     {
                         GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
@@ -170,11 +193,20 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         else
                             MessageBox.Show("Ключ такого типа не поддерживается!");
 
-                        var inputedTextBytes = StringToByte(inputedText);
+                        byte[] textBytes;
 
-                        var encryption = encryptor.Encrypt(inputedTextBytes, selectedKey);
+                        if (openedFileBytes != null)
+                            textBytes = openedFileBytes;
+                        else
+                            textBytes = StringToByte(InputedText);
 
-                        ResultText = BytesToString(encryption);
+                        initialBytes = StringToByte(InputedText);
+
+                        encryptedBytes = encryptor.Encrypt(textBytes, selectedKey);
+
+                        ResultText = BytesToString(encryptedBytes);
+
+                        openedFileBytes = null;
                     }
                 }
             });
@@ -188,6 +220,8 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 {
                     if (selectedKey.AlgorithmName == "DSA")
                         MessageBox.Show("Алгоритм DSA не поддерживает шифрование!");
+                    else if (inputedText == null || inputedText == "")
+                        MessageBox.Show("Введите текст!");
                     else
                     {
                         GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
@@ -201,11 +235,18 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         else
                             MessageBox.Show("Ключ такого типа не поддерживается!");
 
-                        var inputedTextBytes = StringToByte(inputedText);
+                        byte[] textBytes;
 
-                        var encryption = encryptor.Decrypt(inputedTextBytes, selectedKey);
+                        if (openedFileBytes != null)
+                            textBytes = openedFileBytes;
+                        else
+                            textBytes = StringToByte(inputedText);
 
-                        ResultText = BytesToString(encryption);
+                        decryptedBytes = encryptor.Decrypt(encryptedBytes, selectedKey);
+
+                        ResultText = BytesToString(decryptedBytes);
+
+                        openedFileBytes = null;
                     }
                 }
             });
@@ -217,7 +258,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         {
             get => new RelayCommand(obj =>
               {
-                  if (IsValidKey("Private"))
+                  if (IsValidKey("Private") && inputedText == null && inputedText == "")
                   {
                       GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
 
@@ -228,7 +269,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
                       else if (selectedKey.AlgorithmName == "ElGamal")
                           signatutor = new ElGamalAlgorithm(parameters);
                       else if (selectedKey.AlgorithmName == "DSA")
-                          signatutor = new DSA(parameters,(selectedKey as DsaPrivateKey).DomainParameter);
+                          signatutor = new DSA(parameters, (selectedKey as DsaPrivateKey).DomainParameter);
                       else
                           MessageBox.Show("Ключ такого типа не поддерживается!");
 
@@ -238,6 +279,8 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                       ResultText = sign.ToString();
                   }
+                  else
+                      MessageBox.Show("Введите текст!");
               });
         }
 
@@ -245,7 +288,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         {
             get => new RelayCommand(obj =>
             {
-                if (IsValidKey("Public"))
+                if (IsValidKey("Public") && inputedText == null && inputedText == "")
                 {
                     var inputedTextBytes = StringToByte(inputedText);
 
@@ -266,6 +309,8 @@ namespace AsymmetricCryptographyWPF.ViewModel
                    
                     window.Show();
                 }
+                else
+                    MessageBox.Show("Введите текст!");
             });
         }
         #endregion
@@ -358,6 +403,92 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                   generatingWindow.Show();
               });
+        }
+        #endregion
+
+        #region KeysXmlSaving
+        public RelayCommand XmlSaveSelectedKey
+        {
+            get => new RelayCommand(obj =>
+              {
+                  if (selectedKey != null)
+                  {
+                      XmlKeyVisitor keyVisitor = new XmlKeyVisitor();
+
+                      selectedKey.Accept(keyVisitor);
+
+                      SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+                      saveFileDialog.Filter = "XML-File | *.xml";
+
+                      if (saveFileDialog.ShowDialog() == true)
+                      {
+                          keyVisitor.xDoc.Save(saveFileDialog.FileName);
+
+                          MessageBox.Show("Ключ успешно сохранён!");
+                      }
+                  }
+                  else
+                      MessageBox.Show("Выберите ключ!");
+              });
+        }
+        #endregion
+
+        #region OpenAndSaveTxt
+        public RelayCommand OpenInputTextFile
+        {
+            get => new RelayCommand(obj =>
+              {
+                  OpenFileDialog openFileDialog = new OpenFileDialog()
+                  {
+                      Filter = "Text files (*.txt)|*.txt",
+                  };
+
+                  if (openFileDialog.ShowDialog() == true)
+                  {
+                      try
+                      {
+                          InputedText = "";
+
+                          var filePath = openFileDialog.FileName;
+
+                          using (StreamReader streamReader = new StreamReader(filePath))
+                          {
+                              InputedText = streamReader.ReadToEnd();
+                          }
+                      }
+                      catch (Exception ex)
+                      {
+                          MessageBox.Show(ex.GetType().ToString());
+                      }
+                  }
+              });
+        }
+
+        public RelayCommand SaveOutputTxtFile
+        {
+            get => new RelayCommand(obj =>
+            {
+                SaveFileDialog openFileDialog = new SaveFileDialog()
+                {
+                    Filter = "Text files (*.txt)|*.txt",
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    try
+                    {
+                        //using(StreamWriter streamWriter=new StreamWriter()
+                        var filePath = openFileDialog.FileName;
+
+                        File.WriteAllBytes(filePath, decryptedBytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.GetType().ToString());
+                    }
+                }
+            });
         }
         #endregion
     }

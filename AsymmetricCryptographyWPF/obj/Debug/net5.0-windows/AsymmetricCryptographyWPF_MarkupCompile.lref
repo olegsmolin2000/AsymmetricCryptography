@@ -1,5 +1,6 @@
 ﻿
 
+FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\DigitalSignatureVerificationWindows\RsaDSVerificationWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\DSA\DsaDomainParameterGeneratingWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeysGeneratingWindows\DSA\DsaKeysGeneratingByDPWindow.xaml;;
@@ -11,5 +12,4 @@ FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\Vi
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\ElGamalKeyShowingWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\KeyShowingWindows\RsaKeyShowingWindow.xaml;;
 FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\MainWindow.xaml;;
-FC:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.xaml;;
 

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
+using System.Numerics;
 using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
@@ -31,6 +32,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.ElGamal
             result.Append("X:" + X + "\n");
 
             return result.ToString();
+        }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitElGamalPrivateKey(this);
         }
     }
 }

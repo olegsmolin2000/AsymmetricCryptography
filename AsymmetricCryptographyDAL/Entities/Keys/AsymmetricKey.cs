@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
+using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys
 {
@@ -50,5 +51,7 @@ namespace AsymmetricCryptographyDAL.Entities.Keys
 
             return info.ToString();
         }
+
+        public abstract void Accept(IKeyVisitor keyVisitor);
     }
 }

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Key>
+  <BaseInformation>
+    <Name>FirstTest</Name>
+    <AlgorithmName>RSA</AlgorithmName>
+    <Type>Private</Type>
+    <BinarySize>256</BinarySize>
+    <GenerationParameters>
+      <NumberGenerator>Lagged Fibonacci</NumberGenerator>
+      <PrimalityVerificator>Miller-Rabin</PrimalityVerificator>
+      <HashAlgorithm>SHA-256</HashAlgorithm>
+    </GenerationParameters>
+  </BaseInformation>
+  <Modulus>8973845303108892868076727803758263083711404150684876425497525685782093279152137606615510032316531171831667051641529945316322258149060798414680221117538273</Modulus>
+  <PrivateExponent>2829321970894284409507061027756957146970707108004818953459234334802691547065572957075496517798582655535651805520194527921312176278276778874289718479405321</PrivateExponent>
+</Key>

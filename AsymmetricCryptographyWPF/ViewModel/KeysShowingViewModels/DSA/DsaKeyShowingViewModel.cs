@@ -20,7 +20,7 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels.DSA
             {
                 KeyValue = (key as DsaPrivateKey).X.ToString();
 
-                int domainParameterId = ((int)(key as DsaPrivateKey).DomainParameterId);
+                int domainParameterId = (int)(key as DsaPrivateKey).DomainParameterId;
 
                 DomainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
 
@@ -30,7 +30,7 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels.DSA
             {
                 KeyValue = (key as DsaPublicKey).Y.ToString();
 
-                int domainParameterId = ((int)(key as DsaPublicKey).DomainParameterId);
+                int domainParameterId = (int)(key as DsaPublicKey).DomainParameterId;
 
                 DomainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
 

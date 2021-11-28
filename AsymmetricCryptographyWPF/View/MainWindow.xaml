@@ -90,7 +90,17 @@
             </Grid.RowDefinitions>
             <ContentControl Grid.Row="0" VerticalAlignment="Top" Content="{Binding SelectedKeyShowingVM}"
             ContentTemplate="{StaticResource ShowKeyParameters}"/>
-            <Button Margin="10" Grid.Row="1" Content="Открыть полностью" Command="{Binding OpenShowKeyWindow}"/>
+
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="Открыть полностью" Command="{Binding OpenShowKeyWindow}"/>
+                <Button Content="Сохранить в XML" Command="{Binding XmlSaveSelectedKey}"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="2" Margin="5">
@@ -120,6 +130,7 @@
             
             <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding InputedText}"/>
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <Button Content="Открыть TXT" Command="{Binding OpenInputTextFile}"/>
                 <Button Content="Зашифровать" Command="{Binding Encrypt}"/>
                 <Button Content="Расшифровать" Command="{Binding Decrypt}"/>
                 <Button Content="Создать ЭЦП" Command="{Binding CreatingDigitalSignatur}"/>
@@ -128,7 +139,7 @@
 
             <TextBox Grid.Row="2" Grid.Column="0" IsReadOnly="True" Text="{Binding ResultText}"/>
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                <Button Content="1"/>
+                <Button Content="Сохранить в txt" Command="{Binding SaveOutputTxtFile}"/>
                 <Button Content="2"/>
                 <Button Content="3"/>
                 <Button Content="4"/>

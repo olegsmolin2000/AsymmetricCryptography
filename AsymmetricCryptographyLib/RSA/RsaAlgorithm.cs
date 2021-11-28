@@ -92,10 +92,13 @@ namespace AsymmetricCryptography.RSA
                 blocks[i] = BigInteger.ModPow(blocks[i], exponent, modulus);
 
                 //в список добавляются расшифрованные байты
-                decryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i], blockSize + 1));
+                decryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i], blockSize));
             }
 
-            decryptedBytes.RemoveAll(x => x == 0);
+            //decryptedBytes.RemoveAll(x => x == 0);
+
+            if (decryptedBytes[0] == 0)
+                decryptedBytes.RemoveAt(0);
 
             return decryptedBytes.ToArray();
         }

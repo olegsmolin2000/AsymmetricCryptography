@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 
@@ -35,6 +36,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.DSA
             result.Append("G:" + G + "\n");
 
             return result.ToString();
+        }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitDsaDomainParameters(this);
         }
     }
 }

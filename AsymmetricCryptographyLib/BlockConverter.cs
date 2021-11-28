@@ -33,25 +33,51 @@ namespace AsymmetricCryptography
             //нахождение количества будущих блоков
             int blocksCount = message.Length / blockSize;
 
-            if (message.Length % blockSize != 0)
+            List<byte> bytesList = new List<byte>(message);
+
+            if (bytesList.Count % blockSize != 0)
+            {
                 blocksCount++;
 
+                while (bytesList.Count % blockSize != 0)
+                    bytesList.Insert(0, 0);
+            }
+               
+
             BigInteger[] blocks = new BigInteger[blocksCount];
-            
+
             //внешний цикл даёт 1 блок на каждой итерации
-            for (int i = 0; i < message.Length ; i+=blockSize)
+            for (int i = 0; i < bytesList.Count; i += blockSize)
             {
                 StringBuilder binaryBlock = new StringBuilder();
 
                 //внутренний цикл записывает вместе байты в двоичном виде
-                for (int j = i; j < i + blockSize && j < message.Length; j++)
+                for (int j = i; j < i + blockSize && j < bytesList.Count; j++)
                 {
-                    binaryBlock.Append(Convert.ToString(message[j], 2).PadLeft(8, '0'));
+                    binaryBlock.Append(Convert.ToString(bytesList[j], 2).PadLeft(8, '0'));
                 }
 
                 //перевод блока из двоичного вида в десятичный
                 blocks[i / blockSize] = BinaryConverter.BinaryToBigInt(binaryBlock.ToString());
             }
+
+
+
+            //for (int i = message.Length - 1; i >= 0; i -= blockSize)
+            //{
+            //    StringBuilder binaryBlock = new StringBuilder();
+
+            //    //внутренний цикл записывает вместе байты в двоичном виде
+            //    for (int j = i; j >= i - blockSize && j >= 0; j--)
+            //    {
+            //        binaryBlock.Append(Convert.ToString(message[j], 2).PadLeft(8, '0'));
+            //    }
+
+            //    //перевод блока из двоичного вида в десятичный
+            //    blocks[i / blockSize] = BinaryConverter.BinaryToBigInt(binaryBlock.ToString());
+            //}
+
+
 
             return blocks;
         }

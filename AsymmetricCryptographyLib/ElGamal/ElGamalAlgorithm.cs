@@ -68,6 +68,7 @@ namespace AsymmetricCryptography.ElGamal
                 // a = g^k mod p
                 BigInteger a = BigInteger.ModPow(g, k, p);
                 // b = (y^x * M) mod p
+
                 BigInteger b = ModularArithmetic.Modulus(BigInteger.ModPow(y, k, p) * blocks[i], p);
 
                 // пара (a,b) - шифротекст
@@ -106,13 +107,15 @@ namespace AsymmetricCryptography.ElGamal
                 BigInteger b = blocks[i + 1];
 
                 // M = (b * (a^x)^-1) mod p
-                BigInteger decryption = ModularArithmetic.Modulus((b * ModularArithmetic.GetMultiplicativeModuloReverse(BigInteger.ModPow(a, x, p), p)), p);
+                BigInteger decryption = ModularArithmetic.Modulus(b * ModularArithmetic.GetMultiplicativeModuloReverse(BigInteger.ModPow(a, x, p), p), p);
 
                 //в список добавляются расшифрованные байты
-                decryptedBytes.AddRange(BlockConverter.BlockToBytes(decryption, blockSize + 1));
+                decryptedBytes.AddRange(BlockConverter.BlockToBytes(decryption, blockSize));
             }
 
-            decryptedBytes.RemoveAll(x => x == 0);
+            //decryptedBytes.RemoveAll(x => x == 0);
+            if (decryptedBytes[0] == 0)
+                decryptedBytes.RemoveAt(0);
 
             return decryptedBytes.ToArray();
         }

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
+using System.Numerics;
 using System.Text;
 
 namespace AsymmetricCryptographyDAL.Entities.Keys.RSA
@@ -29,6 +30,11 @@ namespace AsymmetricCryptographyDAL.Entities.Keys.RSA
             result.Append("PrivateExponent (d):" + PrivateExponent + "\n");
 
             return result.ToString();
+        }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitRsaPrivateKey(this);
         }
     }
 }
