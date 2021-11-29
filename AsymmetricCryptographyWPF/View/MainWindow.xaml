@@ -21,11 +21,15 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu Grid.Row="0" VerticalAlignment="Center" Margin="5 0 5 0" Grid.ColumnSpan="3">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding OpenTextFile}"/>
+                <MenuItem Header="Сохранить" Command="{Binding SaveTextFile}"/>
+            </MenuItem>
             <MenuItem Header="Ключи">
                 <MenuItem Header="Генерация">
                     <MenuItem Header="RSA" Command="{Binding OpenGenerateRsaKeysWindow}"/>
@@ -108,11 +112,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.35*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="20"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
             <Grid.Resources>
                 <Style TargetType="Button">
@@ -128,22 +127,15 @@
                 </Style>
             </Grid.Resources>
             
-            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding InputedText}"/>
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                <Button Content="Открыть TXT" Command="{Binding OpenInputTextFile}"/>
+            <TextBox Grid.Column="0" Text="{Binding MainTextBox}"/>
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                 <Button Content="Зашифровать" Command="{Binding Encrypt}"/>
                 <Button Content="Расшифровать" Command="{Binding Decrypt}"/>
                 <Button Content="Создать ЭЦП" Command="{Binding CreatingDigitalSignatur}"/>
                 <Button Content="Проверить ЭЦП" Command="{Binding VerificationDigitalSignatur}"/>
             </StackPanel>
 
-            <TextBox Grid.Row="2" Grid.Column="0" IsReadOnly="True" Text="{Binding ResultText}"/>
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                <Button Content="Сохранить в txt" Command="{Binding SaveOutputTxtFile}"/>
-                <Button Content="2"/>
-                <Button Content="3"/>
-                <Button Content="4"/>
-            </StackPanel>
+                
         </Grid>
     </Grid>
 </Window>

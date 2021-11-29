@@ -113,9 +113,11 @@ namespace AsymmetricCryptography.ElGamal
                 decryptedBytes.AddRange(BlockConverter.BlockToBytes(decryption, blockSize));
             }
 
-            //decryptedBytes.RemoveAll(x => x == 0);
-            if (decryptedBytes[0] == 0)
+            while (decryptedBytes[0] == 0)
                 decryptedBytes.RemoveAt(0);
+
+            if (decryptedBytes.Count % 2 != 0)
+                decryptedBytes.Insert(0, 0);
 
             return decryptedBytes.ToArray();
         }

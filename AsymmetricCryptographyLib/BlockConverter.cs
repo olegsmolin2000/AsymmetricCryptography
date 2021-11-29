@@ -61,24 +61,6 @@ namespace AsymmetricCryptography
                 blocks[i / blockSize] = BinaryConverter.BinaryToBigInt(binaryBlock.ToString());
             }
 
-
-
-            //for (int i = message.Length - 1; i >= 0; i -= blockSize)
-            //{
-            //    StringBuilder binaryBlock = new StringBuilder();
-
-            //    //внутренний цикл записывает вместе байты в двоичном виде
-            //    for (int j = i; j >= i - blockSize && j >= 0; j--)
-            //    {
-            //        binaryBlock.Append(Convert.ToString(message[j], 2).PadLeft(8, '0'));
-            //    }
-
-            //    //перевод блока из двоичного вида в десятичный
-            //    blocks[i / blockSize] = BinaryConverter.BinaryToBigInt(binaryBlock.ToString());
-            //}
-
-
-
             return blocks;
         }
 
