@@ -18,6 +18,19 @@ namespace AsymmetricCryptographyDAL.EFCore
             }
         }
 
+        public static void ClearDB()
+        {
+            using (KeyContext db = new KeyContext())
+            {
+                foreach(var el in db.Keys)
+                {
+                    db.Keys.Remove(el);
+                }
+
+                db.SaveChanges();
+            }
+        }
+
         public static List<DsaDomainParameter> GetDsaDomainParameters()
         {
             using(KeyContext db=new KeyContext())
@@ -31,6 +44,16 @@ namespace AsymmetricCryptographyDAL.EFCore
             using (KeyContext db = new KeyContext())
             {
                 AsymmetricKey key = db.Keys.FirstOrDefault(o => o.Id == id);
+
+                return key;
+            }
+        }
+
+        public static DsaDomainParameter GetDsaDomainParameter(string name)
+        {
+            using (KeyContext db = new KeyContext())
+            {
+                DsaDomainParameter key = db.DsaDomainParameters.FirstOrDefault(o => o.Name == name);
 
                 return key;
             }

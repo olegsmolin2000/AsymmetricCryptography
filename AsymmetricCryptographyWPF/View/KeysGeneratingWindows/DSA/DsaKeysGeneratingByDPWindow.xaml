@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA" xmlns:dsa="clr-namespace:AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=dsa:DsaKeysGenerationByDPViewModel}"
+        xmlns:local="clr-namespace:AsymmetricCryptographyWPF.View.KeysGeneratingWindows.DSA" xmlns:dsa="clr-namespace:AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        d:DataContext="{d:DesignInstance Type=dsa:DsaKeysGeneratingByDPViewModel}"
         mc:Ignorable="d"
         Title="DsaKeysGeneratingByDPWindow" Height="500" Width="800"
         Name="DsaKeysGeneratingByDPWnd"
@@ -36,7 +37,8 @@
             <ContentControl Grid.Row="0" VerticalAlignment="Top" Content="{Binding SelectedDPViewModel}"
             ContentTemplate="{StaticResource ShowKeyParameters}">
             </ContentControl>
-            <Button Margin="30" Grid.Row="1" Content="Открыть полностью" Command="{Binding OpenDPShowingWindow}"/>
+            <Button Margin="30 5 30 5" Content="Открыть полностью" Command="{Binding OpenDPShowingWindow}"/>
+            <Button Margin="30 5 30 5" Content="Загрузить из файла" Command="{Binding OpenXmlDsaDomainParameters}"/>
         </StackPanel>
         
         <ListView Grid.Column="2" 

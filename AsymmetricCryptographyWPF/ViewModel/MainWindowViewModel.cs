@@ -14,12 +14,11 @@ using AsymmetricCryptography.RSA;
 using AsymmetricCryptography.ElGamal;
 using System;
 using AsymmetricCryptography.DigitalSignatureAlgorithm;
-using AsymmetricCryptographyWPF.View.DigitalSignatureVerificationWindows;
-using AsymmetricCryptographyWPF.ViewModel.DigitalSignatureVerificationViewModels;
 using AsymmetricCryptographyDAL.Entities.Keys.KeysVisitors;
 using Microsoft.Win32;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 
 namespace AsymmetricCryptographyWPF.ViewModel
 {
@@ -42,6 +41,20 @@ namespace AsymmetricCryptographyWPF.ViewModel
         public void RefreshData()
         {
             LoadKeys.Execute(null);
+        }
+
+        public RelayCommand DeleteAll
+        {
+            get => new RelayCommand(obj =>
+              {
+                  SelectedKey = null;
+
+                  DataWorker.ClearDB();
+
+                  RefreshData();
+
+                  MessageBox.Show("База данных успешно очищенна!");
+              });
         }
 
         public RelayCommand LoadKeys
@@ -79,7 +92,10 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                 NotifyPropertyChanged("SelectedKey");
 
-                SelectedKeyShowingVM = new KeysShowingViewModel(SelectedKey); 
+                if (selectedKey != null)
+                    SelectedKeyShowingVM = new KeysShowingViewModel(SelectedKey);
+                else
+                    SelectedKeyShowingVM = null;
             }
         }
         #endregion
@@ -250,7 +266,13 @@ namespace AsymmetricCryptographyWPF.ViewModel
                       else if (selectedKey.AlgorithmName == "ElGamal")
                           signatutor = new ElGamalAlgorithm(parameters);
                       else if (selectedKey.AlgorithmName == "DSA")
-                          signatutor = new DSA(parameters, (selectedKey as DsaPrivateKey).DomainParameter);
+                      {
+                          int domainParameterId = (int)(selectedKey as DsaPrivateKey).DomainParameterId;
+
+                          DsaDomainParameter domainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
+
+                          signatutor = new DSA(parameters, domainParameter);
+                      }
                       else
                           MessageBox.Show("Ключ такого типа не поддерживается!");
 
@@ -309,7 +331,13 @@ namespace AsymmetricCryptographyWPF.ViewModel
                             signature = new ElGamalDigitalSignature(openFileDialog.FileName);
 
                             if (selectedKey.AlgorithmName == "DSA")
-                                signatutator = new DSA(parameters,(selectedKey as DsaPublicKey).DomainParameter);
+                            {
+                                int domainParameterId = (int)(selectedKey as DsaPublicKey).DomainParameterId;
+
+                                DsaDomainParameter domainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
+
+                                signatutator = new DSA(parameters, domainParameter);
+                            }
                             else if (selectedKey.AlgorithmName == "ElGamal")
                                 signatutator = new ElGamalAlgorithm(parameters);
                         }
@@ -440,7 +468,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
         #endregion
 
-        #region KeysXmlSaving
+        #region KeysXml
         public RelayCommand XmlSaveSelectedKey
         {
             get => new RelayCommand(obj =>
@@ -464,6 +492,25 @@ namespace AsymmetricCryptographyWPF.ViewModel
                   }
                   else
                       MessageBox.Show("Выберите ключ!");
+              });
+        }
+
+        public RelayCommand OpenXmlKey
+        {
+            get => new RelayCommand(obj =>
+              {
+                  OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                  openFileDialog.Filter = "XML-File | *.xml";
+
+                  if (openFileDialog.ShowDialog() == true)
+                  {
+                      string filePath = openFileDialog.FileName;
+
+                      SelectedKey = AsymmetricKey.ReadXml(XElement.Load(filePath));
+
+                      RefreshData();
+                  }
               });
         }
         #endregion

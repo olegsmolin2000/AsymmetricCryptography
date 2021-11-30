@@ -84,4 +84,3 @@ C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\DigitalSignatureVerificationWindows\RsaDSVerificationWindow.baml
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.g.cs
 C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\View\DigitalSignatureVerificationWindows\ElGamalDSVerificationWindow.baml
-C:\Users\olegs\source\repos\AsymmetricCryptography\AsymmetricCryptographyWPF\obj\Debug\net5.0-windows\AsymmetricCryptographyWPF.csproj.CopyComplete

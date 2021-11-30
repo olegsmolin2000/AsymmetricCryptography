@@ -1,10 +1,13 @@
 ﻿using AsymmetricCryptography.DigitalSignatureAlgorithm;
 using AsymmetricCryptographyDAL.EFCore;
+using AsymmetricCryptographyDAL.Entities.Keys;
 using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 using AsymmetricCryptographyWPF.View.KeyShowingWindows.DSA;
 using AsymmetricCryptographyWPF.ViewModel.KeysShowingViewModels.DSA;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA
 {
@@ -77,6 +80,34 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA
               });
         }
 
+        public RelayCommand OpenXmlDsaDomainParameters
+        {
+            get => new RelayCommand(obj =>
+              {
+                  OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                  openFileDialog.Filter = "XML-File | *.xml";
+
+                  if (openFileDialog.ShowDialog() == true)
+                  {
+                      string filePath = openFileDialog.FileName;
+
+                      DsaDomainParameter loadedDomainParameter = AsymmetricKey.ReadXml(XElement.Load(filePath)) as DsaDomainParameter;
+
+                      if (loadedDomainParameter == null)
+                          MessageBox.Show("Нужно загрузить DSA Domain Parameter!");
+                      else
+                      {
+                          DataWorker.AddKey(loadedDomainParameter);
+
+                          LoadParameters.Execute(null);
+
+                          DomainParameter = DataWorker.GetLastDomainParameter() as DsaDomainParameter;
+                      }
+                  }
+              });
+        }
+
         public override RelayCommand GenerateKeys
         {
             get => new RelayCommand(obj =>
@@ -94,6 +125,8 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA
                           FillDBAndClose(obj as Window);
                       }
                   }
+                  else
+                      MessageBox.Show("Выберите параметры!");
               });
         }
     }
