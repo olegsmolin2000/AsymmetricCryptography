@@ -156,7 +156,11 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         MessageBox.Show("Введите текст!");
                     else
                     {
-                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
+                        string[] keyParametersInfo = selectedKey.GetParametersInfo();
+
+                        keyParametersInfo[0] = "Lagged Fibonacci";
+
+                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(keyParametersInfo);
 
                         IEncryptor encryptor = null;
 

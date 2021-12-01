@@ -4,6 +4,7 @@ using System.Text;
 using AsymmetricCryptography.CryptographicHash;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
+using AsymmetricCryptographyLib.RandomNumberGenerators;
 
 namespace AsymmetricCryptography
 {
@@ -57,6 +58,11 @@ namespace AsymmetricCryptography
                 case "Lagged Fibonacci":
                     {
                         generator = new FibonacciNumberGenerator(verificator);
+                        break;
+                    }
+                case "Blum Blum Shub":
+                    {
+                        generator = new BbsNumberGenerator(verificator);
                         break;
                     }
                 default:

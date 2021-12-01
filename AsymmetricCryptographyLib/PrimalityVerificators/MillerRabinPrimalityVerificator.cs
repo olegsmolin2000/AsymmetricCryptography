@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
+﻿using System.Numerics;
 
 namespace AsymmetricCryptography.PrimalityVerificators
 {
     public sealed class MillerRabinPrimalityVerificator: PrimalityVerificator
     {
+
+
         //вероятностный тест на простоту Миллера-Рабина
         public override bool IsPrimal(BigInteger number, int k)
         {

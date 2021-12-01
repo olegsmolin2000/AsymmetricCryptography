@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AsymmetricCryptography.RandomNumberGenerators;
+using System;
 using System.Numerics;
-using System.Text;
 
 namespace AsymmetricCryptography
 {
@@ -14,10 +13,6 @@ namespace AsymmetricCryptography
         protected NumberGenerator(PrimalityVerificator primalityVerificator)
         {
             this.primalityVerificator = primalityVerificator;
-
-            var thisRef = this;
-
-            primalityVerificator.SetNumberGenerator(thisRef);
         }
 
         public abstract BigInteger GenerateNumber(int binarySize);

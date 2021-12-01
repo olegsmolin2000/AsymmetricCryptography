@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AsymmetricCryptography.RandomNumberGenerators;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -9,9 +10,9 @@ namespace AsymmetricCryptography
     {
         protected NumberGenerator numberGenerator;
 
-        public void SetNumberGenerator(NumberGenerator numberGenerator)
+        protected PrimalityVerificator()
         {
-            this.numberGenerator = numberGenerator;
+            numberGenerator = new FibonacciNumberGenerator(this);
         }
 
         public abstract bool IsPrimal(BigInteger number, int k = 0);

@@ -9,6 +9,7 @@ using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptography.RSA;
 using AsymmetricCryptographyDAL.Entities.Keys;
 using AsymmetricCryptographyDAL.Entities.Keys.DSA;
+using AsymmetricCryptographyLib.RandomNumberGenerators;
 //using AsymmetricCryptographyDAL.Entities.Keys.DSA;
 
 namespace AsymmetricCryptographyConsoleApp
@@ -61,8 +62,10 @@ namespace AsymmetricCryptographyConsoleApp
             for (int i = 0; i < count; i++)
             {
                 PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
-                NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
-                primalityVerificator.SetNumberGenerator(numberGenerator);
+
+
+
+                NumberGenerator numberGenerator = new BbsNumberGenerator(primalityVerificator);
 
                 GeneratingParameters parameters = new GeneratingParameters(numberGenerator, primalityVerificator, new SHA_256());
 
@@ -94,7 +97,7 @@ namespace AsymmetricCryptographyConsoleApp
 
                 for (int j = 0; j < mesLength; j++)
                 {
-                    message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 255 + 1)));
+                    message.Append(Convert.ToChar(Convert.ToByte(rand.Next() % 255)));
                 }
 
                 //string me = "zhopa\ngovnomocha\t\nhuy";

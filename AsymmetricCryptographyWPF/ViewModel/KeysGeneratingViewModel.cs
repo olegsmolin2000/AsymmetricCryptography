@@ -12,7 +12,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
     internal abstract class KeysGeneratingViewModel:ViewModel
     {
         #region ListsForComboBoxes
-        private List<string> numberGenerators = new List<string> { "Фибоначчи" };
+        private List<string> numberGenerators = new List<string> { "Lagged Fibonacci", "Blum Blum Shub" };
         public List<string> NumberGenerators
         {
             get => numberGenerators;
@@ -25,7 +25,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-        private List<string> primalityVerificators = new List<string> { "Миллера-рабина" };
+        private List<string> primalityVerificators = new List<string> { "Miller-Rabin" };
         public List<string> PrimalityVerificators
         {
             get => primalityVerificators;
@@ -38,7 +38,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
             }
         }
 
-        private List<string> hashAlgorithmNames = new List<string> { "Sha-256", "MD-5" };
+        private List<string> hashAlgorithmNames = new List<string> { "SHA-256", "MD-5" };
         public List<string> HashAlgorithmNames
         {
             get => hashAlgorithmNames;
@@ -154,27 +154,13 @@ namespace AsymmetricCryptographyWPF.ViewModel
                 }
                 else
                 {
-                    PrimalityVerificator primality = new MillerRabinPrimalityVerificator();
+                    string[] genParameters = new string[3];
 
-                    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primality);
+                    genParameters[0] = selectedNumberGenerator;
+                    genParameters[1] = selectedPrimalityVerificator;
+                    genParameters[2] = selectedHashAlgorithm;
 
-                    CryptographicHashAlgorithm hashAlgorithm;
-
-                    switch (SelectedHashAlgorithm)
-                    {
-                        case "Sha-256":
-                            {
-                                hashAlgorithm = new SHA_256();
-                                break;
-                            }
-                        default:
-                            {
-                                hashAlgorithm = new MD_5();
-                                break;
-                            }
-                    }
-
-                    generationParameters = new GeneratingParameters(numberGenerator, primality, hashAlgorithm);
+                    generationParameters = GeneratingParameters.GetParametersByInfo(genParameters);
                 }
             }
 
