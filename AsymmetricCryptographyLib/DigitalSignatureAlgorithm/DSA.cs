@@ -7,8 +7,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 {
     public sealed class DSA:AsymmetricAlgorithm, IDigitalSignatutator
     {
-        public DSA(GeneratingParameters parameters,DsaDomainParameter domainParameter) 
-            : base(parameters) 
+        public DSA(DsaDomainParameter domainParameter) 
         {
             this.DomainParameter = domainParameter;
         }
@@ -63,7 +62,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
                 r = ModularArithmetic.Modulus(r, q);
                
-                BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
+                BigInteger hash = new BigInteger(HashAlgorithm.GetHash(data));
 
                 //вычисление k^-1 mod q
                 BigInteger reverseK = ModularArithmetic.GetMultiplicativeModuloReverse(k, q);
@@ -92,7 +91,7 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
             //вычисление w = s^-1 mod q
             BigInteger w = ModularArithmetic.GetMultiplicativeModuloReverse(digitalSignature.S, q);
 
-            BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
+            BigInteger hash = new BigInteger(HashAlgorithm.GetHash(data));
 
             //u1 = H(m) * w mod q
             BigInteger u1 = ModularArithmetic.Modulus(hash * w, q);

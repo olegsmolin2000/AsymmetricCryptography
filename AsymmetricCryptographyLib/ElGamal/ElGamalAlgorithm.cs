@@ -35,9 +35,6 @@ namespace AsymmetricCryptography.ElGamal
             }
         }
 
-        public ElGamalAlgorithm(GeneratingParameters parameters)
-            :base(parameters) { }
-
         public byte[] Encrypt(byte[] data,AsymmetricKey publicKey)
         {
             PublicKey = publicKey as ElGamalPublicKey;
@@ -125,7 +122,7 @@ namespace AsymmetricCryptography.ElGamal
         public DigitalSignature CreateSignature(byte[] data, AsymmetricKey privateKey)
         {
             //вычисление хеша по криптографической хеш функции
-            BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
+            BigInteger hash = new BigInteger(HashAlgorithm.GetHash(data));
 
             PrivateKey = privateKey as ElGamalPrivateKey;
 
@@ -174,7 +171,7 @@ namespace AsymmetricCryptography.ElGamal
                 return false;
 
             //вычисление хеша по криптографической хеш функции
-            BigInteger hash = new BigInteger(hashAlgorithm.GetHash(data));
+            BigInteger hash = new BigInteger(HashAlgorithm.GetHash(data));
 
             //хеш берётся по модулю p - 1, чтобы не было проблем с ним 
             hash = ModularArithmetic.Modulus(hash, p - 1);

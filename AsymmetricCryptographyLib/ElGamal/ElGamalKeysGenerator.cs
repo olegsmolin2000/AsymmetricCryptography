@@ -7,9 +7,7 @@ namespace AsymmetricCryptography.ElGamal
     public class ElGamalKeysGenerator : KeysGenerator
     {
         public ElGamalKeysGenerator(GeneratingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         public override void GenerateKeyPair(string name, int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
@@ -27,6 +25,9 @@ namespace AsymmetricCryptography.ElGamal
 
             privateKey = new ElGamalPrivateKey(name, binarySize, x, p, g);
             publicKey = new ElGamalPublicKey(name, binarySize, y, p, g);
+
+            FillGenerationParameters(privateKey);
+            FillGenerationParameters(publicKey);
         }
     }
 }

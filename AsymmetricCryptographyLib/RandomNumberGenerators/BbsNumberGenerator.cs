@@ -16,12 +16,12 @@ namespace AsymmetricCryptographyLib.RandomNumberGenerators
 
             do
             {
-                p = parametersNumberGenerator.GeneratePrimeNumber(1024);
+                p = parametersNumberGenerator.GeneratePrimeNumber(512);
             } while ((p - 3) % 4 != 0);
 
             do
             {
-                q = parametersNumberGenerator.GeneratePrimeNumber(1024);
+                q = parametersNumberGenerator.GeneratePrimeNumber(512);
             } while ((q - 3) % 4 != 0 && q == p);
 
             m = p * q;
@@ -37,7 +37,7 @@ namespace AsymmetricCryptographyLib.RandomNumberGenerators
 
         public override BigInteger GenerateNumber(int binarySize)
         {
-            BigInteger x = parametersNumberGenerator.GenerateNumber(1, BigInteger.Pow(2, binarySize) - 1);
+            BigInteger x = parametersNumberGenerator.GenerateNumber(binarySize);
 
             BigInteger result = 1;
 
@@ -51,46 +51,6 @@ namespace AsymmetricCryptographyLib.RandomNumberGenerators
             }
 
             return result;
-        }
-
-        public override BigInteger GenerateNumber(BigInteger min, BigInteger max)
-        {
-            if (min > max)
-                throw new ArgumentException("Min > max");
-
-            int minBitLength = BinaryConverter.GetBinaryLength(min);
-            int maxBitLength = BinaryConverter.GetBinaryLength(max);
-
-            BigInteger number;
-
-            do
-            {
-                int newNumberBitLength = rand.Next(minBitLength, maxBitLength + 1);
-
-                number = GenerateNumber(newNumberBitLength);
-            } while (number < min || number > max);
-
-            return number;
-        }
-
-        public override BigInteger GeneratePrimeNumber(int binarySize)
-        {
-            BigInteger number = 0;
-
-            while (!primalityVerificator.IsPrimal(number, 100))
-                number = GenerateNumber(binarySize);
-
-            return number;
-        }
-
-        public override BigInteger GeneratePrimeNumber(BigInteger min, BigInteger max)
-        {
-            BigInteger number = 0;
-
-            while (!primalityVerificator.IsPrimal(number, 100))
-                number = GenerateNumber(min, max);
-
-            return number;
         }
 
         public override string ToString()

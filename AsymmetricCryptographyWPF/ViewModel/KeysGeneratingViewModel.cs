@@ -126,6 +126,7 @@ namespace AsymmetricCryptographyWPF.ViewModel
         }
 
         protected GeneratingParameters generationParameters;
+
         protected AsymmetricKey privateKey, publicKey;
 
         public abstract RelayCommand GenerateKeys { get; }
@@ -169,20 +170,6 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
         protected void FillDBAndClose(Window window)
         {
-            if (generationParameters != null)
-            {
-                string[] paramsInfo = generationParameters.GetParameters();
-
-                privateKey.NumberGenerator = paramsInfo[0];
-                publicKey.NumberGenerator = paramsInfo[0];
-
-                privateKey.PrimalityVerificator = paramsInfo[1];
-                publicKey.PrimalityVerificator = paramsInfo[1];
-
-                privateKey.HashAlgorithm = paramsInfo[2];
-                publicKey.HashAlgorithm = paramsInfo[2];
-            }
-
             if (privateKey != null && publicKey != null)
             {
                 DataWorker.AddKey(privateKey);

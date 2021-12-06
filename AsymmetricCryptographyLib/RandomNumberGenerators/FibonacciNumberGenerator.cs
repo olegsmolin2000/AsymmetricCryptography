@@ -15,9 +15,8 @@ namespace AsymmetricCryptography.RandomNumberGenerators
             (576, 3217), (4187, 9689), (7083, 19937), (9739, 23209)
         };
 
-        public FibonacciNumberGenerator(PrimalityVerificator primalityVerificator) : base(primalityVerificator)
-        {
-        }
+        public FibonacciNumberGenerator(PrimalityVerificator primalityVerificator) 
+            : base(primalityVerificator) { }
 
         //генерация случайного числа по количеству бит методом Фибоначчи с запаздываниями
         //в полученом случайном числе ровно столько бит, сколько задано параметром
@@ -78,52 +77,6 @@ namespace AsymmetricCryptography.RandomNumberGenerators
                 number[0] = '1';
 
             return BinaryConverter.BinaryToBigInt(number.ToString());
-        }
-
-        //генерация числа по диапазону
-        public override BigInteger GenerateNumber(BigInteger min,BigInteger max)
-        {
-            if (min > max)
-                throw new ArgumentException("Min > max");
-
-            int minBitLength = BinaryConverter.GetBinaryLength(min);
-            int maxBitLength = BinaryConverter.GetBinaryLength(max);
-
-            BigInteger number;
-
-
-            //выбирается случайная битовая длина между минимальной и максимальной границами
-            //и по ней генерируется число в нужных пределах
-            do
-            {
-                int newNumberBitLength = rand.Next(minBitLength, maxBitLength + 1);
-
-                number = GenerateNumber(newNumberBitLength);
-            } while (number < min || number > max);
-
-            return number;
-        }
-
-        //генерация простых чисел
-        //генерируются случайные числа до тех пор, пока не выпадет число, прошедшее проверку на простоту
-        public override BigInteger GeneratePrimeNumber(int binarySize)
-        {
-            BigInteger number = 0;
-
-            while (!primalityVerificator.IsPrimal(number,100))
-                number = GenerateNumber(binarySize);
-
-            return number;
-        }
-
-        public override BigInteger GeneratePrimeNumber(BigInteger min,BigInteger max)
-        {
-            BigInteger number = 0;
-
-            while (!primalityVerificator.IsPrimal(number, 100))
-                number = GenerateNumber(min, max);
-
-            return number;
         }
 
         public override string ToString()

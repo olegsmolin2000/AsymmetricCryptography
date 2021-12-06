@@ -1,36 +1,36 @@
 ﻿using System.Numerics;
 using AsymmetricCryptography.CryptographicHash;
+using AsymmetricCryptography.PrimalityVerificators;
+using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptographyDAL.Entities.Keys;
 
 namespace AsymmetricCryptography
 {
     public abstract class AsymmetricAlgorithm
     {
-        protected NumberGenerator numberGenerator;
-        protected PrimalityVerificator primalityVerificator;
-        protected CryptographicHashAlgorithm hashAlgorithm;
-
-        protected KeysGenerator keysGenerator;
+        internal static NumberGenerator NumberGenerator { get; set; }
+        internal static PrimalityVerificator PrimalityVerificator { get; set; }
+        public static CryptographicHashAlgorithm HashAlgorithm { get; set; }
 
         protected AsymmetricKey privateKey;
         protected AsymmetricKey publicKey;
 
-        protected AsymmetricAlgorithm(GeneratingParameters parameters)
+        static AsymmetricAlgorithm()
         {
-            this.numberGenerator = parameters.numberGenerator;
-            this.primalityVerificator = parameters.primalityVerificator;
-            this.hashAlgorithm = parameters.hashAlgorithm;
+            PrimalityVerificator = new MillerRabinPrimalityVerificator();
+            NumberGenerator = new FibonacciNumberGenerator(PrimalityVerificator);
+            HashAlgorithm = new SHA_256();
         }
 
         // выбор сессионного ключа k. случайное целое число, взаимно простое с (p - 1), 1 < k < p - 1
         protected BigInteger GenerateSessionKey(BigInteger p)
         {
-            BigInteger sessionKey = 0;
+            BigInteger sessionKey;
 
             do
             {
-                sessionKey = numberGenerator.GenerateNumber(2, p - 2);
-            } while (!primalityVerificator.IsCoprime(sessionKey, p - 1));
+                sessionKey = NumberGenerator.GenerateNumber(2, p - 2);
+            } while (!PrimalityVerificator.IsCoprime(sessionKey, p - 1));
 
             return sessionKey;
         }

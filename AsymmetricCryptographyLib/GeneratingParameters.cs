@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AsymmetricCryptography.CryptographicHash;
+﻿using AsymmetricCryptography.CryptographicHash;
 using AsymmetricCryptography.PrimalityVerificators;
 using AsymmetricCryptography.RandomNumberGenerators;
 using AsymmetricCryptographyLib.RandomNumberGenerators;
@@ -21,7 +18,7 @@ namespace AsymmetricCryptography
             this.hashAlgorithm = hashAlgorithm;
         }
 
-        public string[] GetParameters()
+        public string[] GetParametersInfo()
         {
             string[] parameters = new string[3];
 

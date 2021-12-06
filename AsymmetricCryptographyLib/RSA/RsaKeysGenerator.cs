@@ -29,9 +29,7 @@ namespace AsymmetricCryptography.RSA
             fi = (p - 1) * (q - 1);
 
             if (IsFixedPublicExponent)
-            {
                 e = 65537;
-            }
             else
             {
                 //генерация открытой экспоненты e (1 < e < euler), взаимно простой с euler
@@ -46,7 +44,11 @@ namespace AsymmetricCryptography.RSA
             d = ModularArithmetic.GetMultiplicativeModuloReverse(e, fi);
 
             privateKey = new RsaPrivateKey(name, binarySize, n, d);
+
             publicKey = new RsaPublicKey(name, binarySize, n, e);
+
+            FillGenerationParameters(privateKey);
+            FillGenerationParameters(publicKey);
         }
     }
 }

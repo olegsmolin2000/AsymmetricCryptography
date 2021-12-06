@@ -156,18 +156,12 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         MessageBox.Show("Введите текст!");
                     else
                     {
-                        string[] keyParametersInfo = selectedKey.GetParametersInfo();
-
-                        keyParametersInfo[0] = "Lagged Fibonacci";
-
-                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(keyParametersInfo);
-
                         IEncryptor encryptor = null;
 
                         if (selectedKey.AlgorithmName == "RSA")
-                            encryptor = new RsaAlgorithm(parameters);
+                            encryptor = new RsaAlgorithm();
                         else if (selectedKey.AlgorithmName == "ElGamal")
-                            encryptor = new ElGamalAlgorithm(parameters);
+                            encryptor = new ElGamalAlgorithm();
                         else
                             MessageBox.Show("Ключ такого типа не поддерживается!");
 
@@ -214,14 +208,12 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         MessageBox.Show("Алгоритм DSA не поддерживает шифрование!");
                     else
                     {
-                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
-
                         IEncryptor encryptor = null;
 
                         if (selectedKey.AlgorithmName == "RSA")
-                            encryptor = new RsaAlgorithm(parameters);
+                            encryptor = new RsaAlgorithm();
                         else if (selectedKey.AlgorithmName == "ElGamal")
-                            encryptor = new ElGamalAlgorithm(parameters);
+                            encryptor = new ElGamalAlgorithm();
                         else
                             MessageBox.Show("Ключ такого типа не поддерживается!");
 
@@ -266,16 +258,16 @@ namespace AsymmetricCryptographyWPF.ViewModel
                       IDigitalSignatutator signatutor = null;
 
                       if (selectedKey.AlgorithmName == "RSA")
-                          signatutor = new RsaAlgorithm(parameters);
+                          signatutor = new RsaAlgorithm();
                       else if (selectedKey.AlgorithmName == "ElGamal")
-                          signatutor = new ElGamalAlgorithm(parameters);
+                          signatutor = new ElGamalAlgorithm();
                       else if (selectedKey.AlgorithmName == "DSA")
                       {
                           int domainParameterId = (int)(selectedKey as DsaPrivateKey).DomainParameterId;
 
                           DsaDomainParameter domainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
 
-                          signatutor = new DSA(parameters, domainParameter);
+                          signatutor = new DSA(domainParameter);
                       }
                       else
                           MessageBox.Show("Ключ такого типа не поддерживается!");
@@ -320,15 +312,11 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                         DigitalSignature signature = null;
 
-                        GeneratingParameters parameters = GeneratingParameters.GetParametersByInfo(selectedKey.GetParametersInfo());
-
                         if (selectedKey.AlgorithmName == "RSA")
                         {
-                            signatutator = new RsaAlgorithm(parameters);
+                            signatutator = new RsaAlgorithm();
 
                             signature = new RsaDigitalSignature(openFileDialog.FileName);
-
-
                         }
                         else
                         {
@@ -340,10 +328,10 @@ namespace AsymmetricCryptographyWPF.ViewModel
 
                                 DsaDomainParameter domainParameter = DataWorker.GetKey(domainParameterId) as DsaDomainParameter;
 
-                                signatutator = new DSA(parameters, domainParameter);
+                                signatutator = new DSA(domainParameter);
                             }
                             else if (selectedKey.AlgorithmName == "ElGamal")
-                                signatutator = new ElGamalAlgorithm(parameters);
+                                signatutator = new ElGamalAlgorithm();
                         }
 
                         bool isCorrect = signatutator.VerifyDigitalSignature(signature, bytesToVerificate, selectedKey);
@@ -353,30 +341,9 @@ namespace AsymmetricCryptographyWPF.ViewModel
                         else
                             MessageBox.Show("Подпись неверна!");
                     }
-
-                    //Window window = null;
-
-                    //if (selectedKey.AlgorithmName == "RSA")
-                    //{
-                    //    //TODO: Open XML signature
-
-                    //    window = new RsaDSVerificationWindow();
-
-                    //    window.DataContext = new RsaDSVerificationViewModel(selectedKey, inputedTextBytes);
-                    //}
-                    //else if (selectedKey.AlgorithmName == "ElGamal" || selectedKey.AlgorithmName == "DSA")
-                    //{
-                    //    //TODO: Open XML signature
-
-                    //    window = new ElGamalDSVerificationWindow();
-
-                    //    window.DataContext = new ElGamalDSVerificationViewModel(selectedKey, inputedTextBytes);
-                    //}
-
-                    //window.Show();
                 }
                 else
-                    MessageBox.Show("Введите текст!");
+                    MessageBox.Show("Введите текст или выберите открытый ключ!");
             });
         }
         #endregion

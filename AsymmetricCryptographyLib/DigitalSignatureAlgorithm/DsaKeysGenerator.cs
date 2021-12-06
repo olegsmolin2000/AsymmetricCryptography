@@ -35,6 +35,9 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
 
             privateKey = new DsaPrivateKey(name,domainParameters.BinarySize,domainParameters,x);
             publicKey = new DsaPublicKey(name,domainParameters.BinarySize, domainParameters,y);
+
+            FillGenerationParameters(privateKey);
+            FillGenerationParameters(publicKey);
         }
 
         //генерация доменных параметров DSA, которые можно использовать для нескольких пользователей
@@ -69,7 +72,11 @@ namespace AsymmetricCryptography.DigitalSignatureAlgorithm
                 g = BigInteger.ModPow(h, (p - 1) / q, p);
             }
 
-            return new DsaDomainParameter(name,L, q, p, g);
+            DsaDomainParameter domainParameter = new DsaDomainParameter(name, L, q, p, g);
+
+            FillGenerationParameters(domainParameter);
+
+            return domainParameter;
         }
     }
 }

@@ -26,12 +26,6 @@ namespace AsymmetricCryptographyWPF.ViewModel.KeysGeneratingViewModels.DSA
 
                       domainParameter = keysGenerator.DsaDomainParametersGeneration(Name, l, n);
 
-                      string[] paramsInfo = generationParameters.GetParameters();
-
-                      domainParameter.NumberGenerator = paramsInfo[0];
-                      domainParameter.PrimalityVerificator = paramsInfo[1];
-                      domainParameter.HashAlgorithm = paramsInfo[2];
-
                       DataWorker.AddKey(domainParameter);
 
                       domainParameter = DataWorker.GetLastDomainParameter() as DsaDomainParameter;

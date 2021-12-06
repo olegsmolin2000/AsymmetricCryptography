@@ -24,7 +24,7 @@ namespace AsymmetricCryptographyDAL.EFCore.Contexts
 
         public KeyContext()
         {
-            //Database.Migrate();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

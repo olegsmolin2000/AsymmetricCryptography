@@ -35,9 +35,6 @@ namespace AsymmetricCryptography.RSA
             }
         }
 
-        public RsaAlgorithm(GeneratingParameters parameters)
-            :base(parameters) { }
-
         //шифрование RSA с помощью открытого ключа
         public byte[] Encrypt(byte[] data,AsymmetricKey publicKey)
         {
@@ -111,7 +108,7 @@ namespace AsymmetricCryptography.RSA
         {
             PrivateKey = privateKey as RsaPrivateKey;
 
-            BigInteger digest = new BigInteger(hashAlgorithm.GetHash(data));
+            BigInteger digest = new BigInteger(HashAlgorithm.GetHash(data));
 
             //если модуль ключа не может вместить хеш или хеш будет меньше нуля, то будут проблемы
             //поэтому хеш берётся по модулю
@@ -129,7 +126,7 @@ namespace AsymmetricCryptography.RSA
 
             PublicKey = publicKey as RsaPublicKey;
 
-            BigInteger realHash = new BigInteger(hashAlgorithm.GetHash(data));
+            BigInteger realHash = new BigInteger(HashAlgorithm.GetHash(data));
 
             //взятие хеша по модулю, аналогично того же, что и в создании подписи
             realHash = ModularArithmetic.Modulus(realHash, PublicKey.Modulus);
