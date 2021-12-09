@@ -7,11 +7,8 @@
         // TODO: choose private set or init. depends on ef core
         public DsaDomainParameter DomainParameter { get; private set; }
 
-        private DsaPrivateKey(int binarySize) 
-            : base(AlgorithmName.DSA, KeyType.Private, binarySize) { }
-
         public DsaPrivateKey(int binarySize, BigInteger x, DsaDomainParameter domainParameter)
-            :this(binarySize)
+            : base(binarySize, AlgorithmName.DSA, KeyType.Private)
         {
             X = x;
             DomainParameter = domainParameter;

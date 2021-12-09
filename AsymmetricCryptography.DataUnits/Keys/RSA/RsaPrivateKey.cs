@@ -4,12 +4,9 @@
     {
         public BigInteger PrivateExponent { get; init; }
         public BigInteger Modulus { get; init; }
-
-        private RsaPrivateKey(int binarySize)
-            : base(AlgorithmName.RSA, KeyType.Private, binarySize) { }
-
+            
         public RsaPrivateKey(int binarySize, BigInteger privateExponent, BigInteger modulus)
-            : this(binarySize)
+            : base(binarySize, AlgorithmName.RSA, KeyType.Private)
         {
             PrivateExponent = privateExponent;
             Modulus = modulus;

@@ -11,11 +11,8 @@ namespace AsymmetricCryptography.DataUnits.Keys.DSA
         public List<DsaPrivateKey> PrivateKeys { get; set; }
         public List<DsaPublicKey> PublicKeys { get; set; }
 
-        private DsaDomainParameter(int binarySize) 
-            : base(AlgorithmName.DSA, KeyType.DomainParameter, binarySize) { }
-
         public DsaDomainParameter(int binarySize, BigInteger q, BigInteger p, BigInteger g)
-            : this(binarySize)
+            : base(binarySize, AlgorithmName.DSA, KeyType.DomainParameter)
         {
             Q = q;
             P = p;

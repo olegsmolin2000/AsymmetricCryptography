@@ -7,11 +7,8 @@
 
         public BigInteger X { get; init; }
 
-        private ElGamalPrivateKey(int binarySize) 
-            : base(AlgorithmName.ElGamal, KeyType.Private, binarySize) { }
-
         public ElGamalPrivateKey(int binarySize, BigInteger p, BigInteger g, BigInteger x)
-            :this(binarySize)
+            : base(binarySize, AlgorithmName.ElGamal, KeyType.Private)
         {
             P = p;
             G = g;

@@ -4,10 +4,10 @@
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public AlgorithmName AlgorithmName { get; init; }
-        public KeyType KeyType { get; init; }
-        public int BinarySize { get; init; }
-
+        public int BinarySize { get; private init; }
+        public AlgorithmName AlgorithmName { get; private init; }
+        public KeyType KeyType { get; private init; }
+        
         // TODO: Переделать, чтобы было легкое конвертирование в
         // объекты классов NumberGenerator, PrimalityVerificator, HashAlgorithm
         // в обе стороны, и эти свойства были иммутабельные, возможно init setters
@@ -15,11 +15,11 @@
         public string? PrimalityVerificator { get; set; }
         public string? HashAlgorithm { get; set; }
 
-        protected AsymmetricKey(AlgorithmName algorithmName, KeyType keyType, int binarySize)
+        protected AsymmetricKey(int binarySize, AlgorithmName algorithmName, KeyType keyType)
         {
+            BinarySize = binarySize;
             AlgorithmName = algorithmName;
             KeyType = keyType;
-            BinarySize = binarySize;
         }
     }
 }
