@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AsymmetricCryptography.DataUnits.Keys.DSA
+﻿namespace AsymmetricCryptography.DataUnits.Keys.DSA
 {
     public sealed class DsaDomainParameter : AsymmetricKey
     {

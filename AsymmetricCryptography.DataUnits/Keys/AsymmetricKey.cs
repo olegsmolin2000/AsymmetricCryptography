@@ -22,4 +22,18 @@
             KeyType = keyType;
         }
     }
+
+    public enum AlgorithmName
+    {
+        RSA,
+        DSA,
+        ElGamal
+    }
+
+    public enum KeyType
+    {
+        Private,
+        Public,
+        DomainParameter
+    }
 }

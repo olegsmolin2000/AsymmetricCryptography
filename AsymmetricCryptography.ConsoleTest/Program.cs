@@ -44,17 +44,19 @@ List<DsaPrivateKey> keyList = new List<DsaPrivateKey>();
 
 using (var db=new KeysContext())
 {
-    foreach(var el in db.DsaPrivateKeys.Include(key=>key.DomainParameter))
+    foreach(var el in db.DsaPrivateKeys)
     {
         keyList.Add(el);
     }
 
-    var w = keyList[0].KeyType.GetType();
+    var zhopa = keyList[0].DomainParameter;
 
-    Console.WriteLine(w == typeof(string));
-    Console.WriteLine(w == typeof(KeyType));
-    Console.WriteLine(keyList[0].KeyType);
-    Console.WriteLine(keyList[0].KeyType.GetType());
+    //var w = keyList[0].KeyType.GetType();
+    Console.WriteLine(zhopa.GetType());
+    //Console.WriteLine(w == typeof(string));
+    //Console.WriteLine(w == typeof(KeyType));
+    //Console.WriteLine(keyList[0].KeyType);
+    //Console.WriteLine(keyList[0].KeyType.GetType());
     //foreach (var item in db.DsaDomainParameters)
     //{
     //    dpList.Add(item);

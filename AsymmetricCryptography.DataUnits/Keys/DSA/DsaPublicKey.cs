@@ -5,7 +5,7 @@
         public BigInteger Y { get; init; }
 
         // TODO: choose private set or init. depends on ef core
-        public DsaDomainParameter DomainParameter { get; private set; }
+        public DsaDomainParameter DomainParameter { get; set; }
 
 
         public DsaPublicKey(int binarySize,BigInteger y)
