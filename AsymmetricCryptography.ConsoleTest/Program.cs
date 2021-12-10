@@ -1,4 +1,5 @@
-﻿using AsymmetricCryptography.DataUnits.Keys.DSA;
+﻿using AsymmetricCryptography.DataUnits.Keys;
+using AsymmetricCryptography.DataUnits.Keys.DSA;
 using AsymmetricCryptography.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,12 +49,18 @@ using (var db=new KeysContext())
         keyList.Add(el);
     }
 
+    var w = keyList[0].KeyType.GetType();
+
+    Console.WriteLine(w == typeof(string));
+    Console.WriteLine(w == typeof(KeyType));
+    Console.WriteLine(keyList[0].KeyType);
+    Console.WriteLine(keyList[0].KeyType.GetType());
     //foreach (var item in db.DsaDomainParameters)
     //{
     //    dpList.Add(item);
     //}
-    
 
-    
+
+
 
 }
