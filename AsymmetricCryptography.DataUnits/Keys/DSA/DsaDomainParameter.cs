@@ -8,8 +8,8 @@ namespace AsymmetricCryptography.DataUnits.Keys.DSA
         public BigInteger P { get; init; }
         public BigInteger G { get; init; }
 
-        public List<DsaPrivateKey> PrivateKeys { get; set; }
-        public List<DsaPublicKey> PublicKeys { get; set; }
+        public ICollection<DsaPrivateKey> PrivateKeys { get; set; }
+        public ICollection<DsaPublicKey> PublicKeys { get; set; }
 
         public DsaDomainParameter(int binarySize, BigInteger q, BigInteger p, BigInteger g)
             : base(binarySize, AlgorithmName.DSA, KeyType.DomainParameter)

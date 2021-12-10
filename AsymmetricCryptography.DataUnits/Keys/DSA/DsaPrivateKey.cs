@@ -7,6 +7,12 @@
         // TODO: choose private set or init. depends on ef core
         public DsaDomainParameter DomainParameter { get; private set; }
 
+        public DsaPrivateKey(int binarySize,BigInteger x)
+            : base(binarySize, AlgorithmName.DSA, KeyType.Private)
+        {
+            this.X = x;
+        }
+
         public DsaPrivateKey(int binarySize, BigInteger x, DsaDomainParameter domainParameter)
             : base(binarySize, AlgorithmName.DSA, KeyType.Private)
         {

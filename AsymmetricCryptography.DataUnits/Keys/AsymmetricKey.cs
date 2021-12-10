@@ -7,7 +7,7 @@
         public int BinarySize { get; private init; }
         public AlgorithmName AlgorithmName { get; private init; }
         public KeyType KeyType { get; private init; }
-        
+
         // TODO: Переделать, чтобы было легкое конвертирование в
         // объекты классов NumberGenerator, PrimalityVerificator, HashAlgorithm
         // в обе стороны, и эти свойства были иммутабельные, возможно init setters

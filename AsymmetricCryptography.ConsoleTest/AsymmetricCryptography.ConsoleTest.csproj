@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AsymmetricCryptography.DataUnits\AsymmetricCryptography.DataUnits.csproj" />
+    <ProjectReference Include="..\AsymmetricCryptography.EFCore\AsymmetricCryptography.EFCore.csproj" />
+  </ItemGroup>
+
 </Project>
