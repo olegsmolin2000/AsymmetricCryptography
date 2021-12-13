@@ -1,11 +1,27 @@
 ﻿namespace AsymmetricCryptography.DataUnits.Keys
 {
+    /// <summary>
+    /// Base class for asymmetric cryptographic keys. Contains all generating parameters
+    /// </summary>
     public abstract class AsymmetricKey
     {
         public int Id { get; set; }
+
         public string? Name { get; set; }
+
+        /// <summary>
+        /// Binary size used in keys generating
+        /// </summary>
         public int BinarySize { get; private init; }
+
+        /// <summary>
+        /// Name of cryprographic algorithm
+        /// </summary>
         public AlgorithmName AlgorithmName { get; private init; }
+
+        /// <summary>
+        /// Permission type of key
+        /// </summary>
         public KeyType KeyType { get; private init; }
 
         // TODO: Переделать, чтобы было легкое конвертирование в
@@ -21,19 +37,5 @@
             AlgorithmName = algorithmName;
             KeyType = keyType;
         }
-    }
-
-    public enum AlgorithmName
-    {
-        RSA,
-        DSA,
-        ElGamal
-    }
-
-    public enum KeyType
-    {
-        Private,
-        Public,
-        DomainParameter
     }
 }

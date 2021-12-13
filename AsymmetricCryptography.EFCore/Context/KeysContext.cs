@@ -91,7 +91,7 @@ namespace AsymmetricCryptography.EFCore.Context
                 }
             }
             #endregion
-
+            
             base.OnModelCreating(modelBuilder);
         }
 

@@ -1,5 +1,8 @@
 ﻿namespace AsymmetricCryptography.DataUnits.DigitalSignatures
 {
+    /// <summary>
+    /// ElGamal scheme digital signature (R,S)
+    /// </summary>
     public sealed class ElGamalDigitalSignature:DigitalSignature
     {
         public BigInteger R { get; init; }
