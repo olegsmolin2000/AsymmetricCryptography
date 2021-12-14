@@ -5,6 +5,8 @@
     /// </summary>
     public sealed class SHA_256:HashAlgorithm
     {
+        public override int DigestBitSize => 256;
+
         private UInt32[] Hash;
 
         private const int BLOCK_SIZE = 64;
@@ -30,8 +32,6 @@
             0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5, 0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
             0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208, 0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2
         };
-
-        public override int DigestBitSize => 256;
 
         public override byte[] GetHash(byte[] data)
         {

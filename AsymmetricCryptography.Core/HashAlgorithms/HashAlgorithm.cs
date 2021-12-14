@@ -6,16 +6,16 @@
     public abstract class HashAlgorithm
     {
         /// <summary>
+        /// Bits count of the digest
+        /// </summary>
+        public abstract int DigestBitSize { get; }
+
+        /// <summary>
         /// Computes the hash of data using the cryptographic hash algorithm.
         /// </summary>
         /// <param name="data">Message to getting hash</param>
         /// <returns>Byte array of the digest</returns>
         public abstract byte[] GetHash(byte[] data);
-
-        /// <summary>
-        /// Bits count of the digest
-        /// </summary>
-        public abstract int DigestBitSize { get; }
 
         /// <summary>
         /// Pad message with empty bytes to make correct blocks dividing

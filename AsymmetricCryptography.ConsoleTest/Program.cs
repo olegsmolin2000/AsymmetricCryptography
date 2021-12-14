@@ -114,7 +114,7 @@ using System.Text;
 //}
 
 string str = "zhopa";
-HashAlgorithm q = new SHA_256();
+HashAlgorithm q = new MD_5();
 //while (true)
 {
     //str = Console.ReadLine();
