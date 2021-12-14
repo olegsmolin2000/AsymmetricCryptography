@@ -113,23 +113,62 @@ using System.Text;
 //    Console.WriteLine(Convert.ToString(q[i], 2).PadLeft(8, '0'));
 //}
 
-string str = "zhopa";
-HashAlgorithm q = new MD_5();
-//while (true)
+//string str = "zhopa";
+//HashAlgorithm q = new MD_5();
+////while (true)
+//{
+//    //str = Console.ReadLine();
+
+//    var bytes = Encoding.UTF8.GetBytes(str);
+
+//    var has = q.GetHash(bytes);
+
+//    string hh = "";
+
+//    for (int i = 0; i < has.Length; i++)
+//    {
+//        hh += Convert.ToString(has[i], 16);
+//    }
+
+//    Console.WriteLine(hh);
+//}
+int n = 21;
+
+byte[] arr = new byte[n];
+int s = BlockConverter.GetBlockSize(BigInteger.Pow(256, 5) + 10000);
+
+Console.WriteLine(s);
+
+for (int i = 0; i < n; i++)
 {
-    //str = Console.ReadLine();
+    arr[i] = Convert.ToByte((i * i) % 256);
+    Console.WriteLine(Convert.ToString(arr[i],2).PadLeft(8, '0'));
+}
+Console.WriteLine();
+var blocks = BlockConverter.BytesToBlocks(arr, s);
 
-    var bytes = Encoding.UTF8.GetBytes(str);
+for (int i = 0; i < blocks.Length; i++)
+{
+    Console.WriteLine(blocks[i].ToBinaryString());
+}
+Console.WriteLine();
 
-    var has = q.GetHash(bytes);
+List<byte> lis = new List<byte>();
 
-    string hh = "";
+for (int i = 0; i < blocks.Length; i++)
+{
+    var bl = BlockConverter.BlockToBytes(blocks[i],s);
 
-    for (int i = 0; i < has.Length; i++)
+    for (int j = 0; j < bl.Length; j++)
     {
-        hh += Convert.ToString(has[i], 16);
+        lis.Add(bl[j]);
     }
+}
 
-    Console.WriteLine(hh);
+lis.RemoveAll(el => el == 0);
+
+foreach (var el in lis)
+{
+    Console.WriteLine(Convert.ToString(el, 2).PadLeft(8, '0'));
 }
 

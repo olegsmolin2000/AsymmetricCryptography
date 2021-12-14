@@ -5,7 +5,7 @@ namespace AsymmetricCryptography.Core
     /// <summary>
     /// Provides static methods for converting bytes to bigint and back
     /// </summary>
-    internal static class BlockConverter
+    public static class BlockConverter
     {
         private const int BYTE_SIZE = 8;
 

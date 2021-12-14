@@ -96,14 +96,27 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
 
             return number;
         }
+
+        /// <summary>
+        /// Convert number generator enum to instance of specified value
+        /// </summary>
+        /// <param name="numberGemerator"></param>
+        /// <returns>Insance of number generator</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static NumberGenerator Parse(RandomNumberGenerator numberGenerator) =>
+            numberGenerator switch
+            {
+                RandomNumberGenerator.Fibonacci => new FibonacciNumberGenerator(),
+                _ => throw new ArgumentException("Invalid enum value")
+            };
     }
 
     /// <summary>
     /// Supported number generators enum
     /// </summary>
-    public enum NumberGemerator
+    public enum RandomNumberGenerator
     {
-        Fibonacci,
-        BlumBlumShub
+        Fibonacci
+        //BlumBlumShub
     }
 }

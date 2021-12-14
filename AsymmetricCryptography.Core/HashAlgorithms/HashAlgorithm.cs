@@ -92,5 +92,25 @@
         {
             return (word << rotateCount) | (word >> (32 - rotateCount));
         }
+
+        /// <summary>
+        /// Convert cryptographic hash enum to instance of specified value
+        /// </summary>
+        /// <param name="cryptographicHashAlgorithm"></param>
+        /// <returns>Insance of hash algorithm</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static HashAlgorithm Parse(CryptographicHashAlgorithm cryptographicHashAlgorithm) =>
+            cryptographicHashAlgorithm switch
+            {
+                CryptographicHashAlgorithm.SHA_256 => new SHA_256(),
+                CryptographicHashAlgorithm.MD_5 => new MD_5(),
+                _ => throw new ArgumentException("Invalid enum value")
+            };
+    }
+
+    public enum CryptographicHashAlgorithm
+    {
+        SHA_256,
+        MD_5
     }
 }

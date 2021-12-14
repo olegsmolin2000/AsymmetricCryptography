@@ -37,12 +37,25 @@ namespace AsymmetricCryptography.Core.PrimalityVerification
 
             return BigInteger.Max(number1, number2) == 1;
         }
+
+        /// <summary>
+        /// Convert primality test enum to instance of specified value
+        /// </summary>
+        /// <param name="primalityTest"></param>
+        /// <returns>Insance of primality verificator</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static PrimalityVerificator Parse(PrimalityTest primalityTest) =>
+            primalityTest switch
+            {
+                PrimalityTest.MillerRabin => new MillerRabinPrimalityVerificator(),
+                _ => throw new ArgumentException("Invalid enum value")
+            };
     }
 
     /// <summary>
     /// Supported primality verificators enum
     /// </summary>
-    public enum PrimalityVerifiator
+    public enum PrimalityTest
     {
         MillerRabin
     }
