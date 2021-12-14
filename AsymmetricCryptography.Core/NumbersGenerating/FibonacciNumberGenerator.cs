@@ -21,7 +21,7 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
         /// Initializes a new instance of the Lagged Fibonacci Number Generator, using the Primality Verificator
         /// </summary>
         /// <param name="primalityVerificator">Primality verificator used in prime numbers generating</param>
-        public FibonacciNumberGenerator(PrimalityVerificator? primalityVerificator = null)
+        public FibonacciNumberGenerator(PrimalityVerificator primalityVerificator = null)
             :base(primalityVerificator) { }
 
         public override BigInteger GenerateNumber(int binarySize)

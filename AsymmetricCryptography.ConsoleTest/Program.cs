@@ -1,7 +1,7 @@
-﻿using AsymmetricCryptography.DataUnits.Keys;
-using AsymmetricCryptography.DataUnits.Keys.DSA;
-using AsymmetricCryptography.EFCore.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using AsymmetricCryptography.Core.NumbersGenerating;
+using AsymmetricCryptography.Core.PrimalityVerification;
+using System.Numerics;
+using AsymmetricCryptography.Core;
 
 //var dp1 = new DsaDomainParameter(1, 1, 1, 1)
 //{
@@ -40,29 +40,40 @@ using Microsoft.EntityFrameworkCore;
 //}
 
 //List<DsaDomainParameter> dpList = new List<DsaDomainParameter>();
-List<DsaPrivateKey> keyList = new List<DsaPrivateKey>();
+//List<DsaPrivateKey> keyList = new List<DsaPrivateKey>();
 
-using (var db=new KeysContext())
+//using (var db=new KeysContext())
+//{
+//    foreach(var el in db.DsaPrivateKeys)
+//    {
+//        keyList.Add(el);
+//    }
+
+//    var zhopa = keyList[0].DomainParameter;
+
+//    //var w = keyList[0].KeyType.GetType();
+//    Console.WriteLine(zhopa.GetType());
+//    //Console.WriteLine(w == typeof(string));
+//    //Console.WriteLine(w == typeof(KeyType));
+//    //Console.WriteLine(keyList[0].KeyType);
+//    //Console.WriteLine(keyList[0].KeyType.GetType());
+//    //foreach (var item in db.DsaDomainParameters)
+//    //{
+//    //    dpList.Add(item);
+//    //}
+//}
+
+PrimalityVerificator w = new MillerRabinPrimalityVerificator();
+NumberGenerator q = new FibonacciNumberGenerator();
+
+
+for (int i = 1; i < 100; i++)
 {
-    foreach(var el in db.DsaPrivateKeys)
-    {
-        keyList.Add(el);
-    }
+    BigInteger num = i;
 
-    var zhopa = keyList[0].DomainParameter;
+    var s = num.GetBitLength();
+   // var d = num.GetBinaryLength();
 
-    //var w = keyList[0].KeyType.GetType();
-    Console.WriteLine(zhopa.GetType());
-    //Console.WriteLine(w == typeof(string));
-    //Console.WriteLine(w == typeof(KeyType));
-    //Console.WriteLine(keyList[0].KeyType);
-    //Console.WriteLine(keyList[0].KeyType.GetType());
-    //foreach (var item in db.DsaDomainParameters)
-    //{
-    //    dpList.Add(item);
-    //}
-
-
-
-
+    Console.WriteLine($"{s}  {d}");
 }
+

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AsymmetricCryptography.Core\AsymmetricCryptography.Core.csproj" />
     <ProjectReference Include="..\AsymmetricCryptography.DataUnits\AsymmetricCryptography.DataUnits.csproj" />
     <ProjectReference Include="..\AsymmetricCryptography.EFCore\AsymmetricCryptography.EFCore.csproj" />
   </ItemGroup>
