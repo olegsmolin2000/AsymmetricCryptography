@@ -2,6 +2,8 @@
 using AsymmetricCryptography.Core.PrimalityVerification;
 using System.Numerics;
 using AsymmetricCryptography.Core;
+using AsymmetricCryptography.Core.HashAlgorithms;
+using System.Text;
 
 //var dp1 = new DsaDomainParameter(1, 1, 1, 1)
 //{
@@ -63,11 +65,11 @@ using AsymmetricCryptography.Core;
 //    //}
 //}
 
-PrimalityVerificator w = new MillerRabinPrimalityVerificator();
-NumberGenerator q = new FibonacciNumberGenerator();
+//PrimalityVerificator w = new MillerRabinPrimalityVerificator();
+//NumberGenerator q = new FibonacciNumberGenerator();
 
-int s = 0;
-for (int i = 0; i < 100; i++)
+//int s = 0;
+//for (int i = 1; i < 100; i++)
 {
     //if(i%1000==0)
     //  Console.WriteLine($"\t{i}");
@@ -91,8 +93,43 @@ for (int i = 0; i < 100; i++)
     //else
     //    s++;
 
-    BigInteger num = q.GeneratePrimeNumber(5);
+    //BigInteger num = i;
 
-    Console.WriteLine(num);
+    //if (w.IsPrime(num))
+    //    Console.WriteLine(num);
+}
+
+//byte[] data = new byte[54];
+
+//for (int i = 0; i < data.Length; i++)
+//{
+//    data[i] = 255;
+//}
+
+//var q = HashAlgorithm.Preprocess(data, 64, 1, 8);
+
+//for (int i = 0; i < q.Length; i++)
+//{
+//    Console.WriteLine(Convert.ToString(q[i], 2).PadLeft(8, '0'));
+//}
+
+string str = "zhopa";
+HashAlgorithm q = new SHA_256();
+//while (true)
+{
+    //str = Console.ReadLine();
+
+    var bytes = Encoding.UTF8.GetBytes(str);
+
+    var has = q.GetHash(bytes);
+
+    string hh = "";
+
+    for (int i = 0; i < has.Length; i++)
+    {
+        hh += Convert.ToString(has[i], 16);
+    }
+
+    Console.WriteLine(hh);
 }
 
