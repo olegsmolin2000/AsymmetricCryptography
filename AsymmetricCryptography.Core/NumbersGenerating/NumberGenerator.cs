@@ -12,13 +12,13 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
         /// <summary>
         /// Primality verificator used in prime number generating, nullable
         /// </summary>
-        protected PrimalityVerificator PrimalityVerificator { get; private init; }
+        protected PrimalityVerificator PrimalityVerificator { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the NumberGenerator, using the PrimalityVerificator
         /// </summary>
         /// <param name="primalityVerificator">Used primality verificator or null</param>
-        protected NumberGenerator(PrimalityVerificator primalityVerificator = null)
+        protected NumberGenerator(PrimalityVerificator primalityVerificator = null!)
         {
             PrimalityVerificator = primalityVerificator;
         }
@@ -38,7 +38,22 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
         /// <returns>Random BigInteger number in specified range</returns>
         public BigInteger GenerateNumber(BigInteger min, BigInteger max)
         {
-            return 0;
+            if (min > max)
+                throw new ArgumentException("Min > max");
+
+            int minBitLength = Convert.ToInt32(min.GetBitLength());
+            int maxBitLength = Convert.ToInt32(max.GetBitLength());
+
+            BigInteger number;
+
+            do
+            {
+                int randomBinarySize = Rand.Next(minBitLength, maxBitLength + 1);
+
+                number = GenerateNumber(randomBinarySize);
+            } while (number < min || number > max);
+
+            return number;
         }
 
         /// <summary>
@@ -48,7 +63,17 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
         /// <returns>Random BigInteger prime number</returns>
         public BigInteger GeneratePrimeNumber(int binarySize)
         {
-            return 0;
+            if(PrimalityVerificator==null)
+                PrimalityVerificator=new MillerRabinPrimalityVerificator();
+
+            BigInteger number = 0;
+
+            do
+            {
+                number = GenerateNumber(binarySize);
+            } while (!PrimalityVerificator.IsPrime(number));
+
+            return number;
         }
 
         /// <summary>
@@ -59,7 +84,17 @@ namespace AsymmetricCryptography.Core.NumbersGenerating
         /// <returns>Random BigInteger prime number in specified range</returns>
         public BigInteger GeneratePrimeNumber(BigInteger min, BigInteger max)
         {
-            return 0;
+            if (PrimalityVerificator == null)
+                PrimalityVerificator = new MillerRabinPrimalityVerificator();
+
+            BigInteger number = 0;
+
+            do
+            {
+                number = GenerateNumber(min, max);
+            } while (!PrimalityVerificator.IsPrime(number));
+
+            return number;
         }
     }
 

@@ -66,14 +66,33 @@ using AsymmetricCryptography.Core;
 PrimalityVerificator w = new MillerRabinPrimalityVerificator();
 NumberGenerator q = new FibonacciNumberGenerator();
 
-
-for (int i = 1; i < 100; i++)
+int s = 0;
+for (int i = 0; i < 100; i++)
 {
-    BigInteger num = i;
+    //if(i%1000==0)
+    //  Console.WriteLine($"\t{i}");
+    //BigInteger num = i;
 
-    var s = num.GetBitLength();
-   // var d = num.GetBinaryLength();
+    //var s = num.GetBitLength();
+    // var d = num.GetBinaryLength();
 
-    Console.WriteLine($"{s}  {d}");
+    // Console.WriteLine($"{s}  {d}");
+
+    //BigInteger n = i;
+
+    //Console.WriteLine($"{n}:{w.IsPrime(n)}");
+
+    //BigInteger min = 1274617846;
+    //BigInteger max = 12746178462355;
+    //BigInteger num = q.GenerateNumber(min, max);
+
+    //if (num <= min+10 || num >= max-10)
+    //    Console.WriteLine("PEZDEC");
+    //else
+    //    s++;
+
+    BigInteger num = q.GeneratePrimeNumber(5);
+
+    Console.WriteLine(num);
 }
 
