@@ -32,7 +32,7 @@ namespace AsymmetricCryptography.Core.KeysGenerators
             HashAlgorithm = hashAlgorithm;
         }
 
-        public abstract void GenerateKeys(int binarySize, out AsymmetricKey privateKey, AsymmetricKey publicKey);
+        public abstract void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey);
 
         protected void FillGeneratingParameters(AsymmetricKey key)
         {

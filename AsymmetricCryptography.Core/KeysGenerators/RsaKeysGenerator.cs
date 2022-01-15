@@ -13,7 +13,7 @@ namespace AsymmetricCryptography.Core.KeysGenerators
         public RsaKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
 
-        public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, AsymmetricKey publicKey)
+        public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             BigInteger p, q;
             BigInteger n, fi;
@@ -45,9 +45,9 @@ namespace AsymmetricCryptography.Core.KeysGenerators
             //вычисление закрытой экспоненты, d*e (mod euler) = 1 ( мультипликативно обратное к числу e по модулю euler)
             d = ModularArithmetic.GetModularMultiplicativeInverse(e, fi);
 
-            privateKey = new RsaPrivateKey(binarySize, n, d);
+            privateKey = new RsaPrivateKey(binarySize, d, n);
 
-            publicKey = new RsaPublicKey(binarySize, n, e);
+            publicKey = new RsaPublicKey(binarySize, e, n);
 
             FillGeneratingParameters(privateKey);
             FillGeneratingParameters(publicKey);

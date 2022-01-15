@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AsymmetricCryptography.DataUnits\AsymmetricCryptography.DataUnits.csproj" />
+  </ItemGroup>
+
     <ItemGroup>
 		<Using Include="System.Numerics" />
 	</ItemGroup>

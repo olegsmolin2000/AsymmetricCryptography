@@ -11,7 +11,7 @@ namespace AsymmetricCryptography.Core.KeysGenerators
         public ElGamalKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
 
-        public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, AsymmetricKey publicKey)
+        public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {
             //генерация случайного простого числа p
             BigInteger p = NumberGenerator.GeneratePrimeNumber(binarySize);

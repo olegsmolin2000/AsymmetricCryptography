@@ -1,5 +1,13 @@
 ﻿using System.Numerics;
+using System.Text;
 using AsymmetricCryptography.Core;
+using AsymmetricCryptography.Core.HashAlgorithms;
+using AsymmetricCryptography.Core.KeysGenerators;
+using AsymmetricCryptography.Core.NumberGenerators;
+using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits.DigitalSignatures;
+using AsymmetricCryptography.DataUnits.Keys;
+using AsymmetricCryptography.DataUnits.Keys.RSA;
 
 //var dp1 = new DsaDomainParameter(1, 1, 1, 1)
 //{
@@ -128,43 +136,131 @@ using AsymmetricCryptography.Core;
 
 //    Console.WriteLine(hh);
 //}
-int n = 21;
+//int n = 21;
 
-byte[] arr = new byte[n];
-int s = BlockConverter.GetBlockSize(BigInteger.Pow(256, 5) + 10000);
+//byte[] arr = new byte[n];
+//int s = BlockConverter.GetBlockSize(BigInteger.Pow(256, 5) + 10000);
 
-Console.WriteLine(s);
+//Console.WriteLine(s);
 
-for (int i = 0; i < n; i++)
+//for (int i = 0; i < n; i++)
+//{
+//    arr[i] = Convert.ToByte((i * i) % 256);
+//    Console.WriteLine(Convert.ToString(arr[i],2).PadLeft(8, '0'));
+//}
+//Console.WriteLine();
+//var blocks = BlockConverter.BytesToBlocks(arr, s);
+
+//for (int i = 0; i < blocks.Length; i++)
+//{
+//    Console.WriteLine(blocks[i].ToBinaryString());
+//}
+//Console.WriteLine();
+
+//List<byte> lis = new List<byte>();
+
+//for (int i = 0; i < blocks.Length; i++)
+//{
+//    var bl = BlockConverter.BlockToBytes(blocks[i],s);
+
+//    for (int j = 0; j < bl.Length; j++)
+//    {
+//        lis.Add(bl[j]);
+//    }
+//}
+
+//lis.RemoveAll(el => el == 0);
+
+//foreach (var el in lis)
+//{
+//    Console.WriteLine(Convert.ToString(el, 2).PadLeft(8, '0'));
+//}
+
+Random rand=new Random();
+
+const int rsaKeysBinarySize = 64;
+
+int iterationsCount = 1000;
+int errorsCount = 0;
+
+for (int i = 0; i < iterationsCount; i++)
 {
-    arr[i] = Convert.ToByte((i * i) % 256);
-    Console.WriteLine(Convert.ToString(arr[i],2).PadLeft(8, '0'));
-}
-Console.WriteLine();
-var blocks = BlockConverter.BytesToBlocks(arr, s);
+    if (i % (iterationsCount/10) == 0)
+        Console.WriteLine(i);
 
-for (int i = 0; i < blocks.Length; i++)
-{
-    Console.WriteLine(blocks[i].ToBinaryString());
-}
-Console.WriteLine();
+    bool good = true;
 
-List<byte> lis = new List<byte>();
+    // генерация текста
+    //-------------------------
+    StringBuilder text = new StringBuilder();
 
-for (int i = 0; i < blocks.Length; i++)
-{
-    var bl = BlockConverter.BlockToBytes(blocks[i],s);
+    int messageLength = rand.Next(1024);
 
-    for (int j = 0; j < bl.Length; j++)
+    for (int j = 0; j < messageLength; j++)
     {
-        lis.Add(bl[j]);
+        text.Append(Convert.ToChar(rand.Next() % 256));
     }
+
+    string message = text.ToString();
+    message = "zhopa";
+    var messageBytes = Encoding.Unicode.GetBytes(message);
+    // --------------------
+
+    // генераторы
+    // --------------------
+    PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
+    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
+    HashAlgorithm hashAlgorithm = new SHA_256();
+    // --------------------
+
+    // генерация ключей
+    // --------------------
+
+    AsymmetricKey rsaPrivateKey;
+    AsymmetricKey rsaPublicKey;
+
+    RsaKeysGenerator rsaKeysGenerator = new RsaKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
+    rsaKeysGenerator.GenerateKeys(rsaKeysBinarySize, out rsaPrivateKey, out rsaPublicKey);
+    RSA rSA = new RSA(numberGenerator, primalityVerificator, hashAlgorithm);
+
+
+    // --------------------
+
+    // encryption
+    // --------------------
+
+    var rsaEncryption = rSA.Encrypt(messageBytes, rsaPublicKey);
+    var rsaDecryption = rSA.Decrypt(rsaEncryption, rsaPrivateKey);
+
+    var rsaDecryptedText = Encoding.Unicode.GetString(rsaDecryption);
+
+    if (message != rsaDecryptedText)
+    {
+        good = false;
+        Console.WriteLine("RSA encryption error");
+    }
+        
+
+    // --------------------
+
+    // signatutaturing
+    // --------------------
+
+    var rsaSign = rSA.CreateSignature(messageBytes, rsaPrivateKey);
+    if (rSA.VerifyDigitalSignature(rsaSign, messageBytes, rsaPublicKey) == false)
+    {
+        good = false;
+        Console.WriteLine("RSA sign error");
+    }
+
+
+    // --------------------
+
+    if (good == false)
+        errorsCount++;
 }
 
-lis.RemoveAll(el => el == 0);
+double res = 100 - (errorsCount * 100 / iterationsCount);
 
-foreach (var el in lis)
-{
-    Console.WriteLine(Convert.ToString(el, 2).PadLeft(8, '0'));
-}
-
+Console.WriteLine($"Errors:{errorsCount}");
+Console.WriteLine($"Result:{res}%");
