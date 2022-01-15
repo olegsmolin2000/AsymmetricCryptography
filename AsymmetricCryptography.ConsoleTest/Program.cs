@@ -1,9 +1,5 @@
-﻿using AsymmetricCryptography.Core.NumbersGenerating;
-using AsymmetricCryptography.Core.PrimalityVerification;
-using System.Numerics;
+﻿using System.Numerics;
 using AsymmetricCryptography.Core;
-using AsymmetricCryptography.Core.HashAlgorithms;
-using System.Text;
 
 //var dp1 = new DsaDomainParameter(1, 1, 1, 1)
 //{

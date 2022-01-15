@@ -1,7 +1,7 @@
-﻿using AsymmetricCryptography.Core.PrimalityVerification;
+﻿using AsymmetricCryptography.Core.PrimalityVerificators;
 using System.Text;
 
-namespace AsymmetricCryptography.Core.NumbersGenerating
+namespace AsymmetricCryptography.Core.NumberGenerators
 {
     /// <summary>
     /// Lagged Fibonacci pseudorandom number generator

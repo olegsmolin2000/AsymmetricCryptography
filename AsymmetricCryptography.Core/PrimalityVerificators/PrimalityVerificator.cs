@@ -1,6 +1,6 @@
-﻿using AsymmetricCryptography.Core.NumbersGenerating;
+﻿using AsymmetricCryptography.Core.NumberGenerators;
 
-namespace AsymmetricCryptography.Core.PrimalityVerification
+namespace AsymmetricCryptography.Core.PrimalityVerificators
 {
     /// <summary>
     /// Represents the base class from which all implementations of primality verificators must derived
@@ -10,7 +10,7 @@ namespace AsymmetricCryptography.Core.PrimalityVerification
         /// <summary>
         /// Number generator used in some primality tests
         /// </summary>
-        protected static readonly NumberGenerator NumberGenerator = new FibonacciNumberGenerator(null);
+        protected static readonly NumberGenerator NumberGenerator = new FibonacciNumberGenerator(null!);
 
         /// <summary>
         /// Indicate whether the value is prime number

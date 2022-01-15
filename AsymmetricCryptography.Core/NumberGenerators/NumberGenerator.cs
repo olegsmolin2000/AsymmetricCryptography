@@ -1,6 +1,6 @@
-﻿using AsymmetricCryptography.Core.PrimalityVerification;
+﻿using AsymmetricCryptography.Core.PrimalityVerificators;
 
-namespace AsymmetricCryptography.Core.NumbersGenerating
+namespace AsymmetricCryptography.Core.NumberGenerators
 {
     /// <summary>
     /// Represents the base class from which all implementations of number generators must derived

@@ -1,4 +1,4 @@
-﻿namespace AsymmetricCryptography.Core.PrimalityVerification
+﻿namespace AsymmetricCryptography.Core.PrimalityVerificators
 {
     /// <summary>
     /// Miller rabin probabilistic primality test
@@ -8,7 +8,7 @@
         /// <summary>
         /// Count of rounds in testing
         /// </summary>
-        public static int K { get; set; } = 100;
+        public int K { get; set; } = 100;
 
         public override bool IsPrime(BigInteger number)
         {
