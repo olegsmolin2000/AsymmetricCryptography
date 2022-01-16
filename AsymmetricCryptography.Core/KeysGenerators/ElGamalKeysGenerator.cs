@@ -25,8 +25,8 @@ namespace AsymmetricCryptography.Core.KeysGenerators
             //вычисляется y=g^x mod p
             BigInteger y = BigInteger.ModPow(g, x, p);
 
-            privateKey = new ElGamalPrivateKey(binarySize, x, p, g);
-            publicKey = new ElGamalPublicKey(binarySize, y, p, g);
+            privateKey = new ElGamalPrivateKey(binarySize, p, g, x);
+            publicKey = new ElGamalPublicKey(binarySize, p, g, y);
 
             FillGeneratingParameters(privateKey);
             FillGeneratingParameters(publicKey);

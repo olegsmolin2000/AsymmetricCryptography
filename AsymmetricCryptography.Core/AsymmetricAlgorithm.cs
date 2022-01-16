@@ -6,9 +6,9 @@ namespace AsymmetricCryptography.Core
 {
     public abstract class AsymmetricAlgorithm
     {
-        public NumberGenerator NumberGenerator { get; set; }
-        public PrimalityVerificator PrimalityVerificator { get; set; }
-        public HashAlgorithm HashAlgorithm { get; set; }
+        protected NumberGenerator NumberGenerator { get; private init; }
+        protected PrimalityVerificator PrimalityVerificator { get; private init; }
+        protected HashAlgorithm HashAlgorithm { get; private init; }
 
         protected AsymmetricAlgorithm(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm)
         {
