@@ -27,5 +27,10 @@
             PrivateExponent = privateExponent;
             Modulus = modulus;
         }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitRsaPrivateKey(this);
+        }
     }
 }

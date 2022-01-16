@@ -1,6 +1,4 @@
-﻿using AsymmetricCryptography.DataUnits.Keys;
-
-namespace AsymmetricCryptography.DataUnits.DigitalSignatures
+﻿namespace AsymmetricCryptography.DataUnits.DigitalSignatures
 {
     /// <summary>
     /// Digital signature data unit, contains signature values

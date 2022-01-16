@@ -34,5 +34,10 @@
             G = g;
             Y = y;
         }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitElGamalPublicKey(this);
+        }
     }
 }

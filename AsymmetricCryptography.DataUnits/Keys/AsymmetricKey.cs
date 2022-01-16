@@ -37,5 +37,7 @@
             AlgorithmName = algorithmName;
             KeyType = keyType;
         }
+
+        public abstract void Accept(IKeyVisitor keyVisitor);
     }
 }

@@ -38,5 +38,10 @@
             Y = y;
             DomainParameter = domainParameter;
         }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitDsaPublicKey(this);
+        }
     }
 }

@@ -26,8 +26,11 @@
         {
             PublicExponent = publicExponent;
             Modulus = modulus;
+        }
 
-            
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitRsaPublicKey(this);
         }
     }
 }

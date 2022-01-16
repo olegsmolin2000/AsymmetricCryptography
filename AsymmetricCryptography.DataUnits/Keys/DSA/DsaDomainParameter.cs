@@ -44,5 +44,10 @@
             P = p;
             G = g;
         }
+
+        public override void Accept(IKeyVisitor keyVisitor)
+        {
+            keyVisitor.VisitDsaDomainParameters(this);
+        }
     }
 }
