@@ -6,8 +6,6 @@ namespace AsymmetricCryptography.DataUnits.Keys
 {
     public interface IKeyVisitor
     {
-        public void VisitAsymmetricKey(AsymmetricKey asymmetricKey);
-
         public void VisitRsaPrivateKey(RsaPrivateKey rsaPrivateKey);
         public void VisitRsaPublicKey(RsaPublicKey rsaPublicKey);
 
