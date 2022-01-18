@@ -1,4 +1,5 @@
 ﻿using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 
 namespace AsymmetricCryptography.Core.NumberGenerators
 {
@@ -9,6 +10,8 @@ namespace AsymmetricCryptography.Core.NumberGenerators
     {
         protected static readonly Random Rand = new Random();
 
+        public RandomNumberGenerator NumberGeneratorEnum { get; private init; }
+
         /// <summary>
         /// Primality verificator used in prime number generating, nullable
         /// </summary>
@@ -18,8 +21,10 @@ namespace AsymmetricCryptography.Core.NumberGenerators
         /// Initializes a new instance of the NumberGenerator, using the PrimalityVerificator
         /// </summary>
         /// <param name="primalityVerificator">Used primality verificator or null</param>
-        protected NumberGenerator(PrimalityVerificator primalityVerificator = null!)
+        protected NumberGenerator(RandomNumberGenerator randomNumberGenerator,PrimalityVerificator primalityVerificator = null!)
         {
+            NumberGeneratorEnum = randomNumberGenerator;
+
             PrimalityVerificator = primalityVerificator;
         }
 
@@ -109,14 +114,5 @@ namespace AsymmetricCryptography.Core.NumberGenerators
                 RandomNumberGenerator.Fibonacci => new FibonacciNumberGenerator(),
                 _ => throw new ArgumentException("Invalid enum value")
             };
-    }
-
-    /// <summary>
-    /// Supported number generators enum
-    /// </summary>
-    public enum RandomNumberGenerator
-    {
-        Fibonacci
-        //BlumBlumShub
     }
 }

@@ -3,6 +3,7 @@ using AsymmetricCryptography.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsymmetricCryptography.EFCore.Migrations
 {
     [DbContext(typeof(KeysContext))]
-    partial class KeysContextModelSnapshot : ModelSnapshot
+    [Migration("20220118135815_EnumConversions")]
+    partial class EnumConversions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

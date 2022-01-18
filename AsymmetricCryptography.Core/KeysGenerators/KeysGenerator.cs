@@ -36,7 +36,9 @@ namespace AsymmetricCryptography.Core.KeysGenerators
 
         protected void FillGeneratingParameters(AsymmetricKey key)
         {
-            // TODO: заполнить ключ параметрами генерации
+            key.NumberGenerator = NumberGenerator.NumberGeneratorEnum;
+            key.PrimalityVerificator = PrimalityVerificator.PrimalityTest;
+            key.HashAlgorithm = HashAlgorithm.CryptographicHashAlgorithm;
         }
     }
 }

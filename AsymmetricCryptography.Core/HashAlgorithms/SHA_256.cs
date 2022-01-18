@@ -1,4 +1,6 @@
-﻿namespace AsymmetricCryptography.Core.HashAlgorithms
+﻿using AsymmetricCryptography.DataUnits;
+
+namespace AsymmetricCryptography.Core.HashAlgorithms
 {
     /// <summary>
     /// Cryptographic hash algorithm SHA-256
@@ -6,6 +8,9 @@
     public sealed class SHA_256:HashAlgorithm
     {
         public override int DigestBitSize => 256;
+
+        public SHA_256()
+            :base(CryptographicHashAlgorithm.SHA_256) { }
 
         private UInt32[] Hash;
 

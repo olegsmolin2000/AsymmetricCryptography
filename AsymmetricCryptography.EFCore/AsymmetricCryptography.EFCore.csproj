@@ -20,10 +20,10 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Using Include="AsymmetricCryptography.DataUnits.Keys"/>
-		<Using Include="AsymmetricCryptography.DataUnits.Keys.DSA"/>
-		<Using Include="AsymmetricCryptography.DataUnits.Keys.ElGamal"/>
-		<Using Include="AsymmetricCryptography.DataUnits.Keys.RSA"/>
+		<Using Include="AsymmetricCryptography.DataUnits.Keys" />
+		<Using Include="AsymmetricCryptography.DataUnits.Keys.DSA" />
+		<Using Include="AsymmetricCryptography.DataUnits.Keys.ElGamal" />
+		<Using Include="AsymmetricCryptography.DataUnits.Keys.RSA" />
 	</ItemGroup>
 	
 </Project>

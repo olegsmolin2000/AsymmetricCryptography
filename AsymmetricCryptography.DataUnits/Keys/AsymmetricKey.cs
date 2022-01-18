@@ -27,9 +27,9 @@
         // TODO: Переделать, чтобы было легкое конвертирование в
         // объекты классов NumberGenerator, PrimalityVerificator, HashAlgorithm
         // в обе стороны, и эти свойства были иммутабельные, возможно init setters
-        public string? NumberGenerator { get; set; }
-        public string? PrimalityVerificator { get; set; }
-        public string? HashAlgorithm { get; set; }
+        public RandomNumberGenerator NumberGenerator { get; set; }
+        public PrimalityTest PrimalityVerificator { get; set; }
+        public CryptographicHashAlgorithm HashAlgorithm { get; set; }
 
         protected AsymmetricKey(int binarySize, AlgorithmName algorithmName, KeyType keyType)
         {

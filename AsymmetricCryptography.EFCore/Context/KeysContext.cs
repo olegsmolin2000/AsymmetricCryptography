@@ -72,6 +72,21 @@ namespace AsymmetricCryptography.EFCore.Context
                 .Property(key => key.KeyType)
                 .HasConversion<string>();
 
+            modelBuilder
+                .Entity<AsymmetricKey>()
+                .Property(key => key.NumberGenerator)
+                .HasConversion<string>();
+
+            modelBuilder
+                .Entity<AsymmetricKey>()
+                .Property(key => key.PrimalityVerificator)
+                .HasConversion<string>();
+
+            modelBuilder
+                .Entity<AsymmetricKey>()
+                .Property(key => key.HashAlgorithm)
+                .HasConversion<string>();
+
             var BigIntToStringConverter = new ValueConverter<BigInteger, string>
                (BigInt => BigInt.ToString(),
                str => BigInteger.Parse(str));

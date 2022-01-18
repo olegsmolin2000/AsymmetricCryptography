@@ -1,4 +1,5 @@
 ﻿using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 using System.Text;
 
 namespace AsymmetricCryptography.Core.NumberGenerators
@@ -23,7 +24,7 @@ namespace AsymmetricCryptography.Core.NumberGenerators
         /// </summary>
         /// <param name="primalityVerificator">Primality verificator used in prime numbers generating</param>
         public FibonacciNumberGenerator(PrimalityVerificator primalityVerificator = null!)
-            :base(primalityVerificator) { }
+            :base(RandomNumberGenerator.Fibonacci, primalityVerificator) { }
 
         public override BigInteger GenerateNumber(int binarySize)
         {

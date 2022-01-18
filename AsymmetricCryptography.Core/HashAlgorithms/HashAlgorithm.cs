@@ -1,4 +1,6 @@
-﻿namespace AsymmetricCryptography.Core.HashAlgorithms
+﻿using AsymmetricCryptography.DataUnits;
+
+namespace AsymmetricCryptography.Core.HashAlgorithms
 {
     /// <summary>
     /// Represents the base class from which all implementations of hash algorithms must derived
@@ -9,6 +11,13 @@
         /// Bits count of the digest
         /// </summary>
         public abstract int DigestBitSize { get; }
+
+        public CryptographicHashAlgorithm CryptographicHashAlgorithm { get; private init; }
+
+        protected HashAlgorithm(CryptographicHashAlgorithm hashAlgorithm)
+        {
+            CryptographicHashAlgorithm = hashAlgorithm;
+        }
 
         /// <summary>
         /// Computes the hash of data using the cryptographic hash algorithm.
@@ -106,11 +115,5 @@
                 CryptographicHashAlgorithm.MD_5 => new MD_5(),
                 _ => throw new ArgumentException("Invalid enum value")
             };
-    }
-
-    public enum CryptographicHashAlgorithm
-    {
-        SHA_256,
-        MD_5
     }
 }

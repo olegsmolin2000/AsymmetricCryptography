@@ -1,4 +1,5 @@
 ﻿using AsymmetricCryptography.Core.NumberGenerators;
+using AsymmetricCryptography.DataUnits;
 
 namespace AsymmetricCryptography.Core.PrimalityVerificators
 {
@@ -11,6 +12,13 @@ namespace AsymmetricCryptography.Core.PrimalityVerificators
         /// Number generator used in some primality tests
         /// </summary>
         protected static readonly NumberGenerator NumberGenerator = new FibonacciNumberGenerator(null!);
+
+        public PrimalityTest PrimalityTest { get; private init; }
+
+        protected PrimalityVerificator(PrimalityTest primalityTest)
+        {
+            PrimalityTest=primalityTest;
+        }
 
         /// <summary>
         /// Indicate whether the value is prime number
@@ -50,13 +58,5 @@ namespace AsymmetricCryptography.Core.PrimalityVerificators
                 PrimalityTest.MillerRabin => new MillerRabinPrimalityVerificator(),
                 _ => throw new ArgumentException("Invalid enum value")
             };
-    }
-
-    /// <summary>
-    /// Supported primality verificators enum
-    /// </summary>
-    public enum PrimalityTest
-    {
-        MillerRabin
     }
 }

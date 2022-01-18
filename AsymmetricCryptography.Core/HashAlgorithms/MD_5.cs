@@ -1,4 +1,6 @@
-﻿namespace AsymmetricCryptography.Core.HashAlgorithms
+﻿using AsymmetricCryptography.DataUnits;
+
+namespace AsymmetricCryptography.Core.HashAlgorithms
 {
     /// <summary>
     /// Cryptographic hash algorithm MD-5
@@ -6,6 +8,9 @@
     public sealed class MD_5 : HashAlgorithm
     {
         public override int DigestBitSize => 128;
+
+        public MD_5()
+            :base(CryptographicHashAlgorithm.MD_5) { }
 
         /// <summary>
         /// S specifies the per-round shift amounts
