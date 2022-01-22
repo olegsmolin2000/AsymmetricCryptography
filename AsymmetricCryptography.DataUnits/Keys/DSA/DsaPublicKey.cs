@@ -3,17 +3,18 @@
     /// <summary>
     /// Dsa public key data unit (Y, DomainParameter)
     /// </summary>
-    public sealed class DsaPublicKey : AsymmetricKey
+    public class DsaPublicKey : AsymmetricKey
     {
         /// <summary>
         /// Key value Y, Y = G^X mod P
         /// </summary>
         public BigInteger Y { get; init; }
 
+        public int DomainParameterId { get; set; }
         /// <summary>
         /// DomainParameter which generate this key
         /// </summary>
-        public DsaDomainParameter DomainParameter { get; set; }
+        public virtual DsaDomainParameter DomainParameter { get; set; }
 
         /// <summary>
         /// Initializes new instance of DSA public key without setting domain parameters
@@ -36,7 +37,7 @@
             : base(binarySize, AlgorithmName.DSA, KeyType.Public)
         {
             Y = y;
-            DomainParameter = domainParameter;
+            DomainParameterId = domainParameter.Id;
         }
 
         public override void Accept(IKeyVisitor keyVisitor)

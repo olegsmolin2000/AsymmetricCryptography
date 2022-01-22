@@ -1,6 +1,7 @@
 ﻿using AsymmetricCryptography.Core.HashAlgorithms;
 using AsymmetricCryptography.Core.NumberGenerators;
 using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 using AsymmetricCryptography.DataUnits.Keys;
 using AsymmetricCryptography.DataUnits.Keys.DSA;
 
@@ -8,8 +9,16 @@ namespace AsymmetricCryptography.Core.KeysGenerators
 {
     public sealed class DsaKeysGenerator : KeysGenerator
     {
+        public int DigestBitLength
+        {
+            get => HashAlgorithm.DigestBitSize;
+        }
+
         public DsaKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
+
+        public DsaKeysGenerator(RandomNumberGenerator numberGenerator, PrimalityTest primalityTest, CryptographicHashAlgorithm hashAlgorithm) 
+            : base(numberGenerator, primalityTest, hashAlgorithm) {}
 
         public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {

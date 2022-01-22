@@ -1,6 +1,7 @@
 ﻿using AsymmetricCryptography.Core.HashAlgorithms;
 using AsymmetricCryptography.Core.NumberGenerators;
 using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 using AsymmetricCryptography.DataUnits.Keys;
 using AsymmetricCryptography.DataUnits.Keys.ElGamal;
 
@@ -10,6 +11,9 @@ namespace AsymmetricCryptography.Core.KeysGenerators
     {
         public ElGamalKeysGenerator(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
+
+        public ElGamalKeysGenerator(RandomNumberGenerator numberGenerator, PrimalityTest primalityTest, CryptographicHashAlgorithm hashAlgorithm) 
+            : base(numberGenerator, primalityTest, hashAlgorithm) {}
 
         public override void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey)
         {

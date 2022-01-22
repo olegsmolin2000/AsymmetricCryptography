@@ -8,30 +8,40 @@ namespace AsymmetricCryptography.EFCore.Repositories
         private readonly KeysContext Db;
         private readonly DbSet<T> Set;
 
-        public KeysRepository(KeysContext db)
+        public KeysRepository()
         {
-            Db = db;
-            Set = db.Set<T>();
+            Db = new KeysContext();
+            Set = Db.Set<T>();
         }
 
-        public IEnumerable<T> Items => Set.ToList();
+        public List<T> Items => Set.ToList();
 
         public void Add(T item)
         {
             if (item is null)
                 throw new ArgumentNullException(nameof(item));
 
-            if (Set.Contains(item))
-                throw new ArgumentException("DB contains this key");
+            if (!Db.Keys.Contains(item))
+            {
+                Set.Add(item);
 
-            Set.Add(item);
-
-            Db.SaveChanges();
+                Db.SaveChanges();
+            }
         }
 
         public T Get(int id)
         {
             var key = Items.FirstOrDefault(item => item.Id == id);
+
+            if (key is null)
+                throw new ArgumentException("Incorrect id");
+            else
+                return key;
+        }
+
+        public T Get(string name)
+        {
+            var key = Items.FirstOrDefault(item => item.Name == name);
 
             if (key is null)
                 throw new ArgumentException("Incorrect id");

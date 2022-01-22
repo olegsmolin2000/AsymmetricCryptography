@@ -2,6 +2,7 @@
 using AsymmetricCryptography.Core.NumberGenerators;
 using AsymmetricCryptography.Core.PrimalityVerificators;
 using AsymmetricCryptography.DataUnits.Keys;
+using AsymmetricCryptography.DataUnits;
 
 namespace AsymmetricCryptography.Core.KeysGenerators
 {
@@ -30,6 +31,15 @@ namespace AsymmetricCryptography.Core.KeysGenerators
             NumberGenerator = numberGenerator;
             PrimalityVerificator = primalityVerificator;
             HashAlgorithm = hashAlgorithm;
+        }
+
+        protected KeysGenerator(RandomNumberGenerator numberGenerator, PrimalityTest primalityTest, CryptographicHashAlgorithm hashAlgorithm)
+        {
+            NumberGenerator = NumberGenerators.NumberGenerator.Parse(numberGenerator);
+            PrimalityVerificator = PrimalityVerificators.PrimalityVerificator.Parse(primalityTest);
+            HashAlgorithm = HashAlgorithms.HashAlgorithm.Parse(hashAlgorithm);
+
+            NumberGenerator.SetPrimalityVerificator(PrimalityVerificator);
         }
 
         public abstract void GenerateKeys(int binarySize, out AsymmetricKey privateKey, out AsymmetricKey publicKey);

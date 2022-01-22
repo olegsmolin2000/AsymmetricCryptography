@@ -7,4 +7,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ViewModel\KeyGenerating\**" />
+    <EmbeddedResource Remove="ViewModel\KeyGenerating\**" />
+    <None Remove="ViewModel\KeyGenerating\**" />
+    <Page Remove="ViewModel\KeyGenerating\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AsymmetricCryptography.Core\AsymmetricCryptography.Core.csproj" />
+    <ProjectReference Include="..\AsymmetricCryptography.DataUnits\AsymmetricCryptography.DataUnits.csproj" />
+    <ProjectReference Include="..\AsymmetricCryptography.EFCore\AsymmetricCryptography.EFCore.csproj" />
+    <ProjectReference Include="..\AsymmetricCryptography.IO\AsymmetricCryptography.IO.csproj" />
+  </ItemGroup>
+
 </Project>

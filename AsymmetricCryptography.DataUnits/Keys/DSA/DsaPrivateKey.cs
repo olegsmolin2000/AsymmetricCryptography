@@ -3,17 +3,18 @@
     /// <summary>
     /// Dsa private key data unit (X, DomainParameter)
     /// </summary>
-    public sealed class DsaPrivateKey : AsymmetricKey
+    public class DsaPrivateKey : AsymmetricKey
     {
         /// <summary>
         /// Key Value X, X is random number (0,Q)
         /// </summary>
         public BigInteger X { get; init; }
 
+        public int DomainParameterId { get; set; }
         /// <summary>
         /// DomainParameter which generate this key
         /// </summary>
-        public DsaDomainParameter DomainParameter { get; set; }
+        public virtual DsaDomainParameter DomainParameter { get; set; }
 
         /// <summary>
         /// Initializes new instance of DSA private key without setting domain parameters
@@ -36,7 +37,7 @@
             : base(binarySize, AlgorithmName.DSA, KeyType.Private)
         {
             X = x;
-            DomainParameter = domainParameter;
+            DomainParameterId = domainParameter.Id;
         }
 
         public override void Accept(IKeyVisitor keyVisitor)

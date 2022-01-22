@@ -2,7 +2,7 @@
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> Items { get; }
+        List<T> Items { get; }
 
         T Get(int id);
 

@@ -1,0 +1,72 @@
+﻿<Window x:Class="AsymmetricCryptography.WPF.View.KeyShowingWindows.DsaKeyShowingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsymmetricCryptography.WPF.View.KeyShowingWindows" xmlns:keyshowing="clr-namespace:AsymmetricCryptography.WPF.ViewModel.KeyShowing" d:DataContext="{d:DesignInstance Type=keyshowing:DsaKeyShowingViewModel}"
+        mc:Ignorable="d"
+        Title="DsaKeyShowingWindow" Height="600" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Name="DsaKeyShowingWnd">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Ключ" HorizontalAlignment="Center"/>
+
+            <ContentControl Grid.Row="1" VerticalAlignment="Center" Content="{Binding ElementName=DsaKeyShowingWnd,Path=DataContext}"
+            ContentTemplate="{StaticResource ShowKeyParameters}"/>
+
+            <Grid Grid.Row="2" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Margin" Value="15"/>
+                    </Style>
+                </Grid.Resources>
+                <Label Grid.Row="0" Content="KeyValue" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="1" Text="{Binding KeyValue}"/>
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Доменные Параметры" HorizontalAlignment="Center"/>
+
+            <ContentControl 
+            Grid.Row="1"             
+            Margin="5"
+            Content="{Binding DomainParameterViewModel}"
+            ContentTemplate="{StaticResource ShowKeyParameters}"/>
+
+            <Button Grid.Row="2" 
+                    Content="Посмотреть полную информацию" 
+                    Margin="20" Height="30"
+                    Command="{Binding OpenDPShowingWindow}"/>
+
+        </Grid>
+    </Grid>
+</Window>

@@ -25,7 +25,17 @@ namespace AsymmetricCryptography.Core.NumberGenerators
         {
             NumberGeneratorEnum = randomNumberGenerator;
 
+            SetPrimalityVerificator(primalityVerificator);
+        }
+
+        public void SetPrimalityVerificator(PrimalityVerificator primalityVerificator)
+        {
             PrimalityVerificator = primalityVerificator;
+        }
+
+        public void SetPrimalityVerificator(PrimalityTest primalityTest)
+        {
+            PrimalityVerificator = PrimalityVerificators.PrimalityVerificator.Parse(primalityTest);
         }
 
         /// <summary>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="AsymmetricCryptography.WPF.View.KeysGeneratingWindows.DsaDomainParametersGeneratingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsymmetricCryptography.WPF.View.KeysGeneratingWindows" xmlns:keysgenerating="clr-namespace:AsymmetricCryptography.WPF.ViewModel.KeysGenerating" d:DataContext="{d:DesignInstance Type=keysgenerating:DsaDomainParametersGeneratingViewModel}"
+        mc:Ignorable="d"
+        Title="DsaDomainParameterGeneratingWindow" Height="400" Width="325"
+        Name="DsaDPGeneratingWnd"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl 
+            Grid.Row="0"             
+            Margin="5"
+            Content="{Binding ElementName=DsaDPGeneratingWnd,Path=DataContext}"
+            ContentTemplate="{StaticResource InputParametersElement}"/>
+
+        <Button Grid.Row="1" 
+                Command="{Binding GenerateKeys}" 
+                CommandParameter="{Binding ElementName=DsaDPGeneratingWnd}"
+                Margin="20" 
+                Content="Сгенерировать параметры"/>
+    </Grid>
+</Window>
