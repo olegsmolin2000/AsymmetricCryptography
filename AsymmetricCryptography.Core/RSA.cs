@@ -1,6 +1,7 @@
 ﻿using AsymmetricCryptography.Core.HashAlgorithms;
 using AsymmetricCryptography.Core.NumberGenerators;
 using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 using AsymmetricCryptography.DataUnits.DigitalSignatures;
 using AsymmetricCryptography.DataUnits.Keys;
 using AsymmetricCryptography.DataUnits.Keys.RSA;
@@ -11,6 +12,9 @@ namespace AsymmetricCryptography.Core
     {
         public RSA(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
+
+        public RSA(CryptographicHashAlgorithm hashAlgorithm = CryptographicHashAlgorithm.SHA_256) 
+            : base(hashAlgorithm) { }
 
         public byte[] Encrypt(byte[] data, AsymmetricKey publicKey)
         {
@@ -70,7 +74,7 @@ namespace AsymmetricCryptography.Core
                 blocks[i] = BigInteger.ModPow(blocks[i], exponent, modulus);
 
                 //в список добавляются расшифрованные байты
-                decryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i], blockSize + 1));
+                decryptedBytes.AddRange(BlockConverter.BlockToBytes(blocks[i], blockSize));
             }
 
             // ниже идёт кастыль

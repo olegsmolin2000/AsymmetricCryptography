@@ -14,7 +14,15 @@ namespace AsymmetricCryptography.EFCore.Repositories
             Set = Db.Set<T>();
         }
 
-        public List<T> Items => Set.ToList();
+        public List<T> Items
+        {
+            get
+            {
+                Set.Load();
+
+                return Set.ToList();
+            }
+        }
 
         public void Add(T item)
         {

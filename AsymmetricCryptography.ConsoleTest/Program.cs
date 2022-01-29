@@ -175,137 +175,137 @@ using AsymmetricCryptography.DataUnits.Keys;
 //    Console.WriteLine(Convert.ToString(el, 2).PadLeft(8, '0'));
 //}
 
-////////Random rand=new Random();
+Random rand = new Random();
 
-////////const int rsaKeysBinarySize = 64;
+const int rsaKeysBinarySize = 64;
 
-////////int iterationsCount = 1000;
-////////int errorsCount = 0;
+int iterationsCount = 1000;
+int errorsCount = 0;
 
-////////for (int i = 0; i < iterationsCount; i++)
-////////{
-////////    if (i % (iterationsCount/100) == 0)
-////////        Console.WriteLine(i);
-
-////////    bool good = true;
-
-////////    // генерация текста
-////////    //-------------------------
-////////    StringBuilder text = new StringBuilder();
-
-////////    int messageLength = rand.Next(1024);
-
-////////    for (int j = 0; j < messageLength; j++)
-////////    {
-////////        text.Append(Convert.ToChar(rand.Next() % 256));
-////////    }
-
-////////    string message = text.ToString();
-////////    message = "zhopa";
-////////    var messageBytes = Encoding.Unicode.GetBytes(message);
-////////    // --------------------
-
-////////    // генераторы
-////////    // --------------------
-////////    PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
-////////    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
-////////    HashAlgorithm hashAlgorithm = new SHA_256();
-////////    // --------------------
-
-////////    // генерация ключей
-////////    // --------------------
-////////    AsymmetricKey rsaPrivateKey;
-////////    AsymmetricKey rsaPublicKey;
-
-////////    RsaKeysGenerator rsaKeysGenerator = new RsaKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
-////////    rsaKeysGenerator.GenerateKeys(rsaKeysBinarySize, out rsaPrivateKey, out rsaPublicKey);
-////////    RSA rSA = new RSA(numberGenerator, primalityVerificator, hashAlgorithm);
-
-////////    AsymmetricKey elGamalPrivateKey;
-////////    AsymmetricKey elGamalPublicKey;
-
-////////    ElGamalKeysGenerator elGamalKeysGenerator = new ElGamalKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
-////////    elGamalKeysGenerator.GenerateKeys(16, out elGamalPrivateKey, out elGamalPublicKey);
-////////    ElGamal elGamal = new ElGamal(numberGenerator, primalityVerificator, hashAlgorithm);
-
-////////    AsymmetricKey dsaPrivateKey;
-////////    AsymmetricKey dsaPublicKey;
-
-////////    DsaKeysGenerator dsaKeysGenerator = new DsaKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
-////////    dsaKeysGenerator.GenerateKeys(384, out dsaPrivateKey, out dsaPublicKey);
-////////    DSA dSA = new DSA(numberGenerator, primalityVerificator, hashAlgorithm);
-////////    // --------------------
-
-////////    // encryption
-////////    // --------------------
-
-////////    var rsaEncryption = rSA.Encrypt(messageBytes, rsaPublicKey);
-////////    var rsaDecryption = rSA.Decrypt(rsaEncryption, rsaPrivateKey);
-
-////////    var rsaDecryptedText = Encoding.Unicode.GetString(rsaDecryption);
-
-////////    if (message != rsaDecryptedText)
-////////    {
-////////        good = false;
-////////        Console.WriteLine("RSA encryption error");
-////////    }
-
-////////    var elGamalEncryption = elGamal.Encrypt(messageBytes, elGamalPublicKey);
-////////    var elGamalDecryption = elGamal.Decrypt(elGamalEncryption, elGamalPrivateKey);
-
-////////    var elGamalDecryptedText = Encoding.Unicode.GetString(elGamalDecryption);
-
-////////    if (message != elGamalDecryptedText)
-////////    {
-////////        good = false;
-////////        Console.WriteLine("ElGamal encryption error");
-////////    }
-////////    // --------------------
-
-////////    // signatutaturing
-////////    // --------------------
-
-////////    var rsaSign = rSA.CreateSignature(messageBytes, rsaPrivateKey);
-////////    if (rSA.VerifyDigitalSignature(rsaSign, messageBytes, rsaPublicKey) == false)
-////////    {
-////////        good = false;
-////////        Console.WriteLine("RSA sign error");
-////////    }
-
-////////    var elGamalSign = elGamal.CreateSignature(messageBytes, elGamalPrivateKey);
-////////    if (elGamal.VerifyDigitalSignature(elGamalSign, messageBytes, elGamalPublicKey) == false)
-////////    {
-////////        good = false;
-////////        Console.WriteLine("ElGamal sign error");
-////////    }
-
-////////    //var dsaSign = dSA.CreateSignature(messageBytes, dsaPrivateKey);
-////////    //if (dSA.VerifyDigitalSignature(dsaSign, messageBytes, dsaPublicKey) == false)
-////////    {
-////////      //  good = false;
-////////        //Console.WriteLine("DSA sign error");
-////////    }
-////////    // --------------------
-
-////////    if (good == false)
-////////        errorsCount++;
-////////}
-
-////////double res = 100 - (errorsCount * 100 / iterationsCount);
-
-////////Console.WriteLine($"Errors:{errorsCount}");
-////////Console.WriteLine($"Result:{res}%");
-///
-
-List<string> hashAlgorithms = new List<string>();
-
-foreach (string hashAlgorithm in Enum.GetNames(typeof(CryptographicHashAlgorithm)))
+for (int i = 0; i < iterationsCount; i++)
 {
-    hashAlgorithms.Add(hashAlgorithm);
+    if (i % (iterationsCount / 100) == 0)
+        Console.WriteLine(i);
+
+    bool good = true;
+
+    //генерация текста
+    //-------------------------
+    StringBuilder text = new StringBuilder();
+
+    int messageLength = rand.Next(1024);
+
+    for (int j = 0; j < messageLength; j++)
+    {
+        text.Append(Convert.ToChar(rand.Next() % 256));
+    }
+
+    string message = text.ToString();
+    message = "zhopa";
+    var messageBytes = Encoding.Unicode.GetBytes(message);
+    //--------------------
+
+    //генераторы
+    //--------------------
+    PrimalityVerificator primalityVerificator = new MillerRabinPrimalityVerificator();
+    NumberGenerator numberGenerator = new FibonacciNumberGenerator(primalityVerificator);
+    HashAlgorithm hashAlgorithm = new SHA_256();
+    //--------------------
+
+    //генерация ключей
+    //--------------------
+    AsymmetricKey rsaPrivateKey;
+    AsymmetricKey rsaPublicKey;
+
+    RsaKeysGenerator rsaKeysGenerator = new RsaKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
+    rsaKeysGenerator.GenerateKeys(rsaKeysBinarySize, out rsaPrivateKey, out rsaPublicKey);
+    RSA rSA = new RSA(numberGenerator, primalityVerificator, hashAlgorithm);
+
+    AsymmetricKey elGamalPrivateKey;
+    AsymmetricKey elGamalPublicKey;
+
+    ElGamalKeysGenerator elGamalKeysGenerator = new ElGamalKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
+    elGamalKeysGenerator.GenerateKeys(16, out elGamalPrivateKey, out elGamalPublicKey);
+    ElGamal elGamal = new ElGamal(numberGenerator, primalityVerificator, hashAlgorithm);
+
+    AsymmetricKey dsaPrivateKey;
+    AsymmetricKey dsaPublicKey;
+
+    DsaKeysGenerator dsaKeysGenerator = new DsaKeysGenerator(numberGenerator, primalityVerificator, hashAlgorithm);
+    dsaKeysGenerator.GenerateKeys(384, out dsaPrivateKey, out dsaPublicKey);
+    DSA dSA = new DSA(numberGenerator, primalityVerificator, hashAlgorithm);
+    //--------------------
+
+    //encryption
+    //--------------------
+
+    var rsaEncryption = rSA.Encrypt(messageBytes, rsaPublicKey);
+    var rsaDecryption = rSA.Decrypt(rsaEncryption, rsaPrivateKey);
+
+    var rsaDecryptedText = Encoding.Unicode.GetString(rsaDecryption);
+
+    if (message != rsaDecryptedText)
+    {
+        good = false;
+        Console.WriteLine("RSA encryption error");
+    }
+
+    var elGamalEncryption = elGamal.Encrypt(messageBytes, elGamalPublicKey);
+    var elGamalDecryption = elGamal.Decrypt(elGamalEncryption, elGamalPrivateKey);
+
+    var elGamalDecryptedText = Encoding.Unicode.GetString(elGamalDecryption);
+
+    if (message != elGamalDecryptedText)
+    {
+        good = false;
+        Console.WriteLine("ElGamal encryption error");
+    }
+   // --------------------
+
+    //signatutaturing
+    //--------------------
+
+    var rsaSign = rSA.CreateSignature(messageBytes, rsaPrivateKey);
+    if (rSA.VerifyDigitalSignature(rsaSign, messageBytes, rsaPublicKey) == false)
+    {
+        good = false;
+        Console.WriteLine("RSA sign error");
+    }
+
+    var elGamalSign = elGamal.CreateSignature(messageBytes, elGamalPrivateKey);
+    if (elGamal.VerifyDigitalSignature(elGamalSign, messageBytes, elGamalPublicKey) == false)
+    {
+        good = false;
+        Console.WriteLine("ElGamal sign error");
+    }
+
+    //var dsaSign = dSA.CreateSignature(messageBytes, dsaPrivateKey);
+    //if (dSA.VerifyDigitalSignature(dsaSign, messageBytes, dsaPublicKey) == false)
+    //{
+    //    good = false;
+    //    Console.WriteLine("DSA sign error");
+    //}
+    //--------------------
+
+    if (good == false)
+        errorsCount++;
 }
 
-var q = Enum.Parse(typeof(CryptographicHashAlgorithm), hashAlgorithms[0]);
-var q1 = Enum.Parse(typeof(CryptographicHashAlgorithm), hashAlgorithms[1]);
+double res = 100 - (errorsCount * 100 / iterationsCount);
 
-Console.WriteLine(q.GetType());
-Console.WriteLine();
+Console.WriteLine($"Errors:{errorsCount}");
+Console.WriteLine($"Result:{res}%");
+
+
+//List<string> hashAlgorithms = new List<string>();
+
+//foreach (string hashAlgorithm in Enum.GetNames(typeof(CryptographicHashAlgorithm)))
+//{
+//    hashAlgorithms.Add(hashAlgorithm);
+//}
+
+//var q = Enum.Parse(typeof(CryptographicHashAlgorithm), hashAlgorithms[0]);
+//var q1 = Enum.Parse(typeof(CryptographicHashAlgorithm), hashAlgorithms[1]);
+
+//Console.WriteLine(q.GetType());
+//Console.WriteLine();

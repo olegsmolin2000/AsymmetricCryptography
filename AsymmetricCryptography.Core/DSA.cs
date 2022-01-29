@@ -1,6 +1,7 @@
 ﻿using AsymmetricCryptography.Core.HashAlgorithms;
 using AsymmetricCryptography.Core.NumberGenerators;
 using AsymmetricCryptography.Core.PrimalityVerificators;
+using AsymmetricCryptography.DataUnits;
 using AsymmetricCryptography.DataUnits.DigitalSignatures;
 using AsymmetricCryptography.DataUnits.Keys;
 using AsymmetricCryptography.DataUnits.Keys.DSA;
@@ -9,6 +10,9 @@ namespace AsymmetricCryptography.Core
 {
     public sealed class DSA : AsymmetricAlgorithm, ISignatutator
     {
+        public DSA(CryptographicHashAlgorithm hashAlgorithm = CryptographicHashAlgorithm.SHA_256) 
+            : base(hashAlgorithm) { }
+
         public DSA(NumberGenerator numberGenerator, PrimalityVerificator primalityVerificator, HashAlgorithm hashAlgorithm) 
             : base(numberGenerator, primalityVerificator, hashAlgorithm) { }
 

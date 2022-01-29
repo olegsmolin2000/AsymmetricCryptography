@@ -5,11 +5,16 @@
     /// </summary>
     public sealed class RsaDigitalSignature : DigitalSignature
     {
-        public BigInteger SignValue { get; init; }
+        public BigInteger SignValue { get; set; }
 
         public RsaDigitalSignature(BigInteger signValue)
         {
             SignValue = signValue;
+        }
+
+        public override void Accept(IDigitalSignatureVisitor visitor)
+        {
+            visitor.VisitRsaDigitalSignature(this);
         }
     }
 }

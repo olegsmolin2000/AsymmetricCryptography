@@ -11,7 +11,7 @@ namespace AsymmetricCryptography.IO
         private XDocument xDocument { get; set; }
         private XElement xRoot { get; set; }
 
-        private XmlKeyWriter()
+        public XmlKeyWriter()
         {
             Clear();
         }
@@ -47,7 +47,7 @@ namespace AsymmetricCryptography.IO
 
         private XElement GetDsaDomainParameter(DsaDomainParameter domainParameter)
         {
-            XElement xDomainParameter = new XElement("DSA domain parameter");
+            XElement xDomainParameter = new XElement("DsaDomainParameter");
 
             xDomainParameter.Add(GetBaseInfo(domainParameter));
 

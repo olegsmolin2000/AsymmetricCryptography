@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:AsymmetricCryptography.WPF.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="Курсач" Height="600" Width="1200"
+        Title="Курсач" Height="720" Width="1200"
         WindowStartupLocation="CenterScreen">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -14,32 +14,28 @@
     </i:Interaction.Triggers>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Ключ">
-                <MenuItem Header="Генерация">
-                    <MenuItem Header="RSA" Command="{Binding OpenRsaKeysGeneratingWindow}"/>
-                    <MenuItem Header="ElGamal" Command="{Binding OpenElGamalKeysGeneratingWindow}"/>
-                    <MenuItem Header="DSA">
-                        <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDomainParameterGeneratingWindow}"/>
-                        <MenuItem Header="Ключи" Command="{Binding OpenDsaKeysGeneratingWindow}"/>
-                        <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
-                    </MenuItem>
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding OpenTextFile}"/>
+                <MenuItem Header="Сохранить" Command="{Binding SaveTextFile}"/>
+            </MenuItem>
+            <MenuItem Header="Генерация ключей">
+                <MenuItem Header="RSA" Command="{Binding OpenRsaKeysGeneratingWindow}"/>
+                <MenuItem Header="ElGamal" Command="{Binding OpenElGamalKeysGeneratingWindow}"/>
+                <MenuItem Header="DSA">
+                    <MenuItem Header="Доменные параметры" Command="{Binding OpenDsaDomainParameterGeneratingWindow}"/>
+                    <MenuItem Header="Ключи" Command="{Binding OpenDsaKeysGeneratingWindow}"/>
+                    <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
                 </MenuItem>
             </MenuItem>
         </Menu>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="1.9*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
             <ListView
-                Grid.RowSpan="3"
                 Grid.Column="0"
                 Margin="15"
                 HorizontalAlignment="Stretch"
@@ -59,7 +55,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=AlgorithmName}" Width="85">
                             <TextBlock TextAlignment="Center" Text="Алгоритм"/>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=KeyType}" Width="100">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=KeyType}" Width="110">
                             <TextBlock TextAlignment="Center" Text="Тип"/>
                         </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=BinarySize}" Width="90">
@@ -69,7 +65,56 @@
                 </ListView.View>
             </ListView>
 
-            <Button Grid.Row="1" Grid.Column="1" Command="{Binding OpenKeyShowingWindow}" Content="zhopa"/>
+            <Grid Grid.Column="1" VerticalAlignment="Top" Margin="0 25 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" Content="{Binding SelectedKeyShowingVM}"
+            ContentTemplate="{StaticResource ShowKeyParameters}"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 20 0 0">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="Height" Value="25"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="Открыть полностью" Command="{Binding OpenKeyShowingWindow}"/>
+                    <Button Content="Сохранить в XML" Command="{Binding XmlSaveSelectedKey}"/>
+                    <Button Content="Загрузить из XML" Command="{Binding OpenXmlKey}"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="4 0 4 0"/>
+                        <Setter Property="Width" Value="110"/>
+                        <Setter Property="Height" Value="25"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="0 15 0 15"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                        <Setter Property="AcceptsReturn" Value="True"/>
+                        <Setter Property="AcceptsTab" Value="True"/>
+                    </Style>
+                </Grid.Resources>
+
+                <TextBox Grid.Row="0" Text="{Binding MainTextBox}" Margin="5"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Content="Зашифровать" Command="{Binding Encrypt}"/>
+                    <Button Content="Расшифровать" Command="{Binding Decrypt}"/>
+                    <Button Content="Создать ЭЦП" Command="{Binding CreatingDigitalSignatur}"/>
+                    <Button Content="Проверить ЭЦП" Command="{Binding VerificationDigitalSignatur}"/>
+                </StackPanel>
+            </Grid>
+
         </Grid>
     </DockPanel>
 </Window>

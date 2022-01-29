@@ -5,13 +5,18 @@
     /// </summary>
     public sealed class ElGamalDigitalSignature:DigitalSignature
     {
-        public BigInteger R { get; init; }
-        public BigInteger S { get; init; }
+        public BigInteger R { get; set; }
+        public BigInteger S { get; set; }
 
         public ElGamalDigitalSignature(BigInteger r, BigInteger s)
         {
             R = r;
             S = s;
+        }
+
+        public override void Accept(IDigitalSignatureVisitor visitor)
+        {
+            visitor.VisitElGamalDigitalSignature(this);
         }
     }
 }

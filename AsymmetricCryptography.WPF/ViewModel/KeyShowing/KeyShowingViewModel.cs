@@ -2,7 +2,7 @@
 
 namespace AsymmetricCryptography.WPF.ViewModel.KeyShowing
 {
-    internal abstract class KeyShowingViewModel:ViewModel
+    internal class KeyShowingViewModel:ViewModel
     {
         public string Name { get; set; }
         public string AlgorithmName { get; set; }
@@ -12,7 +12,7 @@ namespace AsymmetricCryptography.WPF.ViewModel.KeyShowing
         public string Permission { get; set; }
         public int BinarySize { get; set; }
 
-        protected KeyShowingViewModel(AsymmetricKey key)
+        public KeyShowingViewModel(AsymmetricKey key)
         {
             Name = key.Name;
             AlgorithmName = key.AlgorithmName.ToString();

@@ -5,6 +5,6 @@
     /// </summary>
     public abstract class DigitalSignature
     {
-        
+        public abstract void Accept(IDigitalSignatureVisitor visitor);
     }
 }
