@@ -18,6 +18,10 @@
                 <MenuItem Header="Открыть" Command="{Binding OpenTextFile}"/>
                 <MenuItem Header="Сохранить" Command="{Binding SaveTextFile}"/>
             </MenuItem>
+            <MenuItem Header="Ключ">
+                <MenuItem Header="Сохранить в XML" Command="{Binding SaveXmlKey}"/>
+                <MenuItem Header="Открыть из XML" Command="{Binding OpenXmlKey}"/>
+            </MenuItem>
             <MenuItem Header="Генерация ключей">
                 <MenuItem Header="RSA" Command="{Binding OpenRsaKeysGeneratingWindow}"/>
                 <MenuItem Header="ElGamal" Command="{Binding OpenElGamalKeysGeneratingWindow}"/>
@@ -26,6 +30,9 @@
                     <MenuItem Header="Ключи" Command="{Binding OpenDsaKeysGeneratingWindow}"/>
                     <MenuItem Header="Ключи по доменным параметрам" Command="{Binding OpenDsaKeysGeneratingByDPWindow}"/>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="База данных">
+                <MenuItem Header="Очистить" Command="{Binding ClearDB}"/>
             </MenuItem>
         </Menu>
 
@@ -81,8 +88,6 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Content="Открыть полностью" Command="{Binding OpenKeyShowingWindow}"/>
-                    <Button Content="Сохранить в XML" Command="{Binding XmlSaveSelectedKey}"/>
-                    <Button Content="Загрузить из XML" Command="{Binding OpenXmlKey}"/>
                 </StackPanel>
             </Grid>
 

@@ -31,8 +31,7 @@
             <ContentControl Grid.Row="0" VerticalAlignment="Top" Content="{Binding SelectedDPViewModel}"
             ContentTemplate="{StaticResource ShowKeyParameters}">
             </ContentControl>
-            <Button Margin="30 5 30 5" Content="Открыть полностью" Command="{Binding OpenDPShowingWindow}"/>
-            <Button Margin="30 5 30 5" Content="Загрузить из файла"/>
+            <Button Margin="30" Content="Открыть полностью" Command="{Binding OpenDPShowingWindow}"/>
         </StackPanel>
 
         <ListView Grid.Column="2" 

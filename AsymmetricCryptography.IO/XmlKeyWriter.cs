@@ -62,7 +62,11 @@ namespace AsymmetricCryptography.IO
         {
             Clear();
 
-            xRoot.Add(GetDsaDomainParameter(dsaDomainParameter));
+            xRoot.Add(GetBaseInfo(dsaDomainParameter));
+
+            xRoot.Add(new XElement("Q", dsaDomainParameter.Q));
+            xRoot.Add(new XElement("P", dsaDomainParameter.P));
+            xRoot.Add(new XElement("G", dsaDomainParameter.G));
         }
 
         public void VisitDsaPrivateKey(DsaPrivateKey dsaPrivateKey)

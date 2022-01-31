@@ -24,6 +24,16 @@ namespace AsymmetricCryptography.EFCore.Repositories
             }
         }
 
+        public void ClearRepository<T>()
+        {
+            foreach (var el in Set)
+            {
+                Set.Remove(el);
+            }
+
+            Db.SaveChanges();
+        }
+
         public void Add(T item)
         {
             if (item is null)

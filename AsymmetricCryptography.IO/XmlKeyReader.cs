@@ -1,4 +1,5 @@
-﻿using AsymmetricCryptography.DataUnits.Keys;
+﻿using AsymmetricCryptography.DataUnits;
+using AsymmetricCryptography.DataUnits.Keys;
 using AsymmetricCryptography.DataUnits.Keys.DSA;
 using AsymmetricCryptography.DataUnits.Keys.ElGamal;
 using AsymmetricCryptography.DataUnits.Keys.RSA;
@@ -7,26 +8,18 @@ using System.Xml.Linq;
 
 namespace AsymmetricCryptography.IO
 {
-    public class XmlKeyReader : IKeyVisitor
+    public sealed class XmlKeyReader
     {
-        private string FilePath { get; set; }
-
-        private XElement root;
-
-        public XmlKeyReader(string filePath)
+        public AsymmetricKey ReadXml(string filePath)
         {
-            FilePath = filePath;
+            return ReadXml(XElement.Load(filePath));
         }
 
-        public AsymmetricKey LoadKey(string newFilePath)
+      private AsymmetricKey ReadXml(XElement xKey)
         {
-            FilePath = newFilePath;
+            AsymmetricKey key = null;
 
-            root = XElement.Load(FilePath);
-
-            AsymmetricKey key;
-
-            XElement xBaseInfo = root.Element("BaseInformation");
+            XElement xBaseInfo = xKey.Element("BaseInformation");
 
             string name = xBaseInfo.Element("Name").Value;
             string algName = xBaseInfo.Element("AlgorithmName").Value;
@@ -41,120 +34,86 @@ namespace AsymmetricCryptography.IO
 
             if (algName == "RSA")
             {
-                BigInteger modulus = BigInteger.Parse(root.Element("Modulus").Value);
+                BigInteger modulus = BigInteger.Parse(xKey.Element("Modulus").Value);
                 BigInteger exponent = new BigInteger();
 
                 if (type == "Private")
                 {
-                    exponent = BigInteger.Parse(root.Element("PrivateExponent").Value);
+                    exponent = BigInteger.Parse(xKey.Element("PrivateExponent").Value);
 
-                    key = new RsaPrivateKey(binarySize, modulus, exponent);
+                    key = new RsaPrivateKey(binarySize, exponent, modulus);
                 }
                 else if (type == "Public")
                 {
-                    exponent = BigInteger.Parse(root.Element("PublicExponent").Value);
+                    exponent = BigInteger.Parse(xKey.Element("PublicExponent").Value);
 
-                    key = new RsaPublicKey(binarySize, modulus, exponent);
+                    key = new RsaPublicKey(binarySize, exponent, modulus);
                 }
             }
             else if (algName == "ElGamal")
             {
-                BigInteger p = BigInteger.Parse(root.Element("P").Value);
-                BigInteger g = BigInteger.Parse(root.Element("G").Value);
+                BigInteger p = BigInteger.Parse(xKey.Element("P").Value);
+                BigInteger g = BigInteger.Parse(xKey.Element("G").Value);
 
                 BigInteger keyValue;
 
                 if (type == "Private")
                 {
-                    keyValue = BigInteger.Parse(root.Element("X").Value);
+                    keyValue = BigInteger.Parse(xKey.Element("X").Value);
 
-                    key = new ElGamalPrivateKey(binarySize, keyValue, p, g);
+                    key = new ElGamalPrivateKey(binarySize, p, g, keyValue);
                 }
                 else if (type == "Public")
                 {
-                    keyValue = BigInteger.Parse(root.Element("Y").Value);
+                    keyValue = BigInteger.Parse(xKey.Element("Y").Value);
 
-                    key = new ElGamalPublicKey(binarySize, keyValue, p, g);
+                    key = new ElGamalPublicKey(binarySize, p, g, keyValue);
                 }
             }
             else if (algName == "DSA")
             {
-                if (type == "Parameters")
+                if (type == "DomainParameter")
                 {
-                    BigInteger q = BigInteger.Parse(root.Element("Q").Value);
-                    BigInteger p = BigInteger.Parse(root.Element("P").Value);
-                    BigInteger g = BigInteger.Parse(root.Element("G").Value);
+                    BigInteger q = BigInteger.Parse(xKey.Element("Q").Value);
+                    BigInteger p = BigInteger.Parse(xKey.Element("P").Value);
+                    BigInteger g = BigInteger.Parse(xKey.Element("G").Value);
 
                     key = new DsaDomainParameter(binarySize, q, p, g);
                 }
                 else
                 {
-                    XElement xDomainParameter = root.Element("DsaDomainParameter");
+                    XElement xDomainParameter = xKey.Element("DsaDomainParameter");
 
-                    //DsaDomainParameter domainParameter = ReadXml(xDomainParameter) as DsaDomainParameter;
-
-                    //if (!DataWorker.ContainsKey(domainParameter.Name))
-                    //{
-                    //    DataWorker.AddKey(domainParameter);
-
-                    //    domainParameter = DataWorker.GetLastDomainParameter() as DsaDomainParameter;
-                    //}
-                    //else
-                    //    domainParameter = DataWorker.GetDsaDomainParameter(domainParameter.Name);
+                    DsaDomainParameter domainParameter = ReadXml(xDomainParameter) as DsaDomainParameter;
 
                     BigInteger keyValue = new BigInteger();
 
-                    //if (type == "Private")
-                    //{
-                    //    keyValue = BigInteger.Parse(root.Element("X").Value);
+                    if (type == "Private")
+                    {
+                        keyValue = BigInteger.Parse(xKey.Element("X").Value);
 
-                    //    key = new DsaPrivateKey(name, binarySize, domainParameter, keyValue);
-                    //}
-                    //else if (type == "Public")
-                    //{
-                    //    keyValue = BigInteger.Parse(root.Element("Y").Value);
+                        key = new DsaPrivateKey(binarySize, keyValue);
+                        ((DsaPrivateKey)key).DomainParameter = domainParameter;
 
-                    //    key = new DsaPublicKey(name, binarySize, domainParameter, keyValue);
-                    //}
+                    }
+                    else if (type == "Public")
+                    {
+                        keyValue = BigInteger.Parse(xKey.Element("Y").Value);
+
+                        key = new DsaPublicKey(binarySize, keyValue);
+
+                        ((DsaPublicKey)key).DomainParameter = domainParameter;
+                    }
                 }
             }
 
-            return null;
-        }
+            key.Name = name;
 
-        public void VisitDsaDomainParameters(DsaDomainParameter dsaDomainParameter)
-        {
-            throw new NotImplementedException();
-        }
+            key.NumberGenerator = Enum.Parse<RandomNumberGenerator>(numberGenerator);
+            key.PrimalityVerificator = Enum.Parse<PrimalityTest>(primalityVerificator);
+            key.HashAlgorithm = Enum.Parse<CryptographicHashAlgorithm>(hashAlgorithm);
 
-        public void VisitDsaPrivateKey(DsaPrivateKey dsaPrivateKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitDsaPublicKey(DsaPublicKey dsaPublicKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitElGamalPrivateKey(ElGamalPrivateKey elGamalPrivateKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitElGamalPublicKey(ElGamalPublicKey elGamalPublicKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitRsaPrivateKey(RsaPrivateKey rsaPrivateKey)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void VisitRsaPublicKey(RsaPublicKey rsaPublicKey)
-        {
-            throw new NotImplementedException();
+            return key;
         }
     }
 }

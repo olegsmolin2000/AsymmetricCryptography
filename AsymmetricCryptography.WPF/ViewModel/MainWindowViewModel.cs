@@ -77,6 +77,22 @@ namespace AsymmetricCryptography.WPF.ViewModel
 
         #endregion
 
+        #region DataBase
+        public RelayCommand ClearDB
+        {
+            get => new RelayCommand(obj =>
+            {
+                SelectedKey = null;
+
+                _keysRepository.ClearRepository<AsymmetricKey>();
+
+                LoadKeys.Execute(null);
+
+                MessageBox.Show("База данных успешно очищенна!");
+            });
+        }
+        #endregion
+
         private string mainTextbox;
         public string MainTextBox
         {
@@ -96,7 +112,7 @@ namespace AsymmetricCryptography.WPF.ViewModel
         }
 
         #region KeysXml
-        public RelayCommand XmlSaveSelectedKey
+        public RelayCommand SaveXmlKey
         {
             get => new RelayCommand(obj =>
             {
@@ -134,9 +150,17 @@ namespace AsymmetricCryptography.WPF.ViewModel
                 {
                     string filePath = openFileDialog.FileName;
 
-                    //SelectedKey = AsymmetricKey.ReadXml(XElement.Load(filePath));
+                    try
+                    {
+                        XmlKeyReader keyReader = new XmlKeyReader();
 
-                    //RefreshData();
+                        SelectedKey = keyReader.ReadXml(filePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                   
                 }
             });
         }
